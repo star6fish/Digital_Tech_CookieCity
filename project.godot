@@ -13,3 +13,7 @@ config_version=5
 config/name="DigitalTech_Internal_CookieCity"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Scripts/global.gd"
