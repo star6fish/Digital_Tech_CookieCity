@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1dpq15ag6r24"]
+
+[ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
+[ext_resource type="StyleBox" uid="uid://7l4b37vxc3ve" path="res://Assets/new_style_box_flat2.tres" id="2_1fjaw"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Control" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = 245.0
+offset_top = 328.0
+offset_right = 970.0
+offset_bottom = 468.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Control"]
+layout_mode = 0
+offset_left = -23.0
+offset_top = 130.0
+offset_right = 702.0
+offset_bottom = 270.0
+theme_override_styles/panel = ExtResource("1_3tuov")
+horizontal_scroll_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Control/ScrollContainer"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="Control/Control/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(105, 105)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Control/ScrollContainer/HBoxContainer/Control"]
+z_index = 1
+layout_mode = 0
+offset_left = 13.0
+offset_top = 63.0
+offset_right = 92.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 23
+text = "N/A"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Control/ScrollContainer/HBoxContainer/Control"]
+z_index = 1
+layout_mode = 0
+offset_left = 14.0
+offset_top = 9.0
+offset_right = 40.0
+offset_bottom = 29.0
+theme_override_font_sizes/font_size = 14
+text = "N/A"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="Control/Control/ScrollContainer/HBoxContainer/Control"]
+layout_mode = 0
+offset_right = 105.0
+offset_bottom = 105.0
+theme_override_styles/panel = ExtResource("2_1fjaw")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Control/ScrollContainer/HBoxContainer/Control"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 28.0
+offset_right = 71.0
+offset_bottom = 68.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
