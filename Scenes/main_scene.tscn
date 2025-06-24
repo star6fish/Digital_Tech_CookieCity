@@ -21,7 +21,6 @@ offset_top = 481.0
 offset_right = 947.0
 offset_bottom = 621.0
 theme_override_styles/panel = ExtResource("1_3tuov")
-horizontal_scroll_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/ScrollContainer"]
 layout_direction = 2
