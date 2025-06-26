@@ -1,21 +1,30 @@
 extends Control
 
+var hovering : bool = false
 
 func _on_button_button_down() -> void:
-	pass
+	var tween = create_tween()
+	tween.tween_property($Panel2, "scale", Vector2(0.97, 0.97), 0.1)
 
 
 func _on_button_button_up() -> void:
-	pass # Replace with function body.
+	var tween = create_tween()
+	
+	if hovering == true:
+		tween.tween_property($Panel2, "scale", Vector2(1.1, 1.1), 0.1)
+	elif hovering == false:
+		tween.tween_property($Panel2, "scale", Vector2(1, 1), 0.1)
 
-
+	
 func _on_button_mouse_entered() -> void:
+	hovering = true
 	
 	var tween = create_tween()
+	tween.tween_property($Panel2, "scale", Vector2(1.1, 1.1), 0.15)
 
-	tween.tween_property($Panel2, "scale", Vector2(1.5, 1.5), 0.25)
 
 func _on_button_mouse_exited() -> void:
-	var tween = create_tween()
+	hovering = false
 	
-	tween.tween_property($Panel2, "scale", Vector2(1, 1), 0.25)
+	var tween = create_tween()
+	tween.tween_property($Panel2, "scale", Vector2(1, 1), 0.15)

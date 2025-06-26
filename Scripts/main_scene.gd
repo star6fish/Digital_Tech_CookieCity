@@ -6,6 +6,8 @@ extends Node3D
 
 var buildings : Dictionary = Global.buildings
 
+
+#Loads the building catalogue on the screen
 func _load_building_catalogue():
 	
 	$Control.get_node("ScrollContainer").visible = true

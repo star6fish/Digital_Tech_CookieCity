@@ -1,5 +1,7 @@
 extends Node
 
+var cookie_dough : int = 0
+
 var buildings : Dictionary = {
 	"House" = {"scene" = "", "price" = 50},
 	"Shop" = {"scene" = "", "price" = 100},
