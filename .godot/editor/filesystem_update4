@@ -1,5 +1,15 @@
 res://Scenes/main_scene.tscn
 res://Assets/new_style_box_flat.tres
-res://Assets/new_style_box_flat2.tres
-res://Scripts/button_FX.gd
+res://Scripts/main_scene.gd
 res://Assets/building_template.tscn
+res://Scenes/house.tscn
+res://Assets/panel_selected.tres
+res://Assets/panel_unselected.tres
+res://Scenes/church.tscn
+res://Scenes/shop.tscn
+res://Scenes/skyscraper.tscn
+res://Scenes/cannon.tscn
+res://Scenes/tank.tscn
+res://Scenes/machine_gun.tscn
+res://Scenes/fighter_jet.tscn
+res://Scripts/global.gd

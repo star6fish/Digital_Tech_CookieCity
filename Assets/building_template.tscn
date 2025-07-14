@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bknyh2vya7pe"]
 
-[ext_resource type="StyleBox" uid="uid://7l4b37vxc3ve" path="res://Assets/new_style_box_flat2.tres" id="1_ed4md"]
+[ext_resource type="StyleBox" uid="uid://7l4b37vxc3ve" path="res://Assets/panel_unselected.tres" id="1_ed4md"]
 [ext_resource type="Script" path="res://Scripts/button_FX.gd" id="1_fw8tj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gfywa"]
@@ -9,10 +9,12 @@
 custom_minimum_size = Vector2(105, 105)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 105.0
+offset_left = -2.0
+offset_right = 103.0
 offset_bottom = 105.0
 pivot_offset = Vector2(52.5, 52.5)
 script = ExtResource("1_fw8tj")
+metadata/building = ""
 
 [node name="Label3" type="Label" parent="."]
 z_index = 1
@@ -78,3 +80,4 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_gfywa")
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

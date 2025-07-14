@@ -1,3 +1,6 @@
+MeshInstance3D
+WorldEnvironment
+GridMap
 TextureRect
 Container
 PanelContainer
@@ -9,6 +12,3 @@ Label
 Panel
 ColorRect
 Control
-HBoxContainer
-ScrollContainer
-BoxContainer

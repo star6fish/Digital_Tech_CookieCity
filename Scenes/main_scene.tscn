@@ -1,12 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=10 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
 [ext_resource type="PackedScene" uid="uid://bknyh2vya7pe" path="res://Assets/building_template.tscn" id="2_esms4"]
+[ext_resource type="StyleBox" uid="uid://ca5r3yd85ry5q" path="res://Assets/panel_selected.tres" id="2_pgo2f"]
+[ext_resource type="StyleBox" uid="uid://7l4b37vxc3ve" path="res://Assets/panel_unselected.tres" id="4_nhymn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lar3c"]
+sky_horizon_color = Color(0.968627, 0.486275, 0.505882, 1)
+ground_bottom_color = Color(0.759053, 0.446963, 0.691542, 1)
+ground_horizon_color = Color(0.967188, 0.488212, 0.504874, 1)
+
+[sub_resource type="Sky" id="Sky_y8t8d"]
+sky_material = SubResource("ProceduralSkyMaterial_lar3c")
+
+[sub_resource type="Environment" id="Environment_2aggu"]
+background_mode = 2
+sky = SubResource("Sky_y8t8d")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uisws"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_7hg08")
 building_template = ExtResource("2_esms4")
+panel_selected = ExtResource("2_pgo2f")
+panel_unselected = ExtResource("4_nhymn")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -27,4 +45,15 @@ layout_direction = 2
 layout_mode = 2
 theme_override_constants/separation = 10
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2aggu")
+
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 1)
+
+[node name="GridMap" type="GridMap" parent="."]
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, -4)
+mesh = SubResource("PlaneMesh_uisws")

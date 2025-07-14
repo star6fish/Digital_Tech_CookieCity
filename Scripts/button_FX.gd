@@ -29,3 +29,8 @@ func _on_button_mouse_exited() -> void:
 	
 	var tween = create_tween()
 	tween.tween_property($Panel2, "scale", Vector2(1, 1), 0.15)
+
+
+func _on_button_pressed() -> void:
+	get_parent().get_parent().get_parent().get_parent()._select_building(get_meta("building"))
+	
