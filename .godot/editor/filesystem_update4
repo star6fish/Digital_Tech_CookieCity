@@ -5,4 +5,3 @@ res://Scripts/main_scene.gd
 res://Assets/building_template.tscn
 res://Scenes/house.tscn
 res://Scenes/skyscraper.tscn
-res://Scripts/global.gd

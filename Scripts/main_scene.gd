@@ -36,11 +36,15 @@ func _load_building_catalogue():
 # Selects the building that the player has pressed
 func _select_building(building_name):
 	
-	current_building = global.buildings[building_name].scene.instantiate()
+	if building_name == null:
+		
+		current_building = null
+		
+	elif building_name != null:
+		
+		current_building = global.buildings[building_name].scene.instantiate()
 	
-	add_child(current_building)
-	
-	current_building.position = Vector3(-0.188, 0, -3.622)
+		add_child(current_building)
 	
 	for i : Control in get_node("Control/ScrollContainer/HBoxContainer").get_children():
 		if i.get_meta("building") == building_name:
@@ -48,6 +52,38 @@ func _select_building(building_name):
 		else:
 			i.get_node("Panel2").set("theme_override_styles/panel", panel_unselected)
 			
+			
+func _input(event: InputEvent) -> void:
+	
+	if event is InputEventMouseMotion:
+		
+		if current_building != null:
+			
+			var mouse_position = get_viewport().get_mouse_position()
+			
+			var space_state = get_world_3d().direct_space_state
+			
+			var origin = $Camera3D.project_ray_origin(mouse_position)
+			var direction = $Camera3D.project_ray_normal(mouse_position)
+			
+			var query = PhysicsRayQueryParameters3D.create(origin, origin + direction * $Camera3D.far)
+			
+			var mouse_position_3D = space_state.intersect_ray(query)
+			
+			var new_position = null
+			
+			if mouse_position_3D.has("position"):
+				new_position = mouse_position_3D.position
+			else :
+				new_position = Vector3(direction.x * 10, -0.5, -10)
+				
+			current_building.position = Vector3(snapped(new_position.x, 0.25), -0.5, snapped(new_position.z, 0.25))
+			
+	elif event is InputEventMouseButton:
+		
+		if event.button_index == 1:
+			_select_building(null)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_load_building_catalogue()
@@ -55,18 +91,4 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
-	if current_building != null:
-		var mouse_position = get_viewport().get_mouse_position()
-		
-		var space_state = get_world_3d().direct_space_state
-		
-		var origin = $Camera3D.project_ray_origin(mouse_position)
-		var direction = $Camera3D.project_ray_normal(mouse_position)
-		
-		var query = PhysicsRayQueryParameters3D.create(origin, origin + direction * 20000)
-		query.collide_with_areas = true
-		var mouse_position3D = space_state.intersect_ray(query)
-		print(mouse_position3D)
-		
-		#current_building.position = mouse_position3D
+	pass
