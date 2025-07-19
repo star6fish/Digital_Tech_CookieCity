@@ -1,8 +1,8 @@
+MeshInstance3D
 TileMap
 StaticBody3D
 CollisionShape3D
 RayCast3D
-MeshInstance3D
 WorldEnvironment
 GridMap
 TextureRect
@@ -12,4 +12,3 @@ CenterContainer
 AspectRatioContainer
 Button
 Camera3D
-Label

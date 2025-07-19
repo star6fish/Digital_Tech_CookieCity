@@ -1,6 +1,4 @@
 res://Scenes/main_scene.tscn
 res://Assets/new_style_box_flat.tres
 res://Assets/panel_selected.tres
-res://Assets/building_template.tscn
-res://Scenes/house.tscn
-res://Scenes/skyscraper.tscn
+res://Scenes/gummy_worm.tscn

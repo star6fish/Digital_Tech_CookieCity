@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm018o6wym1ke"]
+
+[ext_resource type="PackedScene" uid="uid://ruosfynbxp27" path="res://Assets/gummyworm.glb" id="1_kaaal"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="gummyworm" parent="." instance=ExtResource("1_kaaal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.792416, 0, 1.0044)
