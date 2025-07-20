@@ -9,6 +9,10 @@ extends Node3D
 
 var buildings : Dictionary = Global.buildings
 
+var enemies : Array = []
+
+var enemy_cooldown : bool = false
+
 var current_building : Node3D = null
 
 # Loads the building catalogue on the screen
@@ -53,6 +57,45 @@ func _select_building(building_name):
 			i.get_node("Panel2").set("theme_override_styles/panel", panel_unselected)
 			
 			
+# Spawns an ememy
+func _spawn_enemy():
+	
+	enemy_cooldown = true
+	
+	var enemy : Node3D = null
+	
+	var random : int = randf_range(1, global.enemies.size())
+	
+	var count = 0
+	
+	for i in global.enemies:
+		count += 1
+		if count == random:
+			enemy = global.enemies[i].scene.instantiate()
+			break
+	
+	enemies.append(enemy)
+	
+	var enemy_position = null
+	
+	random = randf_range(1, global.enemy_spawn_positions.size() + 1)
+	
+	count = 0
+	
+	for i in global.enemy_spawn_positions:
+		count += 1
+		if count == random:
+			enemy_position = i
+			break
+			
+	enemy.position = enemy_position
+	
+	add_child(enemy)
+	
+	await get_tree().create_timer(1).timeout
+	
+	enemy_cooldown = false
+	
 func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseMotion:
@@ -88,7 +131,13 @@ func _input(event: InputEvent) -> void:
 func _ready() -> void:
 	_load_building_catalogue()
 	
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	
+	if enemy_cooldown == false:
+		_spawn_enemy()
+	
+	for i in enemies:
+		if i.position == Vector3(0, -0.5, 0):
+			enemies.erase(i)
+			i.queue_free()

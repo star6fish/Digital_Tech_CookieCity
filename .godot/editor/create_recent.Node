@@ -1,7 +1,8 @@
+Area3D
+CollisionShape3D
 MeshInstance3D
 TileMap
 StaticBody3D
-CollisionShape3D
 RayCast3D
 WorldEnvironment
 GridMap
@@ -11,4 +12,3 @@ PanelContainer
 CenterContainer
 AspectRatioContainer
 Button
-Camera3D
