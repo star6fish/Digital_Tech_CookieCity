@@ -1,6 +1,7 @@
-Area3D
-CollisionShape3D
 MeshInstance3D
+CollisionShape3D
+ColorRect
+Area3D
 TileMap
 StaticBody3D
 RayCast3D
@@ -11,4 +12,3 @@ Container
 PanelContainer
 CenterContainer
 AspectRatioContainer
-Button

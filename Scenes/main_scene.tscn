@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=12 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
 [ext_resource type="PackedScene" uid="uid://bknyh2vya7pe" path="res://Assets/building_template.tscn" id="2_esms4"]
 [ext_resource type="StyleBox" uid="uid://ca5r3yd85ry5q" path="res://Assets/panel_selected.tres" id="2_pgo2f"]
+[ext_resource type="PackedScene" uid="uid://4h8s0w5kbwrq" path="res://Scenes/bullet.tscn" id="3_ktskd"]
 [ext_resource type="StyleBox" uid="uid://7l4b37vxc3ve" path="res://Assets/panel_unselected.tres" id="4_nhymn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lar3c"]
@@ -17,6 +18,7 @@ sky_material = SubResource("ProceduralSkyMaterial_lar3c")
 [sub_resource type="Environment" id="Environment_2aggu"]
 background_mode = 2
 sky = SubResource("Sky_y8t8d")
+glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_fws2p"]
 
@@ -26,6 +28,7 @@ size = Vector3(31, 1, 21)
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_7hg08")
 building_template = ExtResource("2_esms4")
+bullet = ExtResource("3_ktskd")
 panel_selected = ExtResource("2_pgo2f")
 panel_unselected = ExtResource("4_nhymn")
 

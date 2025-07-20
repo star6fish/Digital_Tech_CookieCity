@@ -2,6 +2,13 @@ extends Node3D
 
 @onready var global = get_node("/root/Global")
 
+var enemy_damage : int = 0
+
+# Damages enemy
+func _damage(damage):
+	enemy_damage += damage
+	set_meta("damage", enemy_damage)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	

@@ -9,6 +9,7 @@ size = Vector3(0.301056, 0.296822, 5.58582)
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_k6v7n")
 metadata/enemy_name = "Gummy Worm"
+metadata/damage = 0
 
 [node name="gummyworm" parent="." instance=ExtResource("1_kaaal")]
 transform = Transform3D(0.153649, 0, 0, 0, 0.153649, 0, 0, 0, 0.153649, 0, 0, 0)

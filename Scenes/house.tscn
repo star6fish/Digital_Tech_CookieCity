@@ -12,6 +12,7 @@ albedo_color = Color(1, 0.788517, 0.443639, 1)
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_03ivi")
 metadata/building_name = "House"
+metadata/health = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

@@ -1,3 +1,24 @@
-[gd_scene format=3 uid="uid://bfrhjn1u6h1ns"]
+[gd_scene load_steps=4 format=3 uid="uid://bfrhjn1u6h1ns"]
+
+[ext_resource type="Script" path="res://Scripts/machine_gun.gd" id="1_pq0mh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3kvs8"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_20nqn"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_pq0mh")
+metadata/building_name = "Machine Gun"
+metadata/health = 0
+metadata/cooldown = false
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_3kvs8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_20nqn")
