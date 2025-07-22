@@ -1,3 +1,24 @@
-[gd_scene format=3 uid="uid://cupcmaikaf54f"]
+[gd_scene load_steps=4 format=3 uid="uid://cupcmaikaf54f"]
+
+[ext_resource type="Script" path="res://Scripts/house.gd" id="1_5xx6p"]
+[ext_resource type="PackedScene" uid="uid://dce7mmk4myi4d" path="res://Assets/skyscraper.glb" id="1_lke14"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rxkcj"]
+size = Vector3(1.47122, 4.51965, 1)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_5xx6p")
+metadata/building_name = "Skyscraper"
+metadata/health = 0
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115036, 1.75983, 0)
+shape = SubResource("BoxShape3D_rxkcj")
+
+[node name="skyscraper" parent="." instance=ExtResource("1_lke14")]
+transform = Transform3D(-2.10252e-08, 0, 0.481, 0, 0.481, 0, -0.481, 0, -2.10252e-08, 3.499, 0.5, 0)

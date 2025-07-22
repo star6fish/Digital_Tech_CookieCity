@@ -10,6 +10,6 @@ emission_energy_multiplier = 16.0
 [node name="Node3D" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.96946e-07, 0, -0.0195, 0, 0.0195, 0, 1.50186, 0, 2.55712e-09, 0, 0, 0)
+transform = Transform3D(1.96946e-07, 0, -0.0195, 0, 0.0195, 0, 1.50186, 0, 2.55712e-09, 0, 0, 0.759031)
 mesh = SubResource("CapsuleMesh_xck6e")
 surface_material_override/0 = SubResource("StandardMaterial3D_x1iyr")

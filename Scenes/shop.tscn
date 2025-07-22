@@ -1,3 +1,22 @@
-[gd_scene format=3 uid="uid://brf8r4brj4pfs"]
+[gd_scene load_steps=4 format=3 uid="uid://brf8r4brj4pfs"]
+
+[ext_resource type="Script" path="res://Scripts/house.gd" id="1_7myvl"]
+[ext_resource type="PackedScene" uid="uid://bjkad7ghrhfup" path="res://Assets/shop.glb" id="1_8njc0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dvft8"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_7myvl")
+metadata/building_name = "Shop"
+metadata/health = 0
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(0.481, 0, 0, 0, 0.481, 0, 0, 0, 0.481, 0, 0.5, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_dvft8")
+
+[node name="shop" parent="." instance=ExtResource("1_8njc0")]
+transform = Transform3D(-2.10252e-08, 0, 0.481, 0, 0.481, 0, -0.481, 0, -2.10252e-08, 6.55627, 0.5, 0)

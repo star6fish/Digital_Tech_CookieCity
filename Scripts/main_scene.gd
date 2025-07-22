@@ -112,7 +112,7 @@ func _shoot(building, enemy):
 	
 	add_child(new_bullet)
 	
-	new_bullet.position = building.position
+	new_bullet.position = building.get_node("Shoot").global_position
 	new_bullet.look_at(enemy.position, Vector3.UP, true)
 	
 	var tween = get_tree().create_tween()
@@ -183,7 +183,7 @@ func _process(delta: float) -> void:
 			for i_2 in i.get_node("Area3D").get_overlapping_areas():
 				if i_2.get_parent().has_meta("enemy_name"):
 					_shoot(i, i_2.get_parent())
-		
+					
 		if i.get_meta("health") >= global.buildings[i.get_meta("building_name")].health:
 			buildings_placed.erase(i)
 			i.queue_free()

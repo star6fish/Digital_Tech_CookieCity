@@ -1,9 +1,10 @@
 MeshInstance3D
+PhysicalBone3D
+StaticBody3D
 CollisionShape3D
 ColorRect
 Area3D
 TileMap
-StaticBody3D
 RayCast3D
 WorldEnvironment
 GridMap
@@ -11,4 +12,3 @@ TextureRect
 Container
 PanelContainer
 CenterContainer
-AspectRatioContainer

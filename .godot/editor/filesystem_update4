@@ -1,13 +1,9 @@
 res://Scenes/main_scene.tscn
 res://Assets/new_style_box_flat.tres
 res://Assets/panel_selected.tres
-res://machine_gun.tscn
-res://Scenes/machine_gun.tscn
-res://Scenes/gummy_worm.tscn
-res://Scripts/gummy_worm.gd
-res://Scripts/global.gd
-res://Scripts/main_scene.gd
-res://Scripts/machine_gun.gd
 res://Scenes/house.tscn
-res://Scripts/house.gd
+res://Scenes/gummy_worm.tscn
+res://Scenes/machine_gun.tscn
 res://Scenes/bullet.tscn
+res://Scenes/shop.tscn
+res://Scenes/skyscraper.tscn

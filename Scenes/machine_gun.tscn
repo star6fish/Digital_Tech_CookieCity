@@ -1,11 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://bfrhjn1u6h1ns"]
 
 [ext_resource type="Script" path="res://Scripts/machine_gun.gd" id="1_pq0mh"]
+[ext_resource type="PackedScene" uid="uid://batkf570ctwlg" path="res://Assets/machinegun.glb" id="2_de4gs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3kvs8"]
 size = Vector3(5, 1, 5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_20nqn"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_pq0mh")
@@ -20,5 +19,8 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_3kvs8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_20nqn")
+[node name="machinegun" parent="." instance=ExtResource("2_de4gs")]
+transform = Transform3D(5.24537e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, 5.24537e-08, -0.842412, 0.403, 0.424)
+
+[node name="Shoot" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0142302, 0.275344, -0.565184)
