@@ -178,7 +178,9 @@ func _process(delta: float) -> void:
 	
 	for i in buildings_placed:
 		
-		if global.buildings[i.get_meta("building_name")].has("damage") and i.has_meta("cooldown") and i.get_meta("cooldown") == false:
+		if global.buildings[i.get_meta("building_name")].has("damage")\
+			and i.has_meta("cooldown")\
+			and i.get_meta("cooldown") == false:
 			
 			for i_2 in i.get_node("Area3D").get_overlapping_areas():
 				if i_2.get_parent().has_meta("enemy_name"):
@@ -193,6 +195,7 @@ func _process(delta: float) -> void:
 	
 	for i in enemies:
 		
-		if i.position == Vector3(0, -0.5, 0) or i.get_meta("damage") >= global.enemies[i.get_meta("enemy_name")].health:
+		if i.position == Vector3(0, -0.5, 0) \
+			or i.get_meta("damage") >= global.enemies[i.get_meta("enemy_name")].health:
 			enemies.erase(i)
 			i.queue_free()
