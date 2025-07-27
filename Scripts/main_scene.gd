@@ -52,6 +52,8 @@ func _select_building(building_name):
 		
 		current_building = global.buildings[building_name].scene.instantiate()
 	
+		current_building.position = Vector3(100, 100, 100)
+	
 		add_child(current_building)
 	
 	for i : Control in get_node("Control/ScrollContainer/HBoxContainer").get_children():
@@ -147,17 +149,20 @@ func _input(event: InputEvent) -> void:
 			var origin = $Camera3D.project_ray_origin(mouse_position)
 			var direction = $Camera3D.project_ray_normal(mouse_position)
 			
-			var query = PhysicsRayQueryParameters3D.create(origin, origin + direction * $Camera3D.far)
+			var query = PhysicsRayQueryParameters3D.create(origin, origin + direction * $Camera3D.far, 1, [current_building.get_node("StaticBody3D")])
 			
 			var mouse_position_3D = space_state.intersect_ray(query)
 			
-			var new_position = null
+			var new_position = Vector3(0, 0, 0)
 			
 			if mouse_position_3D.has("position"):
 				new_position = mouse_position_3D.position
-			else :
-				new_position = Vector3(direction.x * 10, -0.5, -10)
-				
+			
+			for i in current_building.get_node("Area3D").get_overlapping_areas():
+				if i.get_parent().has_meta("building_name"):
+					pass
+					
+			
 			current_building.position = Vector3(snapped(new_position.x, 0.25), -0.5, snapped(new_position.z, 0.25))
 			
 	elif event is InputEventMouseButton:
@@ -166,7 +171,10 @@ func _input(event: InputEvent) -> void:
 			if current_building != null:
 				buildings_placed.append(current_building)
 				_select_building(null)
-
+				
+	elif Input.is_key_pressed(KEY_R) and not event.is_echo():
+		if current_building != null:
+			current_building.rotation += Vector3(0, deg_to_rad(45), 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

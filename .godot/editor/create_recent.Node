@@ -1,6 +1,6 @@
+StaticBody3D
 MeshInstance3D
 PhysicalBone3D
-StaticBody3D
 CollisionShape3D
 ColorRect
 Area3D

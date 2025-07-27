@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=13 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
@@ -25,6 +25,9 @@ glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oyqcg"]
 size = Vector3(143, 1, 45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0gwpa"]
+size = Vector3(143, 37, 3)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_7hg08")
@@ -71,3 +74,7 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_oyqcg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, -7.40186)
+shape = SubResource("BoxShape3D_0gwpa")
