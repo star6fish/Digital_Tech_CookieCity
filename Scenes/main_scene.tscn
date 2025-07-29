@@ -78,3 +78,22 @@ shape = SubResource("BoxShape3D_oyqcg")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, -7.40186)
 shape = SubResource("BoxShape3D_0gwpa")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22)
+exclude_parent = false
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+hit_from_inside = true
+hit_back_faces = false
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast3D2" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22)
+exclude_parent = false
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false

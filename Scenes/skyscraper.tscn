@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dce7mmk4myi4d" path="res://Assets/skyscraper.glb" id="1_lke14"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rxkcj"]
-size = Vector3(1.47122, 4.51965, 1)
+size = Vector3(1.608, 1.27588, 1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_5xx6p")
@@ -13,11 +13,10 @@ metadata/health = 0
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 6
+collision_mask = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115036, 1.75983, 0)
 shape = SubResource("BoxShape3D_rxkcj")
 
 [node name="skyscraper" parent="." instance=ExtResource("1_lke14")]

@@ -149,7 +149,7 @@ func _input(event: InputEvent) -> void:
 			var origin = $Camera3D.project_ray_origin(mouse_position)
 			var direction = $Camera3D.project_ray_normal(mouse_position)
 			
-			var query = PhysicsRayQueryParameters3D.create(origin, origin + direction * $Camera3D.far, 1, [current_building.get_node("StaticBody3D")])
+			var query = PhysicsRayQueryParameters3D.create(origin, origin + direction * $Camera3D.far, 1)
 			
 			var mouse_position_3D = space_state.intersect_ray(query)
 			
@@ -157,19 +157,35 @@ func _input(event: InputEvent) -> void:
 			
 			if mouse_position_3D.has("position"):
 				new_position = mouse_position_3D.position
+				
+				new_position = Vector3(snapped(new_position.x, 0.25), -0.5, snapped(new_position.z, 0.25))
+				
+			$RayCast3D.position = Vector3(new_position.x - 0.5, new_position.y, new_position.z + 0.5)
+			$RayCast3D2.position = Vector3(new_position.x + 0.5, new_position.y, new_position.z + 0.5)
 			
-			for i in current_building.get_node("Area3D").get_overlapping_areas():
-				if i.get_parent().has_meta("building_name"):
-					pass
-					
+			$RayCast3D.add_exception(current_building.get_node("Area3D"))
+			$RayCast3D2.add_exception(current_building.get_node("Area3D"))
 			
-			current_building.position = Vector3(snapped(new_position.x, 0.25), -0.5, snapped(new_position.z, 0.25))
+			if $RayCast3D.is_colliding():
+				var target = $RayCast3D.get_collider().get_parent().position.z + 1
+				new_position = Vector3(new_position.x, new_position.y, target)
+				
+			if $RayCast3D2.is_colliding():
+				
+				var target = $RayCast3D2.get_collider().get_parent().position.z + 1
+				
+				if new_position.z < target:
+					new_position = Vector3(new_position.x, new_position.y, target)
+				
+			current_building.position = new_position
 			
 	elif event is InputEventMouseButton:
 		
 		if event.button_index == 1:
 			if current_building != null:
 				buildings_placed.append(current_building)
+				$RayCast3D.remove_exception(current_building.get_node("Area3D"))
+				$RayCast3D2.remove_exception(current_building.get_node("Area3D"))
 				_select_building(null)
 				
 	elif Input.is_key_pressed(KEY_R) and not event.is_echo():
