@@ -14,6 +14,8 @@ var buildings_placed : Array = []
 
 var enemies : Array = []
 
+var mouse_motion = Vector2(0, 0)
+
 var enemy_cooldown : bool = false
 
 var current_building : Node3D = null
@@ -41,6 +43,11 @@ func _load_building_catalogue():
 		get_node("Control/ScrollContainer/HBoxContainer").add_child(new_building_template)
 
 
+# Moves the selected building to the mouse
+func _move_building_to_mouse():
+	pass
+
+
 # Selects the building that the player has pressed
 func _select_building(building_name):
 	
@@ -52,7 +59,7 @@ func _select_building(building_name):
 		
 		current_building = global.buildings[building_name].scene.instantiate()
 	
-		current_building.position = Vector3(100, 100, 100)
+		current_building.position = Vector3(0, -0.5, 0)
 	
 		add_child(current_building)
 	
@@ -131,16 +138,17 @@ func _shoot(building, enemy):
 	
 	new_bullet.queue_free()
 	
-
-	
 	if building != null:
 		building.set_meta("cooldown", false)
+
 
 func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseMotion:
 		
 		if current_building != null:
+			
+			mouse_motion = event.relative
 			
 			var mouse_position = get_viewport().get_mouse_position()
 			
@@ -176,8 +184,19 @@ func _input(event: InputEvent) -> void:
 				
 				if new_position.z < target:
 					new_position = Vector3(new_position.x, new_position.y, target)
-				
-			current_building.position = new_position
+			
+			var distance = current_building.position.distance_to(new_position)
+			
+			var direction_placement = current_building.position.direction_to(new_position)
+			
+			var rotation_placement = Vector3(direction_placement.z, current_building.rotation.y, -direction_placement.x)
+			
+			var tween = get_tree().create_tween()
+			
+			tween.tween_property(current_building, "position", new_position, 0.1)
+			tween.parallel().tween_property(current_building, "rotation", rotation_placement, 0.1)
+			
+			#current_building.position = new_position
 			
 	elif event is InputEventMouseButton:
 		
@@ -200,13 +219,19 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
+	if current_building != null and mouse_motion == Vector2(0, 0):
+		var new_rotation = Vector3(0, current_building.rotation.y, 0)
+		
+		var tween = get_tree().create_tween()
+		tween.tween_property(current_building, "rotation", new_rotation, 0.1)
+	
 	for i in buildings_placed:
 		
 		if global.buildings[i.get_meta("building_name")].has("damage")\
 			and i.has_meta("cooldown")\
 			and i.get_meta("cooldown") == false:
 			
-			for i_2 in i.get_node("Area3D").get_overlapping_areas():
+			for i_2 in i.get_node("Area3D2").get_overlapping_areas():
 				if i_2.get_parent().has_meta("enemy_name"):
 					_shoot(i, i_2.get_parent())
 					
@@ -223,3 +248,5 @@ func _process(delta: float) -> void:
 			or i.get_meta("damage") >= global.enemies[i.get_meta("enemy_name")].health:
 			enemies.erase(i)
 			i.queue_free()
+
+	mouse_motion = Vector2(0, 0)
