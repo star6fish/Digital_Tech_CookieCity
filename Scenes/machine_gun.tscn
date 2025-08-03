@@ -25,11 +25,12 @@ shape = SubResource("BoxShape3D_3kvs8")
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("BoxShape3D_7imy8")
-
-[node name="machinegun" parent="." instance=ExtResource("2_de4gs")]
+[node name="machinegun" parent="Area3D" instance=ExtResource("2_de4gs")]
 transform = Transform3D(5.24537e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, 5.24537e-08, -0.842412, 0.403, 0.424)
 
-[node name="Shoot" type="MeshInstance3D" parent="."]
+[node name="Shoot" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0142302, 0.275344, -0.565184)
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_7imy8")

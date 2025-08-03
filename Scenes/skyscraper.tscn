@@ -16,8 +16,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 6
 collision_mask = 6
 
+[node name="skyscraper" parent="Area3D" instance=ExtResource("1_lke14")]
+transform = Transform3D(-2.10252e-08, 0, 0.481, 0, 0.481, 0, -0.481, 0, -2.10252e-08, 3.499, 0, 0)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_rxkcj")
-
-[node name="skyscraper" parent="." instance=ExtResource("1_lke14")]
-transform = Transform3D(-2.10252e-08, 0, 0.481, 0, 0.481, 0, -0.481, 0, -2.10252e-08, 3.499, 0.5, 0)

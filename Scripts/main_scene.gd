@@ -121,7 +121,7 @@ func _shoot(building, enemy):
 	
 	add_child(new_bullet)
 	
-	new_bullet.position = building.get_node("Shoot").global_position
+	new_bullet.position = building.get_node("Area3D/Shoot").global_position
 	new_bullet.look_at(enemy.position, Vector3.UP, true)
 	
 	var tween = get_tree().create_tween()
@@ -132,7 +132,7 @@ func _shoot(building, enemy):
 	
 	var target_rotation : Vector3 = Vector3(0, atan2(direction.x, direction.z), 0)
 	
-	tween.parallel().tween_property(building, "rotation", target_rotation, 0.1)
+	tween.parallel().tween_property(building.get_node("Area3D"), "rotation", target_rotation, 0.1)
 	
 	await get_tree().create_timer(0.1).timeout
 	
@@ -187,9 +187,9 @@ func _input(event: InputEvent) -> void:
 			
 			var distance = current_building.position.distance_to(new_position)
 			
-			var direction_placement = current_building.position.direction_to(new_position)
+			var sensitivity = 2 * (1 - (current_building.get_node("Area3D/CollisionShape3D").shape.size.y / 2))
 			
-			var rotation_placement = Vector3(direction_placement.z, current_building.rotation.y, -direction_placement.x)
+			var rotation_placement = Vector3(deg_to_rad(mouse_motion.y) * sensitivity, 0, deg_to_rad(-mouse_motion.x) * sensitivity)
 			
 			var tween = get_tree().create_tween()
 			
@@ -209,7 +209,7 @@ func _input(event: InputEvent) -> void:
 				
 	elif Input.is_key_pressed(KEY_R) and not event.is_echo():
 		if current_building != null:
-			current_building.rotation += Vector3(0, deg_to_rad(45), 0)
+			current_building.get_node("Area3D").rotation += Vector3(0, deg_to_rad(45), 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -220,7 +220,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	if current_building != null and mouse_motion == Vector2(0, 0):
-		var new_rotation = Vector3(0, current_building.rotation.y, 0)
+		var new_rotation = Vector3(0, 0, 0)
 		
 		var tween = get_tree().create_tween()
 		tween.tween_property(current_building, "rotation", new_rotation, 0.1)

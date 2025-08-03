@@ -16,9 +16,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 6
 collision_mask = 6
 
+[node name="shop" parent="Area3D" instance=ExtResource("1_8njc0")]
+transform = Transform3D(-2.10252e-08, 0, 0.481, 0, 0.481, 0, -0.481, 0, -2.10252e-08, 6.55627, 0, 0)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0600353, 0, 0.202118)
 shape = SubResource("BoxShape3D_dvft8")
-
-[node name="shop" parent="." instance=ExtResource("1_8njc0")]
-transform = Transform3D(-2.10252e-08, 0, 0.481, 0, 0.481, 0, -0.481, 0, -2.10252e-08, 6.55627, 0.5, 0)
