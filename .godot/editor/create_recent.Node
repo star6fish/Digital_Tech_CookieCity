@@ -1,3 +1,6 @@
+VoxelGI
+Decal
+ReflectionProbe
 RayCast3D
 MeshInstance3D
 CollisionShape3D
@@ -9,6 +12,3 @@ TileMap
 WorldEnvironment
 GridMap
 TextureRect
-Container
-PanelContainer
-CenterContainer

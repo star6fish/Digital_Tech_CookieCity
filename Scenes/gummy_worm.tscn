@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bm018o6wym1ke"]
+[gd_scene load_steps=5 format=3 uid="uid://bm018o6wym1ke"]
 
 [ext_resource type="Script" path="res://Scripts/gummy_worm.gd" id="1_k6v7n"]
 [ext_resource type="PackedScene" uid="uid://ruosfynbxp27" path="res://Assets/gummyworm.glb" id="1_kaaal"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_g6a2b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3twh0"]
 size = Vector3(0.301056, 0.296822, 5.58582)
@@ -10,6 +12,13 @@ size = Vector3(0.301056, 0.296822, 5.58582)
 script = ExtResource("1_k6v7n")
 metadata/enemy_name = "Gummy Worm"
 metadata/damage = 0
+metadata/cooldown = false
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(0.153649, 0, 0, 0, 0.153649, 0, 0, 0, 0.153649, -0.0266523, 0.157496, -2.43955)
+size = Vector3(2.78149, 2.1456, 41.9746)
+texture_albedo = SubResource("ViewportTexture_g6a2b")
+modulate = Color(0.840452, 0, 0.323227, 1)
 
 [node name="gummyworm" parent="." instance=ExtResource("1_kaaal")]
 transform = Transform3D(0.153649, 0, 0, 0, 0.153649, 0, 0, 0, 0.153649, 0, 0, 0)
@@ -21,5 +30,3 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00190735, 0.0307121, -2.42719)
 shape = SubResource("BoxShape3D_3twh0")
-
-[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

@@ -18,8 +18,6 @@ var mouse_motion = Vector2(0, 0)
 
 var enemy_cooldown : bool = false
 
-var current_building : Node3D = null
-
 
 # Loads the building catalogue on the screen
 func _load_building_catalogue():
@@ -53,15 +51,15 @@ func _select_building(building_name):
 	
 	if building_name == null:
 		
-		current_building = null
+		global.current_building = null
 		
 	elif building_name != null:
 		
-		current_building = global.buildings[building_name].scene.instantiate()
+		global.current_building = global.buildings[building_name].scene.instantiate()
 	
-		current_building.position = Vector3(0, -0.5, 0)
+		global.current_building.position = Vector3(0, -0.5, 0)
 	
-		add_child(current_building)
+		add_child(global.current_building)
 	
 	for i : Control in get_node("Control/ScrollContainer/HBoxContainer").get_children():
 		if i.get_meta("building") == building_name:
@@ -146,7 +144,7 @@ func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseMotion:
 		
-		if current_building != null:
+		if global.current_building != null:
 			
 			mouse_motion = event.relative
 			
@@ -171,8 +169,8 @@ func _input(event: InputEvent) -> void:
 			$RayCast3D.position = Vector3(new_position.x - 0.5, new_position.y, new_position.z + 0.5)
 			$RayCast3D2.position = Vector3(new_position.x + 0.5, new_position.y, new_position.z + 0.5)
 			
-			$RayCast3D.add_exception(current_building.get_node("Area3D"))
-			$RayCast3D2.add_exception(current_building.get_node("Area3D"))
+			$RayCast3D.add_exception(global.current_building.get_node("Area3D"))
+			$RayCast3D2.add_exception(global.current_building.get_node("Area3D"))
 			
 			if $RayCast3D.is_colliding():
 				var target = $RayCast3D.get_collider().get_parent().position.z + 1
@@ -185,31 +183,32 @@ func _input(event: InputEvent) -> void:
 				if new_position.z < target:
 					new_position = Vector3(new_position.x, new_position.y, target)
 			
-			var distance = current_building.position.distance_to(new_position)
+			var distance = global.current_building.position.distance_to(new_position)
 			
-			var sensitivity = 2 * (1 - (current_building.get_node("Area3D/CollisionShape3D").shape.size.y / 2))
+			var sensitivity = 2 * (1 - (global.current_building.get_node("Area3D/CollisionShape3D").shape.size.y / 2))
 			
-			var rotation_placement = Vector3(deg_to_rad(mouse_motion.y) * sensitivity, 0, deg_to_rad(-mouse_motion.x) * sensitivity)
+			var rotation_placement = Vector3(deg_to_rad(mouse_motion.y) * sensitivity, 0,
+			 	deg_to_rad(-mouse_motion.x) * sensitivity)
 			
 			var tween = get_tree().create_tween()
 			
-			tween.tween_property(current_building, "position", new_position, 0.1)
-			tween.parallel().tween_property(current_building, "rotation", rotation_placement, 0.1)
+			tween.tween_property(global.current_building, "position", new_position, 0.1)
+			tween.parallel().tween_property(global.current_building, "rotation", rotation_placement, 0.1)
 			
-			#current_building.position = new_position
+			#global.current_building.position = new_position
 			
 	elif event is InputEventMouseButton:
 		
 		if event.button_index == 1:
-			if current_building != null:
-				buildings_placed.append(current_building)
-				$RayCast3D.remove_exception(current_building.get_node("Area3D"))
-				$RayCast3D2.remove_exception(current_building.get_node("Area3D"))
+			if global.current_building != null:
+				buildings_placed.append(global.current_building)
+				$RayCast3D.remove_exception(global.current_building.get_node("Area3D"))
+				$RayCast3D2.remove_exception(global.current_building.get_node("Area3D"))
 				_select_building(null)
 				
 	elif Input.is_key_pressed(KEY_R) and not event.is_echo():
-		if current_building != null:
-			current_building.get_node("Area3D").rotation += Vector3(0, deg_to_rad(45), 0)
+		if global.current_building != null:
+			global.current_building.get_node("Area3D").rotation += Vector3(0, deg_to_rad(45), 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -219,11 +218,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	if current_building != null and mouse_motion == Vector2(0, 0):
+	if global.current_building != null and mouse_motion == Vector2(0, 0):
 		var new_rotation = Vector3(0, 0, 0)
 		
 		var tween = get_tree().create_tween()
-		tween.tween_property(current_building, "rotation", new_rotation, 0.1)
+		tween.tween_property(global.current_building, "rotation", new_rotation, 0.1)
 	
 	for i in buildings_placed:
 		
@@ -244,7 +243,7 @@ func _process(delta: float) -> void:
 	
 	for i in enemies:
 		
-		if i.position == Vector3(0, -0.5, 0) \
+		if i.position == Vector3(0, -0.5, 0)\
 			or i.get_meta("damage") >= global.enemies[i.get_meta("enemy_name")].health:
 			enemies.erase(i)
 			i.queue_free()
