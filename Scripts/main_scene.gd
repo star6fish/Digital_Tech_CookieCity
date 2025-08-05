@@ -18,6 +18,8 @@ var mouse_motion = Vector2(0, 0)
 
 var enemy_cooldown : bool = false
 
+var run_update_position = null
+
 
 # Loads the building catalogue on the screen
 func _load_building_catalogue():
@@ -44,6 +46,33 @@ func _load_building_catalogue():
 # Moves the selected building to the mouse
 func _move_building_to_mouse():
 	pass
+
+
+# Checks if the placement for the current building is valid
+func _update_placement_position(placement_position):
+	
+		run_update_position = null
+	
+		var original_positon = placement_position
+	
+		$RayCast3D.position = Vector3(placement_position.x - 0.5, placement_position.y, placement_position.z + 0.5)
+		$RayCast3D2.position = Vector3(placement_position.x + 0.5, placement_position.y, placement_position.z + 0.5)
+			
+		if $RayCast3D.is_colliding():
+			var target = $RayCast3D.get_collider().get_parent().position.z + 1
+			placement_position = Vector3(placement_position.x, placement_position.y, target)
+				
+		if $RayCast3D2.is_colliding():
+				
+			var target = $RayCast3D2.get_collider().get_parent().position.z + 1
+				
+			if placement_position.z < target:
+				placement_position = Vector3(placement_position.x, placement_position.y, target)
+		
+		if placement_position != original_positon:
+			run_update_position = placement_position
+			
+		return placement_position
 
 
 # Selects the building that the player has pressed
@@ -166,22 +195,10 @@ func _input(event: InputEvent) -> void:
 				
 				new_position = Vector3(snapped(new_position.x, 0.25), -0.5, snapped(new_position.z, 0.25))
 				
-			$RayCast3D.position = Vector3(new_position.x - 0.5, new_position.y, new_position.z + 0.5)
-			$RayCast3D2.position = Vector3(new_position.x + 0.5, new_position.y, new_position.z + 0.5)
-			
 			$RayCast3D.add_exception(global.current_building.get_node("Area3D"))
 			$RayCast3D2.add_exception(global.current_building.get_node("Area3D"))
 			
-			if $RayCast3D.is_colliding():
-				var target = $RayCast3D.get_collider().get_parent().position.z + 1
-				new_position = Vector3(new_position.x, new_position.y, target)
-				
-			if $RayCast3D2.is_colliding():
-				
-				var target = $RayCast3D2.get_collider().get_parent().position.z + 1
-				
-				if new_position.z < target:
-					new_position = Vector3(new_position.x, new_position.y, target)
+			new_position = _update_placement_position(new_position)
 			
 			var distance = global.current_building.position.distance_to(new_position)
 			
@@ -219,6 +236,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	if global.current_building != null and mouse_motion == Vector2(0, 0):
+		
+		if run_update_position != null:
+			_update_placement_position(run_update_position)
+		
 		var new_rotation = Vector3(0, 0, 0)
 		
 		var tween = get_tree().create_tween()

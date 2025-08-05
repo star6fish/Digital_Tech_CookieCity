@@ -1,8 +1,8 @@
+MeshInstance3D
 VoxelGI
 Decal
 ReflectionProbe
 RayCast3D
-MeshInstance3D
 CollisionShape3D
 Area3D
 StaticBody3D

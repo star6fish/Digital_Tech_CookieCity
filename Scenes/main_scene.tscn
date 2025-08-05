@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=16 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
@@ -28,6 +28,14 @@ size = Vector3(143, 1, 45)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0gwpa"]
 size = Vector3(143, 37, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tcxds"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8uljc"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx0yw"]
+albedo_color = Color(0, 1, 0, 1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_7hg08")
@@ -89,11 +97,22 @@ hit_back_faces = false
 collide_with_areas = true
 collide_with_bodies = false
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RayCast3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.526, -1)
+mesh = SubResource("BoxMesh_tcxds")
+surface_material_override/0 = SubResource("StandardMaterial3D_8uljc")
+
 [node name="RayCast3D2" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22)
 exclude_parent = false
 target_position = Vector3(0, 0, -1)
 collision_mask = 4
 hit_from_inside = true
+hit_back_faces = false
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RayCast3D2"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.526, -1)
+mesh = SubResource("BoxMesh_tcxds")
+surface_material_override/0 = SubResource("StandardMaterial3D_mx0yw")
