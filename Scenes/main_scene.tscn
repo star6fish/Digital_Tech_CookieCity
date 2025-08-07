@@ -99,6 +99,7 @@ collide_with_bodies = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RayCast3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.526, -1)
+visible = false
 mesh = SubResource("BoxMesh_tcxds")
 surface_material_override/0 = SubResource("StandardMaterial3D_8uljc")
 
@@ -114,5 +115,6 @@ collide_with_bodies = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RayCast3D2"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.526, -1)
+visible = false
 mesh = SubResource("BoxMesh_tcxds")
 surface_material_override/0 = SubResource("StandardMaterial3D_mx0yw")
