@@ -14,6 +14,8 @@ var buildings_placed : Array = []
 
 var enemies : Array = []
 
+var ennemy_spawn_saves : Array = []
+
 var mouse_motion = Vector2(0, 0)
 
 var enemy_cooldown : bool = false
@@ -133,25 +135,34 @@ func _spawn_enemy():
 	enemies.append(enemy)
 	
 	var enemy_position = null
+	var valid = false
 	
-	random = randf_range(1, global.enemy_spawn_positions.size() + 1)
-	
-	count = 0
-	
-	for i in global.enemy_spawn_positions:
-		count += 1
-		if count == random:
-			enemy_position = i
-			break
+	while valid == false:
+		
+		valid = true
+		
+		random = snapped(randf_range(-25, 25), 0.5)
+		enemy_position = Vector3(random, -0.5, 25)
+		
+		for i in ennemy_spawn_saves:
+			if abs(random - i.x) < 0.5:
+				valid = false
+				
+		await get_tree().create_timer(0).timeout
+			
+	ennemy_spawn_saves.append(enemy_position)
 			
 	enemy.position = enemy_position
 	
 	add_child(enemy)
 	
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(20).timeout
 	
 	enemy_cooldown = false
 
+	await get_tree().create_timer(5).timeout
+	
+	ennemy_spawn_saves.erase(enemy_position)
 
 #Shoots enemy
 func _shoot(building, enemy):
@@ -283,3 +294,11 @@ func _process(delta: float) -> void:
 			i.queue_free()
 
 	mouse_motion = Vector2(0, 0)
+
+
+func _on_button_pressed_help() -> void:
+	
+	if $Control/Control2.visible == true:
+		$Control/Control2.visible = false
+	elif $Control/Control2.visible == false:
+		$Control/Control2.visible = true

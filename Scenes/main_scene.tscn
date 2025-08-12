@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=18 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
@@ -6,6 +6,10 @@
 [ext_resource type="StyleBox" uid="uid://ca5r3yd85ry5q" path="res://Assets/panel_selected.tres" id="2_pgo2f"]
 [ext_resource type="PackedScene" uid="uid://4h8s0w5kbwrq" path="res://Scenes/bullet.tscn" id="3_ktskd"]
 [ext_resource type="StyleBox" uid="uid://7l4b37vxc3ve" path="res://Assets/panel_unselected.tres" id="4_nhymn"]
+[ext_resource type="StyleBox" uid="uid://e0qoe08p60rl" path="res://Assets/new_style_box_flat2.tres" id="7_t1or8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u0qbg"]
+content_margin_top = 10.0
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lar3c"]
 sky_horizon_color = Color(0.968627, 0.486275, 0.505882, 1)
@@ -63,6 +67,104 @@ layout_direction = 2
 layout_mode = 2
 theme_override_constants/separation = 10
 
+[node name="Control" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = 1002.0
+offset_top = 481.0
+offset_right = 1102.0
+offset_bottom = 621.0
+
+[node name="Button" type="Button" parent="Control/Control"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+theme_override_colors/font_disabled_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_font_sizes/font_size = 65
+theme_override_styles/focus = ExtResource("7_t1or8")
+theme_override_styles/disabled_mirrored = ExtResource("7_t1or8")
+theme_override_styles/disabled = ExtResource("7_t1or8")
+theme_override_styles/hover_pressed_mirrored = ExtResource("7_t1or8")
+theme_override_styles/hover_pressed = ExtResource("7_t1or8")
+theme_override_styles/hover_mirrored = ExtResource("7_t1or8")
+theme_override_styles/hover = ExtResource("7_t1or8")
+theme_override_styles/pressed_mirrored = ExtResource("7_t1or8")
+theme_override_styles/pressed = ExtResource("7_t1or8")
+theme_override_styles/normal_mirrored = ExtResource("7_t1or8")
+theme_override_styles/normal = ExtResource("7_t1or8")
+text = "?"
+
+[node name="Label" type="Label" parent="Control/Control"]
+layout_mode = 0
+offset_top = 105.0
+offset_right = 100.0
+offset_bottom = 132.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_font_sizes/font_size = 19
+text = "HELP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="Control"]
+visible = false
+anchors_preset = 0
+offset_left = 483.0
+offset_top = 173.0
+offset_right = 786.0
+offset_bottom = 457.0
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Control/Control2"]
+layout_mode = 0
+offset_right = 303.0
+offset_bottom = 284.0
+theme_override_styles/panel = ExtResource("7_t1or8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Control2/ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 11
+
+[node name="Label" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "1. Plinko"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+text = "2. Plinko"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+text = "3. Plinko"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+text = "4. Plinko"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+text = "5. Plinko"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2aggu")
 
@@ -118,3 +220,5 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.526, -1)
 visible = false
 mesh = SubResource("BoxMesh_tcxds")
 surface_material_override/0 = SubResource("StandardMaterial3D_mx0yw")
+
+[connection signal="pressed" from="Control/Control/Button" to="." method="_on_button_pressed_help"]
