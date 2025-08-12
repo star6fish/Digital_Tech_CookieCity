@@ -8,17 +8,19 @@ extends Node3D
 @export var panel_selected : StyleBoxFlat
 @export var panel_unselected : StyleBoxFlat
 
+@export var help_screen : Control
+@export var help_screen_container : VBoxContainer
+
 var buildings : Dictionary = Global.buildings
 
 var buildings_placed : Array = []
-
 var enemies : Array = []
-
 var ennemy_spawn_saves : Array = []
 
 var mouse_motion = Vector2(0, 0)
 
 var enemy_cooldown : bool = false
+var help_screen_open : bool = false
 
 
 # Loads the building catalogue on the screen
@@ -298,7 +300,29 @@ func _process(delta: float) -> void:
 
 func _on_button_pressed_help() -> void:
 	
-	if $Control/Control2.visible == true:
-		$Control/Control2.visible = false
-	elif $Control/Control2.visible == false:
-		$Control/Control2.visible = true
+	var tween = get_tree().create_tween()
+	
+	tween.set_trans(Tween.TRANS_QUAD)
+	
+	if help_screen_open == true:
+		
+		help_screen_open = false
+		
+		tween.tween_property(help_screen, "scale", Vector2(0, 0), 0.2)
+		tween.parallel().tween_property(help_screen, "rotation_degrees", 180, 0.25)
+		
+		for i : Label in help_screen_container.get_children():
+			i.visible_characters = 0
+			tween.parallel().tween_property(i, "visible_characters", 0, 0.25)
+		
+	elif help_screen_open == false:
+		
+		help_screen_open = true
+		
+		tween.tween_property(help_screen, "scale", Vector2(1, 1), 0.5)
+		tween.parallel().tween_property(help_screen, "rotation_degrees", 0, 0.5)
+		
+		for i : Label in help_screen_container.get_children():
+			i.visible_characters = 0
+			tween.parallel().tween_property(i, "visible_characters", i.text.length(), 0.25)
+			

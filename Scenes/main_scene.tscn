@@ -9,7 +9,6 @@
 [ext_resource type="StyleBox" uid="uid://e0qoe08p60rl" path="res://Assets/new_style_box_flat2.tres" id="7_t1or8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u0qbg"]
-content_margin_top = 10.0
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lar3c"]
 sky_horizon_color = Color(0.968627, 0.486275, 0.505882, 1)
@@ -41,12 +40,14 @@ albedo_color = Color(0, 1, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx0yw"]
 albedo_color = Color(0, 1, 0, 1)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("help_screen", "help_screen_container")]
 script = ExtResource("1_7hg08")
 building_template = ExtResource("2_esms4")
 bullet = ExtResource("3_ktskd")
 panel_selected = ExtResource("2_pgo2f")
 panel_unselected = ExtResource("4_nhymn")
+help_screen = NodePath("Control/Control2")
+help_screen_container = NodePath("Control/Control2/ScrollContainer2/VBoxContainer")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -111,57 +112,66 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Control2" type="Control" parent="Control"]
-visible = false
 anchors_preset = 0
-offset_left = 483.0
-offset_top = 173.0
-offset_right = 786.0
-offset_bottom = 457.0
+offset_left = 381.0
+offset_top = 127.0
+offset_right = 812.0
+offset_bottom = 409.0
+rotation = 3.14159
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(215, 141)
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="Control/Control2"]
+clip_contents = false
 layout_mode = 0
-offset_right = 303.0
-offset_bottom = 284.0
+offset_right = 431.0
+offset_bottom = 282.0
 theme_override_styles/panel = ExtResource("7_t1or8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Control2/ScrollContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 11
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
 
 [node name="Label" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
-text = "1. Plinko"
+text = "Select a building to start placing it"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
-text = "2. Plinko"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "Click to place the building"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
-text = "3. Plinko"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "Enemies will attack your buildings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label4" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
-text = "4. Plinko"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "Place military buildings to defend your city"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label5" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
-text = "5. Plinko"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "Each building will generate money every second"
 horizontal_alignment = 1
 vertical_alignment = 1
 
