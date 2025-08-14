@@ -11,6 +11,13 @@ extends Node3D
 @export var help_screen : Control
 @export var help_screen_container : VBoxContainer
 
+@export var build_screen : ScrollContainer
+@export var build_screen_container : HBoxContainer
+
+@export var money_label : Label
+@export var buildings_placed_label : Label
+@export var time_label : Label
+
 var buildings : Dictionary = Global.buildings
 
 var buildings_placed : Array = []
@@ -21,28 +28,7 @@ var mouse_motion = Vector2(0, 0)
 
 var enemy_cooldown : bool = false
 var help_screen_open : bool = false
-
-
-# Loads the building catalogue on the screen
-func _load_building_catalogue():
-	
-	$Control.get_node("ScrollContainer").visible = true
-	
-	for i : String in buildings:
-		var building = buildings[i]
-		
-		var new_building_template : Control = building_template.instantiate()
-		
-		new_building_template.set_meta("building", i)
-		
-		new_building_template.get_node("Label3").text = i
-		new_building_template.get_node("Label4").text = "$ " + str(building.price)
-		
-		var new_font_size : int = clamp(200 / clamp(i.length(), 12, INF), 2, 20)
-		
-		new_building_template.get_node("Label3").set("theme_override_font_sizes/font_size", new_font_size)
-		
-		get_node("Control/ScrollContainer/HBoxContainer").add_child(new_building_template)
+var build_screen_open : bool = false
 
 
 # Moves the selected building to the mouse
@@ -166,6 +152,7 @@ func _spawn_enemy():
 	
 	ennemy_spawn_saves.erase(enemy_position)
 
+
 #Shoots enemy
 func _shoot(building, enemy):
 	
@@ -198,6 +185,7 @@ func _shoot(building, enemy):
 		building.set_meta("cooldown", false)
 
 
+# Detects when the player presses a key or clicks or moves their mouse
 func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseMotion:
@@ -256,9 +244,27 @@ func _input(event: InputEvent) -> void:
 		if global.current_building != null:
 			global.current_building.get_node("Area3D").rotation += Vector3(0, deg_to_rad(45), 0)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_load_building_catalogue()
+	
+	for i : String in buildings:
+		
+		var building = buildings[i]
+		
+		var new_building_template : Control = building_template.instantiate()
+		
+		new_building_template.set_meta("building", i)
+		
+		new_building_template.get_node("Label3").text = i
+		new_building_template.get_node("Label4").text = "$ " + str(building.price)
+		
+		var new_font_size : int = clamp(200 / clamp(i.length(), 12, INF), 2, 20)
+		
+		new_building_template.get_node("Label3").set("theme_override_font_sizes/font_size", new_font_size)
+		
+		build_screen_container.add_child(new_building_template)
+		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -295,9 +301,13 @@ func _process(delta: float) -> void:
 			enemies.erase(i)
 			i.queue_free()
 
+	money_label.text = "COOKIE DOUGH: " + str(global.cookie_dough)
+	buildings_placed_label.text = "BUILDINGS PLACED: " + str(buildings_placed.size())
+
 	mouse_motion = Vector2(0, 0)
 
 
+# Help button is pressed
 func _on_button_pressed_help() -> void:
 	
 	var tween = get_tree().create_tween()
@@ -319,10 +329,32 @@ func _on_button_pressed_help() -> void:
 		
 		help_screen_open = true
 		
-		tween.tween_property(help_screen, "scale", Vector2(1, 1), 0.5)
-		tween.parallel().tween_property(help_screen, "rotation_degrees", 0, 0.5)
+		tween.tween_property(help_screen, "scale", Vector2(1, 1), 0.25)
+		tween.parallel().tween_property(help_screen, "rotation_degrees", 0, 0.25)
 		
 		for i : Label in help_screen_container.get_children():
 			i.visible_characters = 0
 			tween.parallel().tween_property(i, "visible_characters", i.text.length(), 0.25)
 			
+
+# Build button is pressed
+func _on_button_pressed_build() -> void:
+	
+	var tween = get_tree().create_tween()
+	
+	tween.set_trans(Tween.TRANS_SINE)
+	
+	if build_screen_open == true:
+		
+		build_screen_open = false
+		
+		tween.tween_property(build_screen, "position", Vector2(222, 667), 0.25)
+		tween.parallel().tween_property(build_screen, "rotation_degrees", -180, 0.25)
+		
+	elif build_screen_open== false:
+		
+		build_screen_open = true
+		
+		tween.tween_property(build_screen, "position", Vector2(222, 447), 0.25)
+		tween.parallel().tween_property(build_screen, "rotation_degrees", 0, 0.25)
+		
