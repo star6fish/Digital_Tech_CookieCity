@@ -302,7 +302,7 @@ func _process(delta: float) -> void:
 			i.queue_free()
 
 	money_label.text = "COOKIE DOUGH: " + str(global.cookie_dough)
-	buildings_placed_label.text = "BUILDINGS PLACED: " + str(buildings_placed.size())
+	buildings_placed_label.text = "Buildings Placed: " + str(buildings_placed.size())
 
 	mouse_motion = Vector2(0, 0)
 

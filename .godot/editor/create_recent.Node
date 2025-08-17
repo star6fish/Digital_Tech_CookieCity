@@ -1,3 +1,7 @@
+GPUParticles3D
+CPUParticles3D
+TextureRect
+DirectionalLight3D
 VBoxContainer
 Label
 Control
@@ -9,7 +13,3 @@ Decal
 ReflectionProbe
 RayCast3D
 CollisionShape3D
-Area3D
-StaticBody3D
-PhysicalBone3D
-ColorRect
