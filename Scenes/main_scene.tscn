@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=22 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
@@ -9,11 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/buttonFX2.gd" id="7_jxr57"]
 [ext_resource type="StyleBox" uid="uid://e0qoe08p60rl" path="res://Assets/new_style_box_flat2.tres" id="7_t1or8"]
 [ext_resource type="FontFile" uid="uid://f05tpeemtcxc" path="res://Assets/ParalucentHeavy.otf" id="9_u8a58"]
-[ext_resource type="PackedScene" uid="uid://dxs3nphe6q57" path="res://Scenes/house.tscn" id="10_d456n"]
 [ext_resource type="Texture2D" uid="uid://o4j2si1ovkv7" path="res://Assets/Oven.png" id="10_fkto3"]
-[ext_resource type="PackedScene" uid="uid://bfrhjn1u6h1ns" path="res://Scenes/machine_gun.tscn" id="11_5gw5d"]
-[ext_resource type="PackedScene" uid="uid://brf8r4brj4pfs" path="res://Scenes/shop.tscn" id="12_vbp6v"]
-[ext_resource type="PackedScene" uid="uid://cupcmaikaf54f" path="res://Scenes/skyscraper.tscn" id="13_2okfs"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_cf8wl"]
 
@@ -366,24 +362,6 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.526, -1)
 visible = false
 mesh = SubResource("BoxMesh_tcxds")
 surface_material_override/0 = SubResource("StandardMaterial3D_mx0yw")
-
-[node name="Node3D" parent="." instance=ExtResource("10_d456n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3163, -0.5, 4.04498)
-
-[node name="Node3D2" parent="." instance=ExtResource("10_d456n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97557, -0.5, 5.54059)
-
-[node name="Node3D3" parent="." instance=ExtResource("11_5gw5d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23444, -0.5, 8.18259)
-
-[node name="Node3D4" parent="." instance=ExtResource("12_vbp6v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96833, -0.5, 6.76782)
-
-[node name="Node3D5" parent="." instance=ExtResource("13_2okfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25607, -0.5, 2.45004)
-
-[node name="Node3D6" parent="." instance=ExtResource("10_d456n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.78582, -0.5, 7.30915)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.690272, 0.399495, 0.603265, -0.200143, -0.695802, 0.689784, 0.695318, -0.596878, -0.400336, 16.9229, 6.40255, -4.50122)

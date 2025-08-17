@@ -1,9 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxs3nphe6q57"]
+[gd_scene load_steps=8 format=3 uid="uid://dxs3nphe6q57"]
 
 [ext_resource type="Script" path="res://Scripts/house.gd" id="1_03ivi"]
 [ext_resource type="PackedScene" uid="uid://b24bg6wcaquey" path="res://Assets/house.glb" id="2_56e04"]
+[ext_resource type="Material" uid="uid://bqrt4qqwplx6b" path="res://Assets/smoke.tres" id="3_h2kcj"]
+[ext_resource type="Texture2D" uid="uid://ds3oflpplogy2" path="res://Assets/cloud2.png" id="3_hk7f0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_35obs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c28en"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 1, 1, 0.521569)
+albedo_texture = ExtResource("3_hk7f0")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xkkgb"]
+material = SubResource("StandardMaterial3D_c28en")
+orientation = 2
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_03ivi")
@@ -21,5 +33,11 @@ transform = Transform3D(-2.10108e-08, 0, 0.480671, 0, 0.480671, 0, -0.480671, 0,
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_35obs")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522097, 1.51418, 0.13654)
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.504208, 1.53042, 0.134832)
+amount = 5
+lifetime = 8.0
+fixed_fps = 60
+transform_align = 1
+process_material = ExtResource("3_h2kcj")
+draw_pass_1 = SubResource("PlaneMesh_xkkgb")
