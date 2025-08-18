@@ -2,7 +2,7 @@ extends Node
 
 var current_building : Node3D = null
 
-var cookie_dough : int = 0
+var cookie_dough : int = 250
 
 var buildings : Dictionary = {
 	"House" = {"scene" = load("res://Scenes/house.tscn"), "price" = 50, "health" = 100},

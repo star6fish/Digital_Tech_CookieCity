@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=26 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
@@ -30,6 +30,20 @@ sky = SubResource("Sky_y8t8d")
 glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_fws2p"]
+
+[sub_resource type="Gradient" id="Gradient_rfxl0"]
+colors = PackedColorArray(0.74698, 0.74698, 0.74698, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_htkp7"]
+frequency = 0.0034
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_07dd5"]
+width = 1485
+color_ramp = SubResource("Gradient_rfxl0")
+noise = SubResource("FastNoiseLite_htkp7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gv2h8"]
+albedo_texture = SubResource("NoiseTexture2D_07dd5")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oyqcg"]
 size = Vector3(143, 1, 45)
@@ -102,7 +116,8 @@ theme_override_colors/font_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_colors/font_focus_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
-theme_override_font_sizes/font_size = 46
+theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_font_sizes/font_size = 63
 theme_override_styles/focus = ExtResource("7_t1or8")
 theme_override_styles/disabled_mirrored = ExtResource("7_t1or8")
 theme_override_styles/disabled = ExtResource("7_t1or8")
@@ -199,14 +214,15 @@ pivot_offset = Vector2(215, 141)
 [node name="Label" type="Label" parent="Control/Control2"]
 z_index = 1
 layout_mode = 2
-offset_left = 129.0
-offset_top = -58.0
-offset_right = 302.0
-offset_bottom = 38.0
+offset_left = 131.0
+offset_top = -47.0
+offset_right = 304.0
+offset_bottom = 49.0
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 13
-theme_override_font_sizes/font_size = 50
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_font_sizes/font_size = 70
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "HELP"
 horizontal_alignment = 1
@@ -229,6 +245,8 @@ alignment = 1
 [node name="Label" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "Select a building to start placing it"
 horizontal_alignment = 1
@@ -237,6 +255,8 @@ vertical_alignment = 1
 [node name="Label2" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "Click to place the building"
 horizontal_alignment = 1
@@ -245,6 +265,8 @@ vertical_alignment = 1
 [node name="Label3" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "Enemies will attack your buildings"
 horizontal_alignment = 1
@@ -253,6 +275,8 @@ vertical_alignment = 1
 [node name="Label4" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "Place military buildings to defend your city"
 horizontal_alignment = 1
@@ -261,6 +285,8 @@ vertical_alignment = 1
 [node name="Label5" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "Each building will generate money every second"
 horizontal_alignment = 1
@@ -323,6 +349,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 transform = Transform3D(142.195, 0, 0, 0, 1, 0, 0, 0, 45.4766, 0, 0, 0)
 mesh = SubResource("BoxMesh_fws2p")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_gv2h8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_oyqcg")

@@ -26,7 +26,9 @@ var ennemy_spawn_saves : Array = []
 
 var mouse_motion = Vector2(0, 0)
 
+var money_cooldown : bool = false
 var enemy_cooldown : bool = false
+
 var help_screen_open : bool = false
 var build_screen_open : bool = false
 
@@ -84,11 +86,16 @@ func _update_placement_position(placement_position : Vector3):
 # Selects the building that the player has pressed
 func _select_building(building_name):
 	
-	if building_name == null:
+	var valid = false
+	
+	if building_name != null and global.cookie_dough >= global.buildings[building_name].price:
+		valid = true
+	
+	if building_name == null or valid == false:
 		
 		global.current_building = null
 		
-	elif building_name != null:
+	elif building_name != null and valid == true:
 		
 		global.current_building = global.buildings[building_name].scene.instantiate()
 	
@@ -97,7 +104,7 @@ func _select_building(building_name):
 		add_child(global.current_building)
 	
 	for i : Control in get_node("Control/ScrollContainer/HBoxContainer").get_children():
-		if i.get_meta("building") == building_name:
+		if i.get_meta("building") == building_name and valid == true:
 			i.get_node("Panel2").set("theme_override_styles/panel", panel_selected)
 		else:
 			i.get_node("Panel2").set("theme_override_styles/panel", panel_unselected)
@@ -238,6 +245,7 @@ func _input(event: InputEvent) -> void:
 				buildings_placed.append(global.current_building)
 				$RayCast3D.remove_exception(global.current_building.get_node("Area3D"))
 				$RayCast3D2.remove_exception(global.current_building.get_node("Area3D"))
+				global.cookie_dough -= global.buildings[global.current_building.get_meta("building_name")].price
 				_select_building(null)
 				
 	elif Input.is_key_pressed(KEY_R) and not event.is_echo():
@@ -300,6 +308,14 @@ func _process(delta: float) -> void:
 			or i.get_meta("damage") >= global.enemies[i.get_meta("enemy_name")].health:
 			enemies.erase(i)
 			i.queue_free()
+
+	if money_cooldown == false:
+		for i in buildings_placed:
+			global.cookie_dough += global.buildings[i.get_meta("building_name")].price / 4
+		
+		money_cooldown = true
+		await get_tree().create_timer(5).timeout
+		money_cooldown = false
 
 	money_label.text = "COOKIE DOUGH: " + str(global.cookie_dough)
 	buildings_placed_label.text = "Buildings Placed: " + str(buildings_placed.size())

@@ -1,3 +1,4 @@
+OmniLight3D
 GPUParticles3D
 CPUParticles3D
 TextureRect
@@ -12,4 +13,3 @@ VoxelGI
 Decal
 ReflectionProbe
 RayCast3D
-CollisionShape3D
