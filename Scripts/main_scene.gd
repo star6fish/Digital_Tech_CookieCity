@@ -202,21 +202,18 @@ func _input(event: InputEvent) -> void:
 			mouse_motion = event.relative
 			
 			var mouse_position = get_viewport().get_mouse_position()
-			
 			var space_state = get_world_3d().direct_space_state
 			
 			var origin = $Camera3D.project_ray_origin(mouse_position)
 			var direction = $Camera3D.project_ray_normal(mouse_position)
 			
 			var query = PhysicsRayQueryParameters3D.create(origin, origin + direction * $Camera3D.far, 1)
-			
 			var mouse_position_3D = space_state.intersect_ray(query)
 			
 			var new_position = Vector3(0, 0, 0)
 			
 			if mouse_position_3D.has("position"):
 				new_position = mouse_position_3D.position
-				
 				new_position = Vector3(snapped(new_position.x, 0.25), -0.5, snapped(new_position.z, 0.25))
 				
 			$RayCast3D.add_exception(global.current_building.get_node("Area3D"))
@@ -225,9 +222,7 @@ func _input(event: InputEvent) -> void:
 			new_position = await _update_placement_position(new_position)
 			
 			var distance = global.current_building.position.distance_to(new_position)
-			
 			var sensitivity = 2 * (1 - (global.current_building.get_node("Area3D/CollisionShape3D").shape.size.y / 2))
-			
 			var rotation_placement = Vector3(deg_to_rad(mouse_motion.y) * sensitivity, 0,
 			 	deg_to_rad(-mouse_motion.x) * sensitivity)
 			
