@@ -5,13 +5,13 @@ var current_building : Node3D = null
 var cookie_dough : int = 250
 
 var buildings : Dictionary = {
-	"House" = {"scene" = load("res://Scenes/house.tscn"), "price" = 50, "health" = 100},
-	"Shop" = {"scene" = load("res://Scenes/shop.tscn"), "price" = 100, "health" = 100},
-	"Skyscraper" = {"scene" = load("res://Scenes/skyscraper.tscn"), "price" = 100000, "health" = 100},
-	#"Cannon" = {"scene" = load("res://Scenes/cannon.tscn"), "price" = 100, "health" = 100},
-	#"Tank" = {"scene" = load("res://Scenes/tank.tscn"), "price" = 250, "health" = 100},
-	"Machine Gun" = {"scene" = load("res://Scenes/machine_gun.tscn"), "price" = 250, "health" = 100, "damage" = 10},
-	#"Fighter Jet" = {"scene" = load("res://Scenes/fighter_jet.tscn"), "price" = 5000, "health" = 100}
+	"House" = {"scene" = load("res://Scenes/house.tscn"), "icon" = "res://Assets/HouseIcon.png", "price" = 50, "health" = 100},
+	"Shop" = {"scene" = load("res://Scenes/shop.tscn"), "icon" = "res://Assets/ShopIcon.png", "price" = 100, "health" = 100},
+	"Skyscraper" = {"scene" = load("res://Scenes/skyscraper.tscn"), "icon" = "res://Assets/skyscrapericon.png", "price" = 100000, "health" = 100},
+	#"Cannon" = {"scene" = load("res://Scenes/cannon.tscn"), "icon" = "res://Assets/HouseIcon.png", "price" = 100, "health" = 100},
+	#"Tank" = {"scene" = load("res://Scenes/tank.tscn"), "icon" = "res://Assets/HouseIcon.png", "price" = 250, "health" = 100},
+	"Machine Gun" = {"scene" = load("res://Scenes/machine_gun.tscn"), "icon" = "res://Assets/MachinegunnerIcon.png", "price" = 250, "health" = 100, "damage" = 10},
+	#"Fighter Jet" = {"scene" = load("res://Scenes/fighter_jet.tscn"), "icon" = "res://Assets/HouseIcon.png", "price" = 5000, "health" = 100}
 }
 
 var enemies : Dictionary = {

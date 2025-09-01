@@ -22,9 +22,9 @@ metadata/building = ""
 z_index = 1
 layout_mode = 2
 offset_left = 13.0
-offset_top = 26.0
+offset_top = 33.0
 offset_right = 92.0
-offset_bottom = 93.0
+offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("2_ey0r1")
 theme_override_font_sizes/font_size = 28
 text = "N/A"
@@ -54,10 +54,11 @@ theme_override_styles/panel = ExtResource("1_ed4md")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 2
-offset_left = 32.0
-offset_top = 27.0
-offset_right = 72.0
-offset_bottom = 67.0
+offset_left = 23.0
+offset_top = 20.0
+offset_right = 523.0
+offset_bottom = 520.0
+scale = Vector2(0.122047, 0.122047)
 
 [node name="Button" type="Button" parent="."]
 z_index = 1

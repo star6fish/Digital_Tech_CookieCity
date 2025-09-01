@@ -2,6 +2,8 @@ extends Node3D
 
 @onready var global = get_node("/root/Global")
 
+@export var camera : Camera3D
+
 @export var building_template : PackedScene
 @export var bullet : PackedScene
 
@@ -25,6 +27,7 @@ var enemies : Array = []
 var ennemy_spawn_saves : Array = []
 
 var mouse_motion = Vector2(0, 0)
+var camera_speed = 0.5
 
 var money_cooldown : bool = false
 var enemy_cooldown : bool = false
@@ -265,6 +268,7 @@ func _ready() -> void:
 		var new_font_size : int = clamp(200 / clamp(i.length(), 12, INF), 2, 20)
 		
 		new_building_template.get_node("Label3").set("theme_override_font_sizes/font_size", new_font_size)
+		new_building_template.get_node("TextureRect2").texture = load(building.icon)
 		
 		build_screen_container.add_child(new_building_template)
 		
@@ -279,6 +283,20 @@ func _process(delta: float) -> void:
 		
 		var tween = get_tree().create_tween()
 		tween.tween_property(global.current_building, "rotation", new_rotation, 0.1)
+		
+	var forward_direction = camera.basis
+	
+	if Input.is_key_pressed(KEY_W):
+		camera.global_position -= forward_direction * camera_speed
+	elif Input.is_key_pressed(KEY_S):
+		camera.position += forward_direction * camera_speed
+		
+	if Input.is_key_pressed(KEY_A):
+		#camera.position -= Vector3(1, 0, 0) * camera_speed
+		camera.rotation_degrees += Vector3(0, 1, 0) * camera_speed
+	elif Input.is_key_pressed(KEY_D):
+		camera.rotation_degrees -= Vector3(0, 1, 0) * camera_speed
+		#camera.position += Vector3(1, 0, 0) * camera_speed
 	
 	for i in buildings_placed:
 		

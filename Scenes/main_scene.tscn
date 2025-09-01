@@ -59,8 +59,9 @@ albedo_color = Color(0, 1, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx0yw"]
 albedo_color = Color(0, 1, 0, 1)
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("help_screen", "help_screen_container", "build_screen", "build_screen_container", "money_label", "buildings_placed_label", "time_label")]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("camera", "help_screen", "help_screen_container", "build_screen", "build_screen_container", "money_label", "buildings_placed_label", "time_label")]
 script = ExtResource("1_7hg08")
+camera = NodePath("Camera3D")
 building_template = ExtResource("2_esms4")
 bullet = ExtResource("3_ktskd")
 panel_selected = ExtResource("2_pgo2f")
