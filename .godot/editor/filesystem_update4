@@ -9,3 +9,5 @@ res://Scenes/bullet.tscn
 res://Scenes/shop.tscn
 res://Scenes/skyscraper.tscn
 res://Assets/building_template.tscn
+res://Scripts/main_scene.gd
+res://Assets/new_style_box_flat2.tres

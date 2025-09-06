@@ -27,7 +27,7 @@ var enemies : Array = []
 var ennemy_spawn_saves : Array = []
 
 var mouse_motion = Vector2(0, 0)
-var camera_speed = 0.5
+var camera_speed = 0.25
 
 var money_cooldown : bool = false
 var enemy_cooldown : bool = false
@@ -284,19 +284,20 @@ func _process(delta: float) -> void:
 		var tween = get_tree().create_tween()
 		tween.tween_property(global.current_building, "rotation", new_rotation, 0.1)
 		
-	var forward_direction = camera.basis
+	var forward_direction = camera.transform.basis.z * Vector3(1, 0, 1)
+	var side_direction = camera.transform.basis.x
 	
-	if Input.is_key_pressed(KEY_W):
+	if Input.is_action_pressed("forward"):
 		camera.global_position -= forward_direction * camera_speed
-	elif Input.is_key_pressed(KEY_S):
+	elif Input.is_action_pressed("backward"):
 		camera.position += forward_direction * camera_speed
 		
 	if Input.is_key_pressed(KEY_A):
-		#camera.position -= Vector3(1, 0, 0) * camera_speed
-		camera.rotation_degrees += Vector3(0, 1, 0) * camera_speed
-	elif Input.is_key_pressed(KEY_D):
+		camera.position -= side_direction * camera_speed / 4
 		camera.rotation_degrees -= Vector3(0, 1, 0) * camera_speed
-		#camera.position += Vector3(1, 0, 0) * camera_speed
+	elif Input.is_key_pressed(KEY_D):
+		camera.position += side_direction * camera_speed / 4
+		camera.rotation_degrees += Vector3(0, 1, 0) * camera_speed
 	
 	for i in buildings_placed:
 		
