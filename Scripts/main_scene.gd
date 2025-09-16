@@ -293,12 +293,17 @@ func _process(delta: float) -> void:
 		camera.position += forward_direction * camera_speed
 		
 	if Input.is_key_pressed(KEY_A):
-		camera.position -= side_direction * camera_speed / 4
-		camera.rotation_degrees -= Vector3(0, 1, 0) * camera_speed
+		camera.position -= side_direction * camera_speed
 	elif Input.is_key_pressed(KEY_D):
-		camera.position += side_direction * camera_speed / 4
-		camera.rotation_degrees += Vector3(0, 1, 0) * camera_speed
+		camera.position += side_direction * camera_speed
 	
+	if Input.is_key_pressed(KEY_E):
+		camera.rotation_degrees += Vector3(0, 1, 0) * camera_speed
+		camera.position += side_direction * camera_speed / 4
+	if Input.is_key_pressed(KEY_Q):
+		camera.rotation_degrees -= Vector3(0, 1, 0) * camera_speed
+		camera.position -= side_direction * camera_speed / 4
+		
 	for i in buildings_placed:
 		
 		if global.buildings[i.get_meta("building_name")].has("damage")\

@@ -10,3 +10,4 @@ res://Scenes/bullet.tscn
 res://Scenes/shop.tscn
 res://Scenes/skyscraper.tscn
 res://Assets/building_template.tscn
+res://Scripts/main_scene.gd
