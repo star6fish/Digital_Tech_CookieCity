@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=27 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://e0qoe08p60rl" path="res://Assets/new_style_box_flat2.tres" id="7_t1or8"]
 [ext_resource type="FontFile" uid="uid://f05tpeemtcxc" path="res://Assets/ParalucentHeavy.otf" id="9_u8a58"]
 [ext_resource type="Texture2D" uid="uid://o4j2si1ovkv7" path="res://Assets/Oven.png" id="10_fkto3"]
+[ext_resource type="FontFile" uid="uid://cepy51vb7pfoi" path="res://Assets/LTSaeada-Bold.otf" id="10_ljekn"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_cf8wl"]
 
@@ -143,7 +144,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/shadow_offset_y = 3
 theme_override_constants/outline_size = 7
 theme_override_constants/shadow_outline_size = -1
-theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_fonts/font = ExtResource("10_ljekn")
 theme_override_font_sizes/font_size = 20
 text = "HELP"
 horizontal_alignment = 1
@@ -202,8 +203,8 @@ offset_bottom = 96.0
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_outline_size = 1
-theme_override_fonts/font = ExtResource("9_u8a58")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 24
 text = "BUILD"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -228,7 +229,7 @@ offset_bottom = 49.0
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 26
-theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_fonts/font = ExtResource("10_ljekn")
 theme_override_font_sizes/font_size = 70
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "HELP"
@@ -252,7 +253,7 @@ alignment = 1
 [node name="Label" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
-theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_fonts/font = ExtResource("10_ljekn")
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "Select a building to start placing it"
@@ -262,7 +263,7 @@ vertical_alignment = 1
 [node name="Label2" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
-theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_fonts/font = ExtResource("10_ljekn")
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "Click to place the building"
@@ -272,7 +273,7 @@ vertical_alignment = 1
 [node name="Label3" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
-theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_fonts/font = ExtResource("10_ljekn")
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "Enemies will attack your buildings"
@@ -282,7 +283,7 @@ vertical_alignment = 1
 [node name="Label4" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
-theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_fonts/font = ExtResource("10_ljekn")
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "Place military buildings to defend your city"
@@ -292,7 +293,7 @@ vertical_alignment = 1
 [node name="Label5" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
-theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_fonts/font = ExtResource("10_ljekn")
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
 text = "Each building will generate money every second"
@@ -310,7 +311,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 13
 theme_override_constants/shadow_outline_size = 1
-theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_fonts/font = ExtResource("10_ljekn")
 theme_override_font_sizes/font_size = 32
 text = "COOKIE DOUGH: N/A"
 horizontal_alignment = 1
@@ -326,7 +327,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_outline_size = 1
-theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_fonts/font = ExtResource("10_ljekn")
 theme_override_font_sizes/font_size = 28
 text = "Buildings Placed: N/A"
 horizontal_alignment = 1

@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://7l4b37vxc3ve" path="res://Assets/panel_unselected.tres" id="1_ed4md"]
 [ext_resource type="Script" path="res://Scripts/button_FX.gd" id="1_fw8tj"]
-[ext_resource type="FontFile" uid="uid://f05tpeemtcxc" path="res://Assets/ParalucentHeavy.otf" id="2_ey0r1"]
+[ext_resource type="FontFile" uid="uid://cepy51vb7pfoi" path="res://Assets/LTSaeada-Bold.otf" id="2_41pkm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gfywa"]
 
@@ -22,11 +22,11 @@ metadata/building = ""
 z_index = 1
 layout_mode = 2
 offset_left = 13.0
-offset_top = 33.0
+offset_top = 32.0
 offset_right = 92.0
-offset_bottom = 100.0
-theme_override_fonts/font = ExtResource("2_ey0r1")
-theme_override_font_sizes/font_size = 28
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("2_41pkm")
+theme_override_font_sizes/font_size = 26
 text = "N/A"
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -37,10 +37,10 @@ justification_flags = 3
 z_index = 1
 layout_mode = 2
 offset_left = 11.0
-offset_top = 13.0
-offset_right = 37.0
-offset_bottom = 33.0
-theme_override_fonts/font = ExtResource("2_ey0r1")
+offset_top = 12.0
+offset_right = 38.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("2_41pkm")
 theme_override_font_sizes/font_size = 14
 text = "N/A"
 horizontal_alignment = 1
