@@ -29,6 +29,7 @@ var ennemy_spawn_saves : Array = []
 var mouse_motion = Vector2(0, 0)
 var camera_speed = 0.25
 
+var placement_mouse_cooldown : bool = false
 var money_cooldown : bool = false
 var enemy_cooldown : bool = false
 
@@ -36,9 +37,25 @@ var help_screen_open : bool = false
 var build_screen_open : bool = false
 
 
-# Moves the selected building to the mouse
-func _move_building_to_mouse():
-	pass
+# Gets the mouse position
+func _get_mouse_position():
+	
+	var mouse_position = get_viewport().get_mouse_position()
+	var space_state = get_world_3d().direct_space_state
+			
+	var origin = $Camera3D.project_ray_origin(mouse_position)
+	var direction = $Camera3D.project_ray_normal(mouse_position)
+			
+	var query = PhysicsRayQueryParameters3D.create(origin, origin + direction * $Camera3D.far, 1)
+	var mouse_position_3D = space_state.intersect_ray(query)
+			
+	var new_position = Vector3(0, 0, 0)
+			
+	if mouse_position_3D.has("position"):
+		new_position = mouse_position_3D.position
+		new_position = Vector3(snapped(new_position.x, 0.25), -0.5, snapped(new_position.z, 0.25))
+				
+	return new_position
 
 
 # Checks if the placement for the current building is valid
@@ -86,6 +103,33 @@ func _update_placement_position(placement_position : Vector3):
 	return placement_position
 
 
+# Moves the current building to the mouse
+func _move_building_to_mouse_position():
+	
+	placement_mouse_cooldown = true # Start the cooldown so that there is no overlapping
+	
+	var new_position = _get_mouse_position()
+	
+	$RayCast3D.add_exception(global.current_building.get_node("Area3D"))
+	$RayCast3D2.add_exception(global.current_building.get_node("Area3D"))
+	
+	new_position = await _update_placement_position(new_position)
+	
+	var distance = global.current_building.position.distance_to(new_position)
+	var sensitivity = 2 * (1 - (global.current_building.get_node("Area3D/CollisionShape3D").shape.size.y / 2))
+	var rotation_placement = Vector3(deg_to_rad(mouse_motion.y) * sensitivity, 0,
+	deg_to_rad(-mouse_motion.x) * sensitivity)
+	
+	var tween = get_tree().create_tween()
+	
+	tween.tween_property(global.current_building, "position", new_position, 0.1)
+	tween.parallel().tween_property(global.current_building, "rotation", rotation_placement, 0.1)
+	
+	await get_tree().create_timer(0.1).timeout
+	
+	placement_mouse_cooldown = false # When the building is finished tweening stop the cooldown
+
+
 # Selects the building that the player has pressed
 func _select_building(building_name):
 	
@@ -102,9 +146,9 @@ func _select_building(building_name):
 		
 		global.current_building = global.buildings[building_name].scene.instantiate()
 	
-		global.current_building.position = Vector3(0, -0.5, 0)
-	
 		add_child(global.current_building)
+		
+		_move_building_to_mouse_position()
 	
 	for i : Control in get_node("Control/ScrollContainer/HBoxContainer").get_children():
 		if i.get_meta("building") == building_name and valid == true:
@@ -199,52 +243,23 @@ func _shoot(building, enemy):
 func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseMotion:
-		
+	
 		if global.current_building != null:
 			
 			mouse_motion = event.relative
-			
-			var mouse_position = get_viewport().get_mouse_position()
-			var space_state = get_world_3d().direct_space_state
-			
-			var origin = $Camera3D.project_ray_origin(mouse_position)
-			var direction = $Camera3D.project_ray_normal(mouse_position)
-			
-			var query = PhysicsRayQueryParameters3D.create(origin, origin + direction * $Camera3D.far, 1)
-			var mouse_position_3D = space_state.intersect_ray(query)
-			
-			var new_position = Vector3(0, 0, 0)
-			
-			if mouse_position_3D.has("position"):
-				new_position = mouse_position_3D.position
-				new_position = Vector3(snapped(new_position.x, 0.25), -0.5, snapped(new_position.z, 0.25))
-				
-			$RayCast3D.add_exception(global.current_building.get_node("Area3D"))
-			$RayCast3D2.add_exception(global.current_building.get_node("Area3D"))
-			
-			new_position = await _update_placement_position(new_position)
-			
-			var distance = global.current_building.position.distance_to(new_position)
-			var sensitivity = 2 * (1 - (global.current_building.get_node("Area3D/CollisionShape3D").shape.size.y / 2))
-			var rotation_placement = Vector3(deg_to_rad(mouse_motion.y) * sensitivity, 0,
-			 	deg_to_rad(-mouse_motion.x) * sensitivity)
-			
-			var tween = get_tree().create_tween()
-			
-			tween.tween_property(global.current_building, "position", new_position, 0.1)
-			tween.parallel().tween_property(global.current_building, "rotation", rotation_placement, 0.1)
-			
-			#global.current_building.position = new_position
+			_move_building_to_mouse_position()
 			
 	elif event is InputEventMouseButton:
 		
 		if event.button_index == 1:
 			if global.current_building != null:
-				buildings_placed.append(global.current_building)
-				$RayCast3D.remove_exception(global.current_building.get_node("Area3D"))
-				$RayCast3D2.remove_exception(global.current_building.get_node("Area3D"))
-				global.cookie_dough -= global.buildings[global.current_building.get_meta("building_name")].price
-				_select_building(null)
+				if placement_mouse_cooldown == false: # Making sure that the building is not moving
+					
+					buildings_placed.append(global.current_building)
+					$RayCast3D.remove_exception(global.current_building.get_node("Area3D"))
+					$RayCast3D2.remove_exception(global.current_building.get_node("Area3D"))
+					global.cookie_dough -= global.buildings[global.current_building.get_meta("building_name")].price
+					_select_building(null)
 				
 	elif Input.is_key_pressed(KEY_R) and not event.is_echo():
 		if global.current_building != null:

@@ -1,0 +1,422 @@
+[gd_scene load_steps=27 format=3 uid="uid://c1dpq15ag6r24"]
+
+[ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
+[ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
+[ext_resource type="PackedScene" uid="uid://bknyh2vya7pe" path="res://Assets/building_template.tscn" id="2_esms4"]
+[ext_resource type="StyleBox" uid="uid://ca5r3yd85ry5q" path="res://Assets/panel_selected.tres" id="2_pgo2f"]
+[ext_resource type="PackedScene" uid="uid://4h8s0w5kbwrq" path="res://Scenes/bullet.tscn" id="3_ktskd"]
+[ext_resource type="StyleBox" uid="uid://7l4b37vxc3ve" path="res://Assets/panel_unselected.tres" id="4_nhymn"]
+[ext_resource type="Script" path="res://Scripts/buttonFX2.gd" id="7_jxr57"]
+[ext_resource type="StyleBox" uid="uid://e0qoe08p60rl" path="res://Assets/new_style_box_flat2.tres" id="7_t1or8"]
+[ext_resource type="FontFile" uid="uid://f05tpeemtcxc" path="res://Assets/ParalucentHeavy.otf" id="9_u8a58"]
+[ext_resource type="Texture2D" uid="uid://o4j2si1ovkv7" path="res://Assets/Oven.png" id="10_fkto3"]
+[ext_resource type="FontFile" uid="uid://cepy51vb7pfoi" path="res://Assets/LTSaeada-Bold.otf" id="10_ljekn"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_cf8wl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u0qbg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lar3c"]
+sky_horizon_color = Color(0.968627, 0.486275, 0.505882, 1)
+ground_bottom_color = Color(0.759053, 0.446963, 0.691542, 1)
+ground_horizon_color = Color(0.967188, 0.488212, 0.504874, 1)
+
+[sub_resource type="Sky" id="Sky_y8t8d"]
+sky_material = SubResource("ProceduralSkyMaterial_lar3c")
+
+[sub_resource type="Environment" id="Environment_2aggu"]
+background_mode = 2
+background_energy_multiplier = 1.23
+sky = SubResource("Sky_y8t8d")
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_fws2p"]
+
+[sub_resource type="Gradient" id="Gradient_rfxl0"]
+colors = PackedColorArray(0.74698, 0.74698, 0.74698, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_htkp7"]
+frequency = 0.0034
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_07dd5"]
+width = 1485
+color_ramp = SubResource("Gradient_rfxl0")
+noise = SubResource("FastNoiseLite_htkp7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gv2h8"]
+albedo_texture = SubResource("NoiseTexture2D_07dd5")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oyqcg"]
+size = Vector3(143, 1, 45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0gwpa"]
+size = Vector3(143, 37, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tcxds"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8uljc"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx0yw"]
+albedo_color = Color(0, 1, 0, 1)
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("camera", "help_screen", "help_screen_container", "build_screen", "build_screen_container", "money_label", "buildings_placed_label", "time_label")]
+script = ExtResource("1_7hg08")
+camera = NodePath("Camera3D")
+building_template = ExtResource("2_esms4")
+bullet = ExtResource("3_ktskd")
+panel_selected = ExtResource("2_pgo2f")
+panel_unselected = ExtResource("4_nhymn")
+help_screen = NodePath("Control/Control2")
+help_screen_container = NodePath("Control/Control2/ScrollContainer2/VBoxContainer")
+build_screen = NodePath("Control/ScrollContainer")
+build_screen_container = NodePath("Control/ScrollContainer/HBoxContainer")
+money_label = NodePath("Control/Label")
+buildings_placed_label = NodePath("Control/Label2")
+time_label = NodePath("Control/Label3")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 667.0
+offset_right = 947.0
+offset_bottom = 807.0
+rotation = -3.14159
+pivot_offset = Vector2(362, 70)
+theme_override_styles/panel = ExtResource("1_3tuov")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ScrollContainer"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="Control" node_paths=PackedStringArray("button")]
+anchors_preset = 0
+offset_left = 1040.0
+offset_top = 510.0
+offset_right = 1112.0
+offset_bottom = 614.0
+pivot_offset = Vector2(36, 52)
+script = ExtResource("7_jxr57")
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="Control/Control"]
+layout_mode = 0
+offset_right = 72.0
+offset_bottom = 74.0
+pivot_offset = Vector2(36, 37)
+theme_override_colors/font_disabled_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_font_sizes/font_size = 63
+theme_override_styles/focus = ExtResource("7_t1or8")
+theme_override_styles/disabled_mirrored = ExtResource("7_t1or8")
+theme_override_styles/disabled = ExtResource("7_t1or8")
+theme_override_styles/hover_pressed_mirrored = ExtResource("7_t1or8")
+theme_override_styles/hover_pressed = ExtResource("7_t1or8")
+theme_override_styles/hover_mirrored = ExtResource("7_t1or8")
+theme_override_styles/hover = ExtResource("7_t1or8")
+theme_override_styles/pressed_mirrored = ExtResource("7_t1or8")
+theme_override_styles/pressed = ExtResource("7_t1or8")
+theme_override_styles/normal_mirrored = ExtResource("7_t1or8")
+theme_override_styles/normal = ExtResource("7_t1or8")
+text = "?"
+
+[node name="Label" type="Label" parent="Control/Control"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 75.0
+offset_right = 69.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = -1
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 20
+text = "HELP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control3" type="Control" parent="Control" node_paths=PackedStringArray("button")]
+anchors_preset = 0
+offset_left = 34.0
+offset_top = 260.0
+offset_right = 134.0
+offset_bottom = 360.0
+pivot_offset = Vector2(50, 70)
+script = ExtResource("7_jxr57")
+button = NodePath(".")
+
+[node name="Button" type="Button" parent="Control/Control3"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+pivot_offset = Vector2(50, 50)
+theme_override_colors/font_disabled_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_font_sizes/font_size = 65
+theme_override_styles/focus = ExtResource("7_t1or8")
+theme_override_styles/disabled_mirrored = ExtResource("7_t1or8")
+theme_override_styles/disabled = ExtResource("7_t1or8")
+theme_override_styles/hover_pressed_mirrored = ExtResource("7_t1or8")
+theme_override_styles/hover_pressed = ExtResource("7_t1or8")
+theme_override_styles/hover_mirrored = ExtResource("7_t1or8")
+theme_override_styles/hover = ExtResource("7_t1or8")
+theme_override_styles/pressed_mirrored = ExtResource("7_t1or8")
+theme_override_styles/pressed = ExtResource("7_t1or8")
+theme_override_styles/normal_mirrored = ExtResource("7_t1or8")
+theme_override_styles/normal = ExtResource("7_t1or8")
+icon = SubResource("ImageTexture_cf8wl")
+
+[node name="TextureRect" type="TextureRect" parent="Control/Control3/Button"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 11.0
+offset_right = 138.0
+offset_bottom = 110.0
+scale = Vector2(0.577196, 0.577196)
+texture = ExtResource("10_fkto3")
+
+[node name="Label" type="Label" parent="Control/Control3"]
+layout_mode = 0
+offset_top = 69.0
+offset_right = 100.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 24
+text = "BUILD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = 370.0
+offset_top = 160.0
+offset_right = 801.0
+offset_bottom = 442.0
+rotation = 3.14159
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(215, 141)
+
+[node name="Label" type="Label" parent="Control/Control2"]
+z_index = 1
+layout_mode = 2
+offset_left = 131.0
+offset_top = -47.0
+offset_right = 304.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 70
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "HELP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Control/Control2"]
+clip_contents = false
+layout_mode = 0
+offset_right = 431.0
+offset_bottom = 282.0
+theme_override_styles/panel = ExtResource("7_t1or8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Control2/ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "Select a building to start placing it"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "Click to place the building"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "Enemies will attack your buildings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "Place military buildings to defend your city"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Control/Control2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u0qbg")
+text = "Each building will generate money every second"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 598.0
+offset_right = 323.0
+offset_bottom = 631.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 32
+text = "COOKIE DOUGH: N/A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 19.0
+offset_right = 338.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 28
+text = "Buildings Placed: N/A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 933.0
+offset_top = 22.0
+offset_right = 1114.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 27
+text = "TIME TIME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2aggu")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 14)
+
+[node name="GridMap" type="GridMap" parent="."]
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(142.195, 0, 0, 0, 1, 0, 0, 0, 45.4766, 0, 0, 0)
+mesh = SubResource("BoxMesh_fws2p")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_gv2h8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_oyqcg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, -7.40186)
+shape = SubResource("BoxShape3D_0gwpa")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22)
+exclude_parent = false
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+hit_from_inside = true
+hit_back_faces = false
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RayCast3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.526, -1)
+visible = false
+mesh = SubResource("BoxMesh_tcxds")
+surface_material_override/0 = SubResource("StandardMaterial3D_8uljc")
+
+[node name="RayCast3D2" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22)
+exclude_parent = false
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+hit_from_inside = true
+hit_back_faces = false
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RayCast3D2"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.526, -1)
+visible = false
+mesh = SubResource("BoxMesh_tcxds")
+surface_material_override/0 = SubResource("StandardMaterial3D_mx0yw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.690272, 0.399495, 0.603265, -0.200143, -0.695802, 0.689784, 0.695318, -0.596878, -0.400336, 16.9229, 6.40255, -4.50122)
+light_color = Color(1, 0.443137, 0.607843, 1)
+light_energy = 0.485
+shadow_enabled = true
+shadow_opacity = 0.95
+
+[connection signal="button_down" from="Control/Control/Button" to="Control/Control" method="_on_button_button_down"]
+[connection signal="button_up" from="Control/Control/Button" to="Control/Control" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Control/Control/Button" to="Control/Control" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Control/Button" to="Control/Control" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Control/Control/Button" to="." method="_on_button_pressed_help"]
+[connection signal="button_down" from="Control/Control3/Button" to="Control/Control3" method="_on_button_button_down"]
+[connection signal="button_up" from="Control/Control3/Button" to="Control/Control3" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Control/Control3/Button" to="Control/Control3" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Control3/Button" to="Control/Control3" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Control/Control3/Button" to="." method="_on_button_pressed_build"]
