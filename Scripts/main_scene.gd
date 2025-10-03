@@ -30,6 +30,7 @@ var mouse_motion = Vector2(0, 0)
 var camera_speed = 0.25
 
 var placement_mouse_cooldown : bool = false
+var placement_mouse_target : Vector3 = Vector3(0, 0, 0)
 var money_cooldown : bool = false
 var enemy_cooldown : bool = false
 
@@ -115,6 +116,8 @@ func _move_building_to_mouse_position():
 	
 	new_position = await _update_placement_position(new_position)
 	
+	placement_mouse_target = new_position
+	
 	var distance = global.current_building.position.distance_to(new_position)
 	var sensitivity = 2 * (1 - (global.current_building.get_node("Area3D/CollisionShape3D").shape.size.y / 2))
 	var rotation_placement = Vector3(deg_to_rad(mouse_motion.y) * sensitivity, 0,
@@ -127,7 +130,8 @@ func _move_building_to_mouse_position():
 	
 	await get_tree().create_timer(0.1).timeout
 	
-	placement_mouse_cooldown = false # When the building is finished tweening stop the cooldown
+	if placement_mouse_target == new_position:
+		placement_mouse_cooldown = false # When the building is finished tweening stop the cooldown
 
 
 # Selects the building that the player has pressed
@@ -135,14 +139,13 @@ func _select_building(building_name):
 	
 	var valid = false
 	
-	if building_name != null and global.cookie_dough >= global.buildings[building_name].price:
+	if building_name != null and global.cookie_dough >= global.buildings[building_name].price and placement_mouse_cooldown == false:
 		valid = true
 	
-	if building_name == null or valid == false:
-		
+	if building_name == null:
 		global.current_building = null
 		
-	elif building_name != null and valid == true:
+	if valid == true:
 		
 		global.current_building = global.buildings[building_name].scene.instantiate()
 	
@@ -211,6 +214,8 @@ func _spawn_enemy():
 func _shoot(building, enemy):
 	
 	building.set_meta("cooldown", true)
+	
+	building.get_node("Area3D/Animated/AnimationPlayer").play("Shoot")
 	
 	enemy._damage(global.buildings[building.get_meta("building_name")].damage)
 	

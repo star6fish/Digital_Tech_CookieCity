@@ -1,3 +1,35 @@
-[gd_scene format=3 uid="uid://c3vip27eabb5s"]
+[gd_scene load_steps=4 format=3 uid="uid://c3vip27eabb5s"]
+
+[ext_resource type="PackedScene" uid="uid://b41vf6ghf5g8y" path="res://Assets/Cannon_Animated.tscn" id="1_skxh5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ij8dp"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2lmfx"]
 
 [node name="Node3D" type="Node3D"]
+metadata/building_name = "Cannon"
+metadata/health = 0
+metadata/cooldown = false
+
+[node name="Area3D2" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("BoxShape3D_ij8dp")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 6
+collision_mask = 6
+
+[node name="Animated" parent="Area3D" instance=ExtResource("1_skxh5")]
+transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 0, 0, 0)
+
+[node name="Shoot" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0142302, 0.974002, -0.947841)
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52906, 0)
+shape = SubResource("BoxShape3D_2lmfx")
