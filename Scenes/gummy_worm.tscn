@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm018o6wym1ke"]
+[gd_scene load_steps=4 format=3 uid="uid://bm018o6wym1ke"]
 
-[ext_resource type="Script" path="res://Scripts/gummy_worm.gd" id="1_k6v7n"]
-[ext_resource type="PackedScene" uid="uid://ruosfynbxp27" path="res://Assets/gummyworm.glb" id="1_kaaal"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_g6a2b"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_k6v7n"]
+[ext_resource type="PackedScene" uid="uid://ctiwdldrvnsxf" path="res://Assets/Gummy_Worm_Animated.tscn" id="3_4hi3d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3twh0"]
 size = Vector3(0.301056, 0.296822, 5.58582)
@@ -14,14 +12,8 @@ metadata/enemy_name = "Gummy Worm"
 metadata/damage = 0
 metadata/cooldown = false
 
-[node name="Decal" type="Decal" parent="."]
-transform = Transform3D(0.153649, 0, 0, 0, 0.153649, 0, 0, 0, 0.153649, -0.0266523, 0.157496, -2.43955)
-size = Vector3(2.78149, 2.1456, 41.9746)
-texture_albedo = SubResource("ViewportTexture_g6a2b")
-modulate = Color(0.840452, 0, 0.323227, 1)
-
-[node name="gummyworm" parent="." instance=ExtResource("1_kaaal")]
-transform = Transform3D(0.153649, 0, 0, 0, 0.153649, 0, 0, 0, 0.153649, 0, 0, 0)
+[node name="Animated" parent="." instance=ExtResource("3_4hi3d")]
+transform = Transform3D(0.153649, 0, 0, 0, 0.153649, 0, 0, 0, 0.153649, 0, 0.1, 0)
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2

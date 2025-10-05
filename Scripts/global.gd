@@ -15,7 +15,8 @@ var buildings : Dictionary = {
 }
 
 var enemies : Dictionary = {
-	"Gummy Worm" = {"scene" = load("res://Scenes/gummy_worm.tscn"), "speed" = 5, "damage" = 10, "health" = 100}
+	"Gummy Worm" = {"scene" = load("res://Scenes/gummy_worm.tscn"), "speed" = 5, "damage" = 10, "health" = 100},
+	"Chocolate Monster" = {"scene" = load("res://Scenes/chocolate_monster.tscn"), "speed" = 10, "damage" = 20, "health" = 25}
 }
 
 var enemy_spawn_positions : Array = [Vector3(-14, -0.5, 13), Vector3(-13, -0.5, 13), Vector3(12, -0.5, 13), Vector3(11, -0.5, 13), Vector3(-0.27, -0.5, 13), Vector3(-1, -0.5, 13)]

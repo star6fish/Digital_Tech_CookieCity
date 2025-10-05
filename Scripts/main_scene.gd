@@ -168,7 +168,7 @@ func _spawn_enemy():
 	
 	var enemy : Node3D = null
 	
-	var random : int = randf_range(1, global.enemies.size())
+	var random : int = randf_range(1, global.enemies.size() + 1)
 	
 	var count = 0
 	
@@ -202,11 +202,11 @@ func _spawn_enemy():
 	
 	add_child(enemy)
 	
-	await get_tree().create_timer(20).timeout
+	await get_tree().create_timer(1.5).timeout
 	
 	enemy_cooldown = false
 
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(20 - global.enemies[enemy.get_meta("enemy_name")].speed).timeout
 	
 	ennemy_spawn_saves.erase(enemy_position)
 

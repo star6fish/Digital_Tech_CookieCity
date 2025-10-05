@@ -19,6 +19,8 @@ func _ready() -> void:
 	
 	tween.tween_property($Area3D.get_parent(), "position", Vector3(0, -0.5, 0), 20 - global.enemies[get_meta("enemy_name")].speed)
 	
+	get_node("Animated/AnimationPlayer").play("ArmatureAction")
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if position != Vector3(0, -0.5, 0):
@@ -34,5 +36,11 @@ func _process(delta: float) -> void:
 			
 			i.get_parent()._damage(global.enemies[get_meta("enemy_name")].damage, position)
 			tween.pause()
+			
+			get_node("Animated/AnimationPlayer").pause()
+			
 			await get_tree().create_timer(1).timeout
 			tween.play()
+			
+			get_node("Animated/AnimationPlayer").play("ArmatureAction")
+			
