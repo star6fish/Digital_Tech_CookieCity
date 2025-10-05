@@ -6,6 +6,7 @@ extends Node3D
 
 @export var building_template : PackedScene
 @export var bullet : PackedScene
+@export var explosion_crums : PackedScene
 
 @export var panel_selected : StyleBoxFlat
 @export var panel_unselected : StyleBoxFlat

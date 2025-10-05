@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 			
 			buildings_hit.append(i.get_parent())
 			
-			i.get_parent()._damage(global.enemies[get_meta("enemy_name")].damage)
+			i.get_parent()._damage(global.enemies[get_meta("enemy_name")].damage, position)
 			tween.pause()
 			await get_tree().create_timer(1).timeout
 			tween.play()

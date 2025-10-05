@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=28 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://ca5r3yd85ry5q" path="res://Assets/panel_selected.tres" id="2_pgo2f"]
 [ext_resource type="PackedScene" uid="uid://4h8s0w5kbwrq" path="res://Scenes/bullet.tscn" id="3_ktskd"]
 [ext_resource type="StyleBox" uid="uid://7l4b37vxc3ve" path="res://Assets/panel_unselected.tres" id="4_nhymn"]
+[ext_resource type="PackedScene" uid="uid://dngppnpo0l3b0" path="res://Scenes/explosion_crums.tscn" id="6_avtoe"]
 [ext_resource type="Script" path="res://Scripts/buttonFX2.gd" id="7_jxr57"]
 [ext_resource type="StyleBox" uid="uid://e0qoe08p60rl" path="res://Assets/new_style_box_flat2.tres" id="7_t1or8"]
 [ext_resource type="FontFile" uid="uid://f05tpeemtcxc" path="res://Assets/ParalucentHeavy.otf" id="9_u8a58"]
@@ -65,6 +66,7 @@ script = ExtResource("1_7hg08")
 camera = NodePath("Camera3D")
 building_template = ExtResource("2_esms4")
 bullet = ExtResource("3_ktskd")
+explosion_crums = ExtResource("6_avtoe")
 panel_selected = ExtResource("2_pgo2f")
 panel_unselected = ExtResource("4_nhymn")
 help_screen = NodePath("Control/Control2")
