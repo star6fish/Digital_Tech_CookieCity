@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://brf8r4brj4pfs"]
+[gd_scene load_steps=9 format=3 uid="uid://brf8r4brj4pfs"]
 
-[ext_resource type="Script" path="res://Scripts/house.gd" id="1_7myvl"]
+[ext_resource type="Script" path="res://Scripts/building.gd" id="1_7myvl"]
 [ext_resource type="PackedScene" uid="uid://bjkad7ghrhfup" path="res://Assets/shop.glb" id="1_8njc0"]
+[ext_resource type="PackedScene" uid="uid://dngppnpo0l3b0" path="res://Scenes/explosion_crums.tscn" id="2_u4iub"]
 [ext_resource type="Material" uid="uid://bqrt4qqwplx6b" path="res://Assets/smoke.tres" id="3_msxmv"]
 [ext_resource type="Texture2D" uid="uid://ds3oflpplogy2" path="res://Assets/cloud2.png" id="4_02qmc"]
 
@@ -20,6 +21,7 @@ orientation = 2
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_7myvl")
+explosion_crums = ExtResource("2_u4iub")
 metadata/building_name = "Shop"
 metadata/health = 0
 

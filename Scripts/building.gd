@@ -8,7 +8,7 @@ var building_damage : int = 0
 
 
 # Damages the building
-func _damage(damage, position):
+func _damage(damage, target_position):
 	building_damage += damage
 	set_meta("health", building_damage)
 	
@@ -16,7 +16,7 @@ func _damage(damage, position):
 		
 		var explosion_crum = explosion_crums.instantiate()
 		
-		explosion_crum.position = (position - global_position) + Vector3(0, 0.5, 0)
+		explosion_crum.position = (target_position - global_position) + Vector3(0, 0.5, 0)
 		
 		add_child(explosion_crum)
 		

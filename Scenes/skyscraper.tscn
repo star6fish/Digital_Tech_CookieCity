@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cupcmaikaf54f"]
+[gd_scene load_steps=5 format=3 uid="uid://cupcmaikaf54f"]
 
-[ext_resource type="Script" path="res://Scripts/house.gd" id="1_5xx6p"]
+[ext_resource type="Script" path="res://Scripts/building.gd" id="1_5xx6p"]
 [ext_resource type="PackedScene" uid="uid://dce7mmk4myi4d" path="res://Assets/skyscraper.glb" id="1_lke14"]
+[ext_resource type="PackedScene" uid="uid://dngppnpo0l3b0" path="res://Scenes/explosion_crums.tscn" id="2_tianr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rxkcj"]
 size = Vector3(1.608, 1.27588, 1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_5xx6p")
+explosion_crums = ExtResource("2_tianr")
 metadata/building_name = "Skyscraper"
 metadata/health = 0
 

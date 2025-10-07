@@ -202,7 +202,7 @@ func _spawn_enemy():
 	
 	add_child(enemy)
 	
-	await get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(2).timeout
 	
 	enemy_cooldown = false
 
