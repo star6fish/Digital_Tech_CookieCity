@@ -1,9 +1,10 @@
-res://Scenes/main_scene.tscn
+res://Scenes/chocolate_monster.tscn
 res://Assets/new_style_box_flat.tres
 res://Assets/panel_selected.tres
 res://Assets/new_style_box_flat2.tres
 res://Assets/smoke.tres
 res://Scripts/enemy.gd
+res://Scenes/main_scene.tscn
 res://Scenes/house.tscn
 res://Scenes/gummy_worm.tscn
 res://Scenes/machine_gun.tscn
@@ -12,5 +13,6 @@ res://Scenes/shop.tscn
 res://Scenes/skyscraper.tscn
 res://Assets/building_template.tscn
 res://Scenes/cannon.tscn
-res://Scenes/chocolate_monster.tscn
 res://Scenes/explosion_crums.tscn
+res://Assets/Chocolate_Monster_Animated.tscn
+res://Scripts/main_scene.gd

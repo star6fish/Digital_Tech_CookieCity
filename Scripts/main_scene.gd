@@ -21,6 +21,8 @@ extends Node3D
 @export var buildings_placed_label : Label
 @export var time_label : Label
 
+var file = FileAccess.open("user://myfile.name", FileAccess.READ)
+
 var buildings : Dictionary = Global.buildings
 
 var buildings_placed : Array = []
@@ -274,7 +276,9 @@ func _input(event: InputEvent) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+		
+	if FileAccess.file_exists("user://myfile.name"):
+		print(file)
 	for i : String in buildings:
 		
 		var building = buildings[i]

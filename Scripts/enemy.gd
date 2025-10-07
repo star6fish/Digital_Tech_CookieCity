@@ -23,8 +23,8 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if position != Vector3(0, -0.5, 0):
-		look_at(Vector3(0, -0.5, 0), Vector3.UP, true)
+	#if position != Vector3(0, -0.5, 0):
+		#look_at(Vector3(0, -0.5, 0), Vector3.UP, true)
 		
 	for i in $Area3D.get_overlapping_areas():
 		if i.name != "Area3D2"\

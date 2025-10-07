@@ -1,3 +1,4 @@
+Node3D
 AnimationPlayer
 AnimatedSprite3D
 MeshInstance3D
@@ -11,5 +12,3 @@ Label
 Control
 Panel
 Button
-VoxelGI
-Decal
