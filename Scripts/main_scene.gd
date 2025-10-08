@@ -21,7 +21,7 @@ extends Node3D
 @export var buildings_placed_label : Label
 @export var time_label : Label
 
-var file = FileAccess.open("user://myfile.name", FileAccess.READ)
+var save_path = "user://save_data"
 
 var buildings : Dictionary = Global.buildings
 
@@ -36,9 +36,65 @@ var placement_mouse_cooldown : bool = false
 var placement_mouse_target : Vector3 = Vector3(0, 0, 0)
 var money_cooldown : bool = false
 var enemy_cooldown : bool = false
+var save_cooldown : bool = true # Sets to true so that the game does not save the data before the buildings are loaded
 
 var help_screen_open : bool = false
 var build_screen_open : bool = false
+
+
+# Saves the game data
+func _save_game():
+	
+	save_cooldown = true
+	
+	var save = FileAccess.open(save_path, FileAccess.WRITE)
+	
+	global.save_buildings = []
+	
+	for i in buildings_placed:	
+		global.save_buildings.append({type = i.get_meta("building_name"), position = i.position, rotation = i.rotation, health = i.get_meta("health")})
+	
+	var game_save = {cookie_dough = global.cookie_dough, buildings = global.save_buildings}
+	
+	save.store_var(game_save)
+	
+	save.close()
+	
+	await get_tree().create_timer(5).timeout
+	save_cooldown = false
+
+
+# Gets the games data
+func _get_game_save():
+	
+	if FileAccess.file_exists(save_path):
+		var save = FileAccess.open(save_path, FileAccess.READ)
+		return save.get_var()
+
+	else:
+		return null
+
+
+# Resets the games data amd resets the game as well
+func _reset_game_save():
+	
+	for i in buildings_placed:
+		i.queue_free()
+		buildings_placed.erase(i)
+		
+	for i in enemies:
+		i.queue_free()
+		enemies.erase(i)
+	
+	global.cookie_dough = 250
+	
+	var save = FileAccess.open(save_path, FileAccess.WRITE)
+	
+	var game_save = {cookie_dough = 250, buildings = []}
+	
+	save.store_var(game_save)
+	
+	save.close()
 
 
 # Gets the mouse position
@@ -121,7 +177,6 @@ func _move_building_to_mouse_position():
 	
 	placement_mouse_target = new_position
 	
-	var distance = global.current_building.position.distance_to(new_position)
 	var sensitivity = 2 * (1 - (global.current_building.get_node("Area3D/CollisionShape3D").shape.size.y / 2))
 	var rotation_placement = Vector3(deg_to_rad(mouse_motion.y) * sensitivity, 0,
 	deg_to_rad(-mouse_motion.x) * sensitivity)
@@ -170,9 +225,9 @@ func _spawn_enemy():
 	
 	var enemy : Node3D = null
 	
-	var random : int = randf_range(1, global.enemies.size() + 1)
+	var random : int = randi_range(1, global.enemies.size())
 	
-	var count = 0
+	var count : int = 0
 	
 	for i in global.enemies:
 		count += 1
@@ -276,9 +331,26 @@ func _input(event: InputEvent) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	var game_save = _get_game_save()
+	
+	for i in game_save.buildings:
+		var building_name = i.type
 		
-	if FileAccess.file_exists("user://myfile.name"):
-		print(file)
+		var new_building = global.buildings[building_name].scene.instantiate()
+		
+		add_child(new_building)
+		
+		new_building.position = i.position
+		new_building.rotation = i.rotation
+		new_building.set_meta("health", i.health)
+		
+		buildings_placed.append(new_building)
+	
+	global.cookie_dough = game_save.cookie_dough
+	
+	save_cooldown = false
+	
 	for i : String in buildings:
 		
 		var building = buildings[i]
@@ -296,11 +368,10 @@ func _ready() -> void:
 		new_building_template.get_node("TextureRect2").texture = load(building.icon)
 		
 		build_screen_container.add_child(new_building_template)
-		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	if global.current_building != null and mouse_motion == Vector2(0, 0):
 		
@@ -360,6 +431,9 @@ func _process(delta: float) -> void:
 		money_cooldown = true
 		await get_tree().create_timer(5).timeout
 		money_cooldown = false
+
+	if save_cooldown == false:
+		_save_game()
 
 	money_label.text = "COOKIE DOUGH: " + str(global.cookie_dough)
 	buildings_placed_label.text = "Buildings Placed: " + str(buildings_placed.size())

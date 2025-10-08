@@ -20,3 +20,5 @@ var enemies : Dictionary = {
 }
 
 var enemy_spawn_positions : Array = [Vector3(-14, -0.5, 13), Vector3(-13, -0.5, 13), Vector3(12, -0.5, 13), Vector3(11, -0.5, 13), Vector3(-0.27, -0.5, 13), Vector3(-1, -0.5, 13)]
+
+var save_buildings : Array = []
