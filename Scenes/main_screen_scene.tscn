@@ -1,0 +1,378 @@
+[gd_scene load_steps=11 format=3 uid="uid://td72w4exb6mg"]
+
+[ext_resource type="StyleBox" uid="uid://e0qoe08p60rl" path="res://Assets/new_style_box_flat2.tres" id="1_56mc0"]
+[ext_resource type="Script" path="res://Scripts/main_screen_scene.gd" id="1_hanqq"]
+[ext_resource type="FontFile" uid="uid://cepy51vb7pfoi" path="res://Assets/LTSaeada-Bold.otf" id="2_t2hdb"]
+[ext_resource type="Script" path="res://Scripts/buttonFX2.gd" id="3_yuaf5"]
+[ext_resource type="FontFile" uid="uid://f05tpeemtcxc" path="res://Assets/ParalucentHeavy.otf" id="4_jv0ux"]
+[ext_resource type="Texture2D" uid="uid://du1ix7tooj2la" path="res://Assets/star.png" id="5_hqlia"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_wagbv"]
+
+[sub_resource type="Gradient" id="Gradient_in0ks"]
+colors = PackedColorArray(0.935525, 0.471721, 0.210474, 1, 0.533496, 0.206573, 0.806064, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_exd8d"]
+gradient = SubResource("Gradient_in0ks")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqynp"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("help_screen", "help_screen_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hanqq")
+help_screen = NodePath("Control3")
+help_screen_container = NodePath("Control3/ScrollContainer2/VBoxContainer")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 404.0
+offset_top = 451.0
+offset_right = 796.0
+offset_bottom = 599.0
+pivot_offset = Vector2(50, 50)
+theme_override_colors/font_disabled_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_font_sizes/font_size = 65
+theme_override_styles/focus = ExtResource("1_56mc0")
+theme_override_styles/disabled_mirrored = ExtResource("1_56mc0")
+theme_override_styles/disabled = ExtResource("1_56mc0")
+theme_override_styles/hover_pressed_mirrored = ExtResource("1_56mc0")
+theme_override_styles/hover_pressed = ExtResource("1_56mc0")
+theme_override_styles/hover_mirrored = ExtResource("1_56mc0")
+theme_override_styles/hover = ExtResource("1_56mc0")
+theme_override_styles/pressed_mirrored = ExtResource("1_56mc0")
+theme_override_styles/pressed = ExtResource("1_56mc0")
+theme_override_styles/normal_mirrored = ExtResource("1_56mc0")
+theme_override_styles/normal = ExtResource("1_56mc0")
+icon = SubResource("ImageTexture_wagbv")
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 16.0
+offset_right = 349.0
+offset_bottom = 136.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 120
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 411.0
+offset_top = 607.0
+offset_right = 793.0
+offset_bottom = 639.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = -1
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 22
+text = "PRESS PLAY TO START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 373.0
+offset_top = 42.0
+offset_right = 830.0
+offset_bottom = 263.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_constants/line_spacing = -19
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 42
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 116
+text = "COOKIE
+CITY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("button")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 37.0
+offset_top = 496.0
+offset_right = 119.0
+offset_bottom = 614.0
+pivot_offset = Vector2(36, 52)
+script = ExtResource("3_yuaf5")
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 81.0
+offset_bottom = 83.0
+pivot_offset = Vector2(36, 37)
+theme_override_colors/font_disabled_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("4_jv0ux")
+theme_override_font_sizes/font_size = 72
+theme_override_styles/focus = ExtResource("1_56mc0")
+theme_override_styles/disabled_mirrored = ExtResource("1_56mc0")
+theme_override_styles/disabled = ExtResource("1_56mc0")
+theme_override_styles/hover_pressed_mirrored = ExtResource("1_56mc0")
+theme_override_styles/hover_pressed = ExtResource("1_56mc0")
+theme_override_styles/hover_mirrored = ExtResource("1_56mc0")
+theme_override_styles/hover = ExtResource("1_56mc0")
+theme_override_styles/pressed_mirrored = ExtResource("1_56mc0")
+theme_override_styles/pressed = ExtResource("1_56mc0")
+theme_override_styles/normal_mirrored = ExtResource("1_56mc0")
+theme_override_styles/normal = ExtResource("1_56mc0")
+text = "?"
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 86.0
+offset_right = 81.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = -1
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 22
+text = "HELP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="." node_paths=PackedStringArray("button")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1025.0
+offset_top = 496.0
+offset_right = 1107.0
+offset_bottom = 614.0
+pivot_offset = Vector2(36, 52)
+script = ExtResource("3_yuaf5")
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="Control2"]
+layout_mode = 0
+offset_right = 81.0
+offset_bottom = 83.0
+pivot_offset = Vector2(36, 37)
+theme_override_colors/font_disabled_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("4_jv0ux")
+theme_override_font_sizes/font_size = 72
+theme_override_styles/focus = ExtResource("1_56mc0")
+theme_override_styles/disabled_mirrored = ExtResource("1_56mc0")
+theme_override_styles/disabled = ExtResource("1_56mc0")
+theme_override_styles/hover_pressed_mirrored = ExtResource("1_56mc0")
+theme_override_styles/hover_pressed = ExtResource("1_56mc0")
+theme_override_styles/hover_mirrored = ExtResource("1_56mc0")
+theme_override_styles/hover = ExtResource("1_56mc0")
+theme_override_styles/pressed_mirrored = ExtResource("1_56mc0")
+theme_override_styles/pressed = ExtResource("1_56mc0")
+theme_override_styles/normal_mirrored = ExtResource("1_56mc0")
+theme_override_styles/normal = ExtResource("1_56mc0")
+
+[node name="Label2" type="Label" parent="Control2"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 86.0
+offset_right = 81.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = -1
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 22
+text = "HELP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Star" type="Sprite2D" parent="Control2"]
+position = Vector2(-914, -327)
+scale = Vector2(0.056, 0.056)
+texture = ExtResource("5_hqlia")
+
+[node name="Star2" type="Sprite2D" parent="Control2"]
+position = Vector2(-763, -392)
+scale = Vector2(0.064, 0.064)
+texture = ExtResource("5_hqlia")
+
+[node name="Star3" type="Sprite2D" parent="Control2"]
+position = Vector2(-776, -245)
+scale = Vector2(0.076, 0.076)
+texture = ExtResource("5_hqlia")
+
+[node name="Star4" type="Sprite2D" parent="Control2"]
+position = Vector2(-211, -187)
+scale = Vector2(0.104, 0.104)
+texture = ExtResource("5_hqlia")
+
+[node name="Star5" type="Sprite2D" parent="Control2"]
+position = Vector2(-72.5, -398.5)
+scale = Vector2(0.0659999, 0.0659999)
+texture = ExtResource("5_hqlia")
+
+[node name="Star6" type="Sprite2D" parent="Control2"]
+position = Vector2(-10, -284)
+scale = Vector2(0.0599999, 0.0599999)
+texture = ExtResource("5_hqlia")
+
+[node name="Star7" type="Sprite2D" parent="Control2"]
+position = Vector2(-644, -310)
+scale = Vector2(0.062, 0.062)
+texture = ExtResource("5_hqlia")
+
+[node name="Star8" type="Sprite2D" parent="Control2"]
+position = Vector2(-927, -175)
+scale = Vector2(0.056, 0.056)
+texture = ExtResource("5_hqlia")
+
+[node name="Star9" type="Sprite2D" parent="Control2"]
+position = Vector2(-913, -463)
+scale = Vector2(0.072, 0.072)
+texture = ExtResource("5_hqlia")
+
+[node name="Star10" type="Sprite2D" parent="Control2"]
+position = Vector2(46, -466)
+scale = Vector2(0.076, 0.076)
+texture = ExtResource("5_hqlia")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 844.0
+texture = SubResource("GradientTexture2D_exd8d")
+
+[node name="Control3" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 370.0
+offset_top = 160.0
+offset_right = 801.0
+offset_bottom = 442.0
+rotation = 3.14159
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(215, 141)
+
+[node name="Label" type="Label" parent="Control3"]
+z_index = 1
+layout_mode = 2
+offset_left = 131.0
+offset_top = -47.0
+offset_right = 304.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 70
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lqynp")
+text = "HELP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Control3"]
+clip_contents = false
+layout_mode = 0
+offset_right = 431.0
+offset_bottom = 282.0
+theme_override_styles/panel = ExtResource("1_56mc0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control3/ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="Control3/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lqynp")
+text = "Select a building to start placing it"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control3/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lqynp")
+text = "Click to place the building"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control3/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lqynp")
+text = "Enemies will attack your buildings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control3/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lqynp")
+text = "Place military buildings to defend your city"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Control3/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("2_t2hdb")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lqynp")
+text = "Each building will generate money every second"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="Control/Button" to="Control" method="_on_button_button_down"]
+[connection signal="button_up" from="Control/Button" to="Control" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Control/Button" to="Control" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Button" to="Control" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed_help"]
+[connection signal="button_down" from="Control2/Button" to="Control2" method="_on_button_button_down"]
+[connection signal="button_up" from="Control2/Button" to="Control2" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Control2/Button" to="Control2" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control2/Button" to="Control2" method="_on_button_mouse_exited"]

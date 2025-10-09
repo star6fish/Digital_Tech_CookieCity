@@ -262,8 +262,9 @@ func _spawn_enemy():
 	await get_tree().create_timer(2).timeout
 	
 	enemy_cooldown = false
-
-	await get_tree().create_timer(20 - global.enemies[enemy.get_meta("enemy_name")].speed).timeout
+	
+	if enemy != null:
+		await get_tree().create_timer(20 - global.enemies[enemy.get_meta("enemy_name")].speed).timeout
 	
 	ennemy_spawn_saves.erase(enemy_position)
 
@@ -273,7 +274,7 @@ func _shoot(building, enemy):
 	
 	building.set_meta("cooldown", true)
 	
-	building.get_node("Area3D/Animated/AnimationPlayer").play("Shoot")
+	building.get_node("Area3D2/Animated/AnimationPlayer").play("Shoot")
 	
 	enemy._damage(global.buildings[building.get_meta("building_name")].damage)
 	
@@ -281,7 +282,7 @@ func _shoot(building, enemy):
 	
 	add_child(new_bullet)
 	
-	new_bullet.position = building.get_node("Area3D/Shoot").global_position
+	new_bullet.position = building.get_node("Area3D2/Shoot").global_position
 	new_bullet.look_at(enemy.position, Vector3.UP, true)
 	
 	var tween = get_tree().create_tween()
@@ -292,13 +293,17 @@ func _shoot(building, enemy):
 	
 	var target_rotation : Vector3 = Vector3(0, atan2(direction.x, direction.z), 0)
 	
-	tween.parallel().tween_property(building.get_node("Area3D"), "rotation", target_rotation, 0.1)
+	if building.get_meta("building_name") != "Fighter Jet":
+		tween.parallel().tween_property(building.get_node("Area3D2"), "rotation", target_rotation, 0.1)
 	
 	await get_tree().create_timer(0.1).timeout
 	
 	new_bullet.queue_free()
 	
 	if building != null:
+		var cooldown_time = clamp(global.buildings[building.get_meta("building_name")].cooldown_time - 0.1, 0, INF)
+		await get_tree().create_timer(cooldown_time).timeout
+		
 		building.set_meta("cooldown", false)
 
 

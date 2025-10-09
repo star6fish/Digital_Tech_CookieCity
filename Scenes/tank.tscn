@@ -1,3 +1,42 @@
-[gd_scene format=3 uid="uid://csy83sp2t28m6"]
+[gd_scene load_steps=6 format=3 uid="uid://csy83sp2t28m6"]
+
+[ext_resource type="PackedScene" uid="uid://cb4otfpt2sgpc" path="res://Assets/Tank_Animated.tscn" id="1_4nxj6"]
+[ext_resource type="Script" path="res://Scripts/tank.gd" id="1_m4l12"]
+[ext_resource type="PackedScene" uid="uid://bwf40nktj1sya" path="res://Assets/tankbottom.glb" id="3_kvros"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kp3xu"]
+size = Vector3(7, 1, 7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gvtt1"]
+size = Vector3(1.66748, 0.599335, 1)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_m4l12")
+metadata/building_name = "Tank"
+metadata/health = 0
+metadata/cooldown = false
+
+[node name="Area3D2" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("BoxShape3D_kp3xu")
+
+[node name="Shoot" type="MeshInstance3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02757, 0.511231, 0.0434989)
+skeleton = NodePath("../..")
+
+[node name="Animated" parent="Area3D2" instance=ExtResource("1_4nxj6")]
+transform = Transform3D(-1.87959e-08, 0, -0.43, 0, 0.43, 0, 0.43, 0, -1.87959e-08, 1.28906, 0, -0.017917)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 6
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.250244, 0.317368, 0)
+shape = SubResource("BoxShape3D_gvtt1")
+
+[node name="tankbottom" parent="." instance=ExtResource("3_kvros")]
+transform = Transform3D(-1.87959e-08, 0, -0.43, 0, 0.43, 0, 0.43, 0, -1.87959e-08, 1.28906, 0, -0.017917)

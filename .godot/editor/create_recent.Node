@@ -1,3 +1,8 @@
+TextureRect
+TextEdit
+Button
+Control
+ColorRect
 Node3D
 AnimationPlayer
 AnimatedSprite3D
@@ -5,10 +10,5 @@ MeshInstance3D
 OmniLight3D
 GPUParticles3D
 CPUParticles3D
-TextureRect
 DirectionalLight3D
 VBoxContainer
-Label
-Control
-Panel
-Button

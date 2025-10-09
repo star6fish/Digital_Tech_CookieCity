@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=30 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
@@ -12,6 +12,8 @@
 [ext_resource type="FontFile" uid="uid://f05tpeemtcxc" path="res://Assets/ParalucentHeavy.otf" id="9_u8a58"]
 [ext_resource type="Texture2D" uid="uid://o4j2si1ovkv7" path="res://Assets/Oven.png" id="10_fkto3"]
 [ext_resource type="FontFile" uid="uid://cepy51vb7pfoi" path="res://Assets/LTSaeada-Bold.otf" id="10_ljekn"]
+[ext_resource type="Texture2D" uid="uid://cy7qdlkjx84ql" path="res://Assets/cog.png" id="12_1aijc"]
+[ext_resource type="Texture2D" uid="uid://chrpqtsis7dsq" path="res://Assets/house.png" id="13_tm0ce"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_cf8wl"]
 
@@ -151,6 +153,130 @@ theme_override_font_sizes/font_size = 20
 text = "HELP"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Control4" type="Control" parent="Control" node_paths=PackedStringArray("button")]
+anchors_preset = 0
+offset_left = 896.0
+offset_top = 510.0
+offset_right = 968.0
+offset_bottom = 614.0
+pivot_offset = Vector2(36, 52)
+script = ExtResource("7_jxr57")
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="Control/Control4"]
+layout_mode = 0
+offset_right = 72.0
+offset_bottom = 74.0
+pivot_offset = Vector2(36, 37)
+theme_override_colors/font_disabled_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_font_sizes/font_size = 63
+theme_override_styles/focus = ExtResource("7_t1or8")
+theme_override_styles/disabled_mirrored = ExtResource("7_t1or8")
+theme_override_styles/disabled = ExtResource("7_t1or8")
+theme_override_styles/hover_pressed_mirrored = ExtResource("7_t1or8")
+theme_override_styles/hover_pressed = ExtResource("7_t1or8")
+theme_override_styles/hover_mirrored = ExtResource("7_t1or8")
+theme_override_styles/hover = ExtResource("7_t1or8")
+theme_override_styles/pressed_mirrored = ExtResource("7_t1or8")
+theme_override_styles/pressed = ExtResource("7_t1or8")
+theme_override_styles/normal_mirrored = ExtResource("7_t1or8")
+theme_override_styles/normal = ExtResource("7_t1or8")
+
+[node name="Label" type="Label" parent="Control/Control4"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = 75.0
+offset_right = 81.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = -1
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 20
+text = "OPTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/Control4"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 505.0
+offset_bottom = 506.0
+scale = Vector2(0.121848, 0.121848)
+texture = ExtResource("12_1aijc")
+
+[node name="Control5" type="Control" parent="Control" node_paths=PackedStringArray("button")]
+anchors_preset = 0
+offset_left = 744.0
+offset_top = 510.0
+offset_right = 816.0
+offset_bottom = 614.0
+pivot_offset = Vector2(36, 52)
+script = ExtResource("7_jxr57")
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="Control/Control5"]
+layout_mode = 0
+offset_right = 72.0
+offset_bottom = 74.0
+pivot_offset = Vector2(36, 37)
+theme_override_colors/font_disabled_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_hover_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_fonts/font = ExtResource("9_u8a58")
+theme_override_font_sizes/font_size = 63
+theme_override_styles/focus = ExtResource("7_t1or8")
+theme_override_styles/disabled_mirrored = ExtResource("7_t1or8")
+theme_override_styles/disabled = ExtResource("7_t1or8")
+theme_override_styles/hover_pressed_mirrored = ExtResource("7_t1or8")
+theme_override_styles/hover_pressed = ExtResource("7_t1or8")
+theme_override_styles/hover_mirrored = ExtResource("7_t1or8")
+theme_override_styles/hover = ExtResource("7_t1or8")
+theme_override_styles/pressed_mirrored = ExtResource("7_t1or8")
+theme_override_styles/pressed = ExtResource("7_t1or8")
+theme_override_styles/normal_mirrored = ExtResource("7_t1or8")
+theme_override_styles/normal = ExtResource("7_t1or8")
+
+[node name="Label" type="Label" parent="Control/Control5"]
+layout_mode = 0
+offset_left = -20.0
+offset_top = 75.0
+offset_right = 92.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(0.92549, 0.603922, 0.403922, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = -1
+theme_override_fonts/font = ExtResource("10_ljekn")
+theme_override_font_sizes/font_size = 20
+text = "MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/Control5"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 505.0
+offset_bottom = 506.0
+scale = Vector2(0.121848, 0.121848)
+texture = ExtResource("13_tm0ce")
 
 [node name="Control3" type="Control" parent="Control" node_paths=PackedStringArray("button")]
 anchors_preset = 0
@@ -417,6 +543,15 @@ shadow_opacity = 0.95
 [connection signal="mouse_entered" from="Control/Control/Button" to="Control/Control" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/Control/Button" to="Control/Control" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Control/Control/Button" to="." method="_on_button_pressed_help"]
+[connection signal="button_down" from="Control/Control4/Button" to="Control/Control4" method="_on_button_button_down"]
+[connection signal="button_up" from="Control/Control4/Button" to="Control/Control4" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Control/Control4/Button" to="Control/Control4" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Control4/Button" to="Control/Control4" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="Control/Control5/Button" to="Control/Control5" method="_on_button_button_down"]
+[connection signal="button_up" from="Control/Control5/Button" to="Control/Control5" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Control/Control5/Button" to="Control/Control5" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Control5/Button" to="Control/Control5" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Control/Control5/Button" to="." method="_on_button_pressed_help"]
 [connection signal="button_down" from="Control/Control3/Button" to="Control/Control3" method="_on_button_button_down"]
 [connection signal="button_up" from="Control/Control3/Button" to="Control/Control3" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="Control/Control3/Button" to="Control/Control3" method="_on_button_mouse_entered"]

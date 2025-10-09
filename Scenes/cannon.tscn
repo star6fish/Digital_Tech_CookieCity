@@ -19,16 +19,16 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
 shape = SubResource("BoxShape3D_ij8dp")
 
+[node name="Shoot" type="MeshInstance3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0142302, 0.974002, -0.947841)
+skeleton = NodePath("../..")
+
+[node name="Animated" parent="Area3D2" instance=ExtResource("1_skxh5")]
+transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 0, 0, 0)
+
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 6
 collision_mask = 6
-
-[node name="Animated" parent="Area3D" instance=ExtResource("1_skxh5")]
-transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 0, 0, 0)
-
-[node name="Shoot" type="MeshInstance3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0142302, 0.974002, -0.947841)
-skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52906, 0)

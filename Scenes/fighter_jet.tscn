@@ -1,3 +1,43 @@
-[gd_scene format=3 uid="uid://c66ctdvfb8m3g"]
+[gd_scene load_steps=6 format=3 uid="uid://c66ctdvfb8m3g"]
+
+[ext_resource type="Script" path="res://Scripts/fighter_jet.gd" id="1_c305t"]
+[ext_resource type="PackedScene" uid="uid://p5er5whytbo1" path="res://Assets/planebottom.glb" id="2_82l2o"]
+[ext_resource type="PackedScene" uid="uid://bqh73dwrjk5co" path="res://Assets/Fighter_Jet_Animated.tscn" id="3_ccwrl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m2avp"]
+size = Vector3(3.41553, 5, 3.49609)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oslbm"]
+size = Vector3(5, 1, 5)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_c305t")
+metadata/building_name = "Fighter Jet"
+metadata/health = 0
+metadata/cooldown = false
+
+[node name="Area3D2" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+metadata/building_name = ""
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.31953, 1.14936, 2.5077)
+shape = SubResource("BoxShape3D_m2avp")
+
+[node name="Shoot" type="MeshInstance3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24808, 2.35176, 2.732)
+skeleton = NodePath("../..")
+
+[node name="Animated" parent="Area3D2" instance=ExtResource("3_ccwrl")]
+transform = Transform3D(0.43, 0, 0, 0, 0.43, 0, 0, 0, 0.43, 0, 0, -0.26505)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 6
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_oslbm")
+
+[node name="planebottom" parent="." instance=ExtResource("2_82l2o")]
+transform = Transform3D(0.43, 0, 0, 0, 0.43, 0, 0, 0, 0.43, 0, 0, -3)

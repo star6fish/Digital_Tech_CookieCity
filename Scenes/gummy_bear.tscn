@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://crsyssrxo25jm"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_32j2m"]
+[ext_resource type="PackedScene" uid="uid://cac55nghnfhyv" path="res://Assets/Gummy_Bear_Animated.tscn" id="1_mur8y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_00mr4"]
+size = Vector3(0.79044, 1.31102, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_32j2m")
+metadata/enemy_name = "Gummy Bear"
+metadata/damage = 0
+metadata/cooldown = false
+
+[node name="Animated" parent="." instance=ExtResource("1_mur8y")]
+transform = Transform3D(-1.87959e-08, 0, 0.43, 0, 0.43, 0, -0.43, 0, -1.87959e-08, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0179081, 0.200396, -0.13428)
+shape = SubResource("BoxShape3D_00mr4")
