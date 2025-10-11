@@ -1,13 +1,11 @@
-res://Scenes/options_screen_scene.tscn
+res://Scenes/main_screen_scene.tscn
 res://Assets/new_style_box_flat2.tres
 res://Assets/new_style_box_flat.tres
-res://Assets/new_style_box_flat3.tres
 res://Assets/panel_selected.tres
+res://Assets/new_style_box_flat3.tres
 res://Assets/smoke.tres
 res://Scripts/enemy.gd
-res://Scripts/options_screen_scene.gd
-res://Scripts/global.gd
-res://Scenes/main_screen_scene.tscn
+res://Scenes/options_screen_scene.tscn
 res://Scenes/main_scene.tscn
 res://Scenes/bullet.tscn
 res://Scenes/shop.tscn

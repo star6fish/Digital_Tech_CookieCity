@@ -87,12 +87,12 @@ offset_bottom = 648.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control"]
 layout_mode = 0
-offset_left = 222.0
+offset_left = 26.0
 offset_top = 667.0
-offset_right = 947.0
+offset_right = 689.0
 offset_bottom = 807.0
 rotation = -3.14159
-pivot_offset = Vector2(362, 70)
+pivot_offset = Vector2(331, 70)
 theme_override_styles/panel = ExtResource("1_3tuov")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/ScrollContainer"]
@@ -214,6 +214,7 @@ offset_top = 6.0
 offset_right = 505.0
 offset_bottom = 506.0
 scale = Vector2(0.121848, 0.121848)
+mouse_filter = 2
 texture = ExtResource("12_1aijc")
 
 [node name="Control5" type="Control" parent="Control" node_paths=PackedStringArray("button")]
@@ -276,6 +277,7 @@ offset_top = 6.0
 offset_right = 505.0
 offset_bottom = 506.0
 scale = Vector2(0.121848, 0.121848)
+mouse_filter = 2
 texture = ExtResource("13_tm0ce")
 
 [node name="Control3" type="Control" parent="Control" node_paths=PackedStringArray("button")]
@@ -547,11 +549,12 @@ shadow_opacity = 0.95
 [connection signal="button_up" from="Control/Control4/Button" to="Control/Control4" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="Control/Control4/Button" to="Control/Control4" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/Control4/Button" to="Control/Control4" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Control/Control4/Button" to="." method="_on_button_pressed_options"]
 [connection signal="button_down" from="Control/Control5/Button" to="Control/Control5" method="_on_button_button_down"]
 [connection signal="button_up" from="Control/Control5/Button" to="Control/Control5" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="Control/Control5/Button" to="Control/Control5" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/Control5/Button" to="Control/Control5" method="_on_button_mouse_exited"]
-[connection signal="pressed" from="Control/Control5/Button" to="." method="_on_button_pressed_help"]
+[connection signal="pressed" from="Control/Control5/Button" to="." method="_on_button_pressed_main_screen"]
 [connection signal="button_down" from="Control/Control3/Button" to="Control/Control3" method="_on_button_button_down"]
 [connection signal="button_up" from="Control/Control3/Button" to="Control/Control3" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="Control/Control3/Button" to="Control/Control3" method="_on_button_mouse_entered"]

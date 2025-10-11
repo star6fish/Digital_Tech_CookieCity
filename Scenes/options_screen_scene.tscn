@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3nftgwhhaew0"]
+[gd_scene load_steps=15 format=3 uid="uid://d3nftgwhhaew0"]
 
 [ext_resource type="FontFile" uid="uid://cepy51vb7pfoi" path="res://Assets/LTSaeada-Bold.otf" id="1_d30bj"]
 [ext_resource type="FontFile" uid="uid://f05tpeemtcxc" path="res://Assets/ParalucentHeavy.otf" id="1_dfiok"]
 [ext_resource type="Script" path="res://Scripts/options_screen_scene.gd" id="1_ncbyl"]
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="2_4kiut"]
+[ext_resource type="PackedScene" uid="uid://c1dpq15ag6r24" path="res://Scenes/main_scene.tscn" id="2_brqdp"]
 [ext_resource type="StyleBox" uid="uid://e0qoe08p60rl" path="res://Assets/new_style_box_flat2.tres" id="2_e1cgp"]
 [ext_resource type="StyleBox" uid="uid://12l51xv0241a" path="res://Assets/new_style_box_flat3.tres" id="2_goha0"]
 [ext_resource type="Texture2D" uid="uid://cgrocoom77dup" path="res://Assets/tick.png" id="4_hdqka"]
 [ext_resource type="Script" path="res://Scripts/option.gd" id="5_jdct0"]
+[ext_resource type="Script" path="res://Scripts/buttonFX2.gd" id="9_ataox"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1fjvm"]
 
@@ -30,8 +32,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ncbyl")
 options_container = NodePath("ScrollContainer2/VBoxContainer")
+main_scene = ExtResource("2_brqdp")
 
-[node name="Button2" type="Button" parent="."]
+[node name="Button2" type="Button" parent="." node_paths=PackedStringArray("button")]
 z_index = 1
 layout_mode = 0
 offset_left = 29.0
@@ -60,15 +63,17 @@ theme_override_styles/pressed = ExtResource("2_e1cgp")
 theme_override_styles/normal_mirrored = ExtResource("2_e1cgp")
 theme_override_styles/normal = ExtResource("2_e1cgp")
 text = "BACK"
+script = ExtResource("9_ataox")
+button = NodePath(".")
 
-[node name="Button3" type="Button" parent="."]
+[node name="Button3" type="Button" parent="." node_paths=PackedStringArray("button")]
 z_index = 1
 layout_mode = 0
-offset_left = 390.0
-offset_top = 531.0
-offset_right = 795.0
-offset_bottom = 594.0
-pivot_offset = Vector2(36, 37)
+offset_left = 392.0
+offset_top = 429.0
+offset_right = 797.0
+offset_bottom = 492.0
+pivot_offset = Vector2(202, 31)
 theme_override_colors/font_disabled_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_colors/font_hover_color = Color(0.92549, 0.603922, 0.403922, 1)
@@ -90,29 +95,21 @@ theme_override_styles/pressed = ExtResource("2_e1cgp")
 theme_override_styles/normal_mirrored = ExtResource("2_e1cgp")
 theme_override_styles/normal = ExtResource("2_e1cgp")
 text = "RESET DATA"
+script = ExtResource("9_ataox")
+button = NodePath(".")
 
-[node name="ScrollContainer2" type="ScrollContainer" parent="."]
-clip_contents = false
-layout_mode = 0
-offset_left = 373.0
-offset_top = 199.0
-offset_right = 804.0
-offset_bottom = 515.0
-theme_override_styles/panel = ExtResource("2_4kiut")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer2"]
+[node name="Control" type="Control" parent="."]
+z_index = 1
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 42
-alignment = 1
-
-[node name="Control" type="Control" parent="ScrollContainer2/VBoxContainer"]
-layout_mode = 2
+anchors_preset = 0
+offset_left = 415.0
+offset_top = 310.0
+offset_right = 826.0
+offset_bottom = 310.0
 script = ExtResource("5_jdct0")
 metadata/option = "Bullet Effects"
 
-[node name="Button" type="Button" parent="ScrollContainer2/VBoxContainer/Control"]
+[node name="Button" type="Button" parent="Control" node_paths=PackedStringArray("button")]
 layout_mode = 0
 offset_left = 230.0
 offset_top = -40.0
@@ -129,8 +126,10 @@ theme_override_styles/pressed_mirrored = ExtResource("2_goha0")
 theme_override_styles/pressed = ExtResource("2_goha0")
 theme_override_styles/normal_mirrored = ExtResource("2_goha0")
 theme_override_styles/normal = ExtResource("2_goha0")
+script = ExtResource("9_ataox")
+button = NodePath(".")
 
-[node name="Label" type="Label" parent="ScrollContainer2/VBoxContainer/Control"]
+[node name="Label" type="Label" parent="Control"]
 layout_mode = 2
 offset_top = -38.0
 offset_right = 303.0
@@ -143,7 +142,7 @@ text = "Bullet Effects"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Tick" type="TextureRect" parent="ScrollContainer2/VBoxContainer/Control"]
+[node name="Tick" type="TextureRect" parent="Control"]
 modulate = Color(0.620744, 0.376387, 0, 1)
 layout_mode = 0
 offset_left = 227.0
@@ -151,7 +150,83 @@ offset_top = -52.0
 offset_right = 727.0
 offset_bottom = 448.0
 scale = Vector2(0.0634141, 0.0634141)
+mouse_filter = 2
 texture = ExtResource("4_hdqka")
+
+[node name="Control2" type="Control" parent="."]
+z_index = 1
+layout_mode = 2
+anchors_preset = 0
+offset_left = 415.0
+offset_top = 349.0
+offset_right = 826.0
+offset_bottom = 349.0
+script = ExtResource("5_jdct0")
+metadata/option = "Black And White"
+
+[node name="Button" type="Button" parent="Control2" node_paths=PackedStringArray("button")]
+layout_mode = 0
+offset_left = 230.0
+offset_top = -40.0
+offset_right = 251.0
+offset_bottom = -19.0
+theme_override_styles/focus = ExtResource("2_goha0")
+theme_override_styles/disabled_mirrored = ExtResource("2_goha0")
+theme_override_styles/disabled = ExtResource("2_goha0")
+theme_override_styles/hover_pressed_mirrored = ExtResource("2_goha0")
+theme_override_styles/hover_pressed = ExtResource("2_goha0")
+theme_override_styles/hover_mirrored = ExtResource("2_goha0")
+theme_override_styles/hover = ExtResource("2_goha0")
+theme_override_styles/pressed_mirrored = ExtResource("2_goha0")
+theme_override_styles/pressed = ExtResource("2_goha0")
+theme_override_styles/normal_mirrored = ExtResource("2_goha0")
+theme_override_styles/normal = ExtResource("2_goha0")
+script = ExtResource("9_ataox")
+button = NodePath(".")
+
+[node name="Label" type="Label" parent="Control2"]
+layout_mode = 2
+offset_top = -38.0
+offset_right = 303.0
+offset_bottom = -20.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_d30bj")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1fjvm")
+text = "Black And White"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tick" type="TextureRect" parent="Control2"]
+visible = false
+modulate = Color(0.620744, 0.376387, 0, 1)
+layout_mode = 0
+offset_left = 227.0
+offset_top = -52.0
+offset_right = 727.0
+offset_bottom = 448.0
+scale = Vector2(0.0634141, 0.0634141)
+mouse_filter = 2
+texture = ExtResource("4_hdqka")
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="."]
+clip_contents = false
+layout_mode = 0
+offset_left = 373.0
+offset_top = 218.0
+offset_right = 804.0
+offset_bottom = 393.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_4kiut")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer2"]
+z_index = -1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 42
+alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -1
@@ -178,6 +253,23 @@ text = "OPTIONS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="button_down" from="Button2" to="Button2" method="_on_button_button_down"]
+[connection signal="button_up" from="Button2" to="Button2" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Button2" to="Button2" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button2" to="Button2" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed_back"]
+[connection signal="button_down" from="Button3" to="Button3" method="_on_button_button_down"]
+[connection signal="button_up" from="Button3" to="Button3" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Button3" to="Button3" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button3" to="Button3" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed_resetdata"]
-[connection signal="pressed" from="ScrollContainer2/VBoxContainer/Control/Button" to="ScrollContainer2/VBoxContainer/Control" method="_on_button_pressed"]
+[connection signal="button_down" from="Control/Button" to="Control/Button" method="_on_button_button_down"]
+[connection signal="button_up" from="Control/Button" to="Control/Button" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Control/Button" to="Control/Button" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Button" to="Control/Button" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Control/Button" to="Control" method="_on_button_pressed"]
+[connection signal="button_down" from="Control2/Button" to="Control2/Button" method="_on_button_button_down"]
+[connection signal="button_up" from="Control2/Button" to="Control2/Button" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Control2/Button" to="Control2/Button" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control2/Button" to="Control2/Button" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Control2/Button" to="Control2" method="_on_button_pressed"]

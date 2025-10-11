@@ -75,28 +75,6 @@ func _get_game_save():
 		return null
 
 
-# Resets the games data amd resets the game as well
-func _reset_game_save():
-	
-	for i in buildings_placed:
-		i.queue_free()
-		buildings_placed.erase(i)
-		
-	for i in enemies:
-		i.queue_free()
-		enemies.erase(i)
-	
-	global.cookie_dough = 250
-	
-	var save = FileAccess.open(save_path, FileAccess.WRITE)
-	
-	var game_save = {cookie_dough = 250, buildings = []}
-	
-	save.store_var(game_save)
-	
-	save.close()
-
-
 # Gets the mouse position
 func _get_mouse_position():
 	
@@ -337,6 +315,8 @@ func _input(event: InputEvent) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	global.options_back = "Game Screen"
+	
 	var game_save = _get_game_save()
 	
 	for i in game_save.buildings:
@@ -487,13 +467,20 @@ func _on_button_pressed_build() -> void:
 		
 		build_screen_open = false
 		
-		tween.tween_property(build_screen, "position", Vector2(222, 667), 0.25)
+		tween.tween_property(build_screen, "position", Vector2(26, 667), 0.25)
 		tween.parallel().tween_property(build_screen, "rotation_degrees", -180, 0.25)
 		
 	elif build_screen_open== false:
 		
 		build_screen_open = true
 		
-		tween.tween_property(build_screen, "position", Vector2(222, 447), 0.25)
+		tween.tween_property(build_screen, "position", Vector2(26, 447), 0.25)
 		tween.parallel().tween_property(build_screen, "rotation_degrees", 0, 0.25)
-		
+
+
+func _on_button_pressed_options() -> void:
+	get_tree().change_scene_to_file("res://Scenes/options_screen_scene.tscn")
+
+
+func _on_button_pressed_main_screen() -> void:
+	get_tree().change_scene_to_file("res://Scenes/main_screen_scene.tscn")

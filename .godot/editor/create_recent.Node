@@ -1,8 +1,9 @@
+ColorRect
+Container
 TextureRect
 TextEdit
 Button
 Control
-ColorRect
 Node3D
 AnimationPlayer
 AnimatedSprite3D
@@ -11,4 +12,3 @@ OmniLight3D
 GPUParticles3D
 CPUParticles3D
 DirectionalLight3D
-VBoxContainer

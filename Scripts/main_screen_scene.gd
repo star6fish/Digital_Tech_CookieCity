@@ -1,5 +1,7 @@
 extends Control
 
+@onready var global = get_node("/root/Global")
+
 @export var help_screen : Control
 @export var help_screen_container : VBoxContainer
 
@@ -8,12 +10,8 @@ var help_screen_open : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	global.options_back = "Main Screen"
+	
 
 # Help button is pressed
 func _on_button_pressed_help() -> void:
@@ -43,3 +41,11 @@ func _on_button_pressed_help() -> void:
 		for i : Label in help_screen_container.get_children():
 			i.visible_characters = 0
 			tween.parallel().tween_property(i, "visible_characters", i.text.length(), 0.25)
+
+
+func _on_button_pressed_play() -> void:
+	get_tree().change_scene_to_file("res://Scenes/main_scene.tscn")
+
+
+func _on_button_pressed_options() -> void:
+	get_tree().change_scene_to_file("res://Scenes/options_screen_scene.tscn")

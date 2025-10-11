@@ -9,9 +9,9 @@ var buildings : Dictionary = {
 	"Shop" = {"scene" = load("res://Scenes/shop.tscn"), "icon" = "res://Assets/ShopIcon.png", "price" = 100, "health" = 100},
 	"Skyscraper" = {"scene" = load("res://Scenes/skyscraper.tscn"), "icon" = "res://Assets/skyscrapericon.png", "price" = 100000, "health" = 100},
 	#"Cannon" = {"scene" = load("res://Scenes/cannon.tscn"), "icon" = "res://Assets/HouseIcon.png", "price" = 100, "health" = 100},
-	"Tank" = {"scene" = load("res://Scenes/tank.tscn"), "icon" = "res://Assets/HouseIcon.png", "price" = 2500, "health" = 400, damage = 75, "cooldown_time" = 2},
+	"Tank" = {"scene" = load("res://Scenes/tank.tscn"), "icon" = "res://Assets/TankIcon.png", "price" = 2500, "health" = 400, damage = 75, "cooldown_time" = 2},
 	"Machine Gun" = {"scene" = load("res://Scenes/machine_gun.tscn"), "icon" = "res://Assets/MachinegunnerIcon.png", "price" = 250, "health" = 100, "damage" = 10, "cooldown_time" = 0.1},
-	"Fighter Jet" = {"scene" = load("res://Scenes/fighter_jet.tscn"), "icon" = "res://Assets/HouseIcon.png", "price" = 5000, "health" = 100, "damage" = 50, "cooldown_time" = 0.1}
+	"Fighter Jet" = {"scene" = load("res://Scenes/fighter_jet.tscn"), "icon" = "res://Assets/FighterJetIcon.png", "price" = 5000, "health" = 100, "damage" = 50, "cooldown_time" = 0.1}
 }
 
 var enemies : Dictionary = {
