@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c1dpq15ag6r24"]
+[gd_scene load_steps=34 format=3 uid="uid://c1dpq15ag6r24"]
 
 [ext_resource type="StyleBox" uid="uid://bmp3egxyyb3ns" path="res://Assets/new_style_box_flat.tres" id="1_3tuov"]
 [ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_7hg08"]
@@ -14,10 +14,18 @@
 [ext_resource type="FontFile" uid="uid://cepy51vb7pfoi" path="res://Assets/LTSaeada-Bold.otf" id="10_ljekn"]
 [ext_resource type="Texture2D" uid="uid://cy7qdlkjx84ql" path="res://Assets/cog.png" id="12_1aijc"]
 [ext_resource type="Texture2D" uid="uid://chrpqtsis7dsq" path="res://Assets/house.png" id="13_tm0ce"]
+[ext_resource type="Shader" path="res://Assets/black_and_white.gdshader" id="15_axebe"]
+[ext_resource type="Shader" path="res://Assets/high_contrast_shader.gdshader" id="16_fw2ie"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_cf8wl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u0qbg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_scegv"]
+shader = ExtResource("15_axebe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dtw3l"]
+shader = ExtResource("16_fw2ie")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lar3c"]
 sky_horizon_color = Color(0.968627, 0.486275, 0.505882, 1)
@@ -32,6 +40,7 @@ background_mode = 2
 background_energy_multiplier = 1.23
 sky = SubResource("Sky_y8t8d")
 glow_enabled = true
+adjustment_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_fws2p"]
 
@@ -475,6 +484,26 @@ theme_override_font_sizes/font_size = 27
 text = "TIME TIME"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BlackAndWhite" type="ColorRect" parent="Control"]
+visible = false
+show_behind_parent = true
+z_index = 2
+material = SubResource("ShaderMaterial_scegv")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="Control/BlackAndWhite"]
+copy_mode = 2
+
+[node name="HighContrast" type="ColorRect" parent="Control"]
+visible = false
+z_index = 2
+material = SubResource("ShaderMaterial_dtw3l")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2aggu")

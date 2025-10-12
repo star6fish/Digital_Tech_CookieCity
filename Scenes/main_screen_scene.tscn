@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://td72w4exb6mg"]
+[gd_scene load_steps=17 format=3 uid="uid://td72w4exb6mg"]
 
 [ext_resource type="StyleBox" uid="uid://e0qoe08p60rl" path="res://Assets/new_style_box_flat2.tres" id="1_56mc0"]
 [ext_resource type="Script" path="res://Scripts/main_screen_scene.gd" id="1_hanqq"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://du1ix7tooj2la" path="res://Assets/star.png" id="5_hqlia"]
 [ext_resource type="Texture2D" uid="uid://cy7qdlkjx84ql" path="res://Assets/cog.png" id="7_ctux2"]
 [ext_resource type="Texture2D" uid="uid://bslgm1huu5dco" path="res://Assets/Mainscreen.png" id="8_l3m7q"]
+[ext_resource type="Shader" path="res://Assets/high_contrast_shader.gdshader" id="9_6r73o"]
+[ext_resource type="Shader" path="res://Assets/black_and_white.gdshader" id="9_skydv"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_wagbv"]
 
@@ -20,6 +22,12 @@ colors = PackedColorArray(0.935525, 0.471721, 0.210474, 1, 0.533496, 0.206573, 0
 gradient = SubResource("Gradient_in0ks")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_plsua"]
+shader = ExtResource("9_skydv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aw1an"]
+shader = ExtResource("9_6r73o")
 
 [node name="Control" type="Control" node_paths=PackedStringArray("help_screen", "help_screen_container")]
 layout_mode = 3
@@ -387,6 +395,29 @@ texture = ExtResource("5_hqlia")
 position = Vector2(590, 329)
 scale = Vector2(0.359662, 0.359662)
 texture = ExtResource("8_l3m7q")
+
+[node name="BlackAndWhite" type="ColorRect" parent="."]
+visible = false
+z_index = 2
+material = SubResource("ShaderMaterial_plsua")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="BlackAndWhite"]
+copy_mode = 2
+
+[node name="HighContrast" type="ColorRect" parent="."]
+visible = false
+top_level = true
+clip_children = 2
+z_index = 2
+material = SubResource("ShaderMaterial_aw1an")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
 
 [connection signal="button_down" from="Button" to="Button" method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="Button" method="_on_button_button_up"]

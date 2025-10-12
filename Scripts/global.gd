@@ -28,6 +28,7 @@ var options = {
 	"Bullet Effects" = true,
 	"Black And White" = false,
 	"Bigger Text" = false,
+	"High Contrast" = false,
 }
 
 var options_back = "Main Screen"

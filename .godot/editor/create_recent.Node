@@ -1,4 +1,6 @@
+BackBufferCopy
 ColorRect
+WorldEnvironment
 Container
 TextureRect
 TextEdit
@@ -11,4 +13,3 @@ MeshInstance3D
 OmniLight3D
 GPUParticles3D
 CPUParticles3D
-DirectionalLight3D

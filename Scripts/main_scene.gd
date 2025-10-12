@@ -54,7 +54,7 @@ func _save_game():
 	for i in buildings_placed:	
 		global.save_buildings.append({type = i.get_meta("building_name"), position = i.position, rotation = i.rotation, health = i.get_meta("health")})
 	
-	var game_save = {cookie_dough = global.cookie_dough, buildings = global.save_buildings}
+	var game_save = {cookie_dough = global.cookie_dough, buildings = global.save_buildings, options = global.options}
 	
 	save.store_var(game_save)
 	
@@ -256,27 +256,29 @@ func _shoot(building, enemy):
 	
 	enemy._damage(global.buildings[building.get_meta("building_name")].damage)
 	
-	var new_bullet = bullet.instantiate()
-	
-	add_child(new_bullet)
-	
-	new_bullet.position = building.get_node("Area3D2/Shoot").global_position
-	new_bullet.look_at(enemy.position, Vector3.UP, true)
-	
-	var tween = get_tree().create_tween()
-
-	tween.tween_property(new_bullet, "position", enemy.position, 0.1)
-	
 	var direction = building.position - enemy.position
 	
 	var target_rotation : Vector3 = Vector3(0, atan2(direction.x, direction.z), 0)
 	
+	var tween = get_tree().create_tween()
+	
 	if building.get_meta("building_name") != "Fighter Jet":
-		tween.parallel().tween_property(building.get_node("Area3D2"), "rotation", target_rotation, 0.1)
+		tween.tween_property(building.get_node("Area3D2"), "rotation", target_rotation, 0.1)
 	
-	await get_tree().create_timer(0.1).timeout
+	if global.options["Bullet Effects"] == true:
 	
-	new_bullet.queue_free()
+		var new_bullet = bullet.instantiate()
+	
+		add_child(new_bullet)
+		
+		new_bullet.position = building.get_node("Area3D2/Shoot").global_position
+		new_bullet.look_at(enemy.position, Vector3.UP, true)
+		
+		tween.parallel().tween_property(new_bullet, "position", enemy.position, 0.1)
+	
+		await get_tree().create_timer(0.1).timeout
+	
+		new_bullet.queue_free()
 	
 	if building != null:
 		var cooldown_time = clamp(global.buildings[building.get_meta("building_name")].cooldown_time - 0.1, 0, INF)
@@ -317,6 +319,12 @@ func _ready() -> void:
 	
 	global.options_back = "Game Screen"
 	
+	if global.options["Black And White"] == true:
+		get_node("Control/BlackAndWhite").visible = true
+		
+	if global.options["High Contrast"] == true:
+		get_node("Control/HighContrast").visible = true
+
 	var game_save = _get_game_save()
 	
 	for i in game_save.buildings:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3nftgwhhaew0"]
+[gd_scene load_steps=19 format=3 uid="uid://d3nftgwhhaew0"]
 
 [ext_resource type="FontFile" uid="uid://cepy51vb7pfoi" path="res://Assets/LTSaeada-Bold.otf" id="1_d30bj"]
 [ext_resource type="FontFile" uid="uid://f05tpeemtcxc" path="res://Assets/ParalucentHeavy.otf" id="1_dfiok"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cgrocoom77dup" path="res://Assets/tick.png" id="4_hdqka"]
 [ext_resource type="Script" path="res://Scripts/option.gd" id="5_jdct0"]
 [ext_resource type="Script" path="res://Scripts/buttonFX2.gd" id="9_ataox"]
+[ext_resource type="Shader" path="res://Assets/black_and_white.gdshader" id="11_05cvk"]
+[ext_resource type="Shader" path="res://Assets/high_contrast_shader.gdshader" id="12_7vgqf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1fjvm"]
 
@@ -22,6 +24,12 @@ fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yyji2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_36faa"]
+shader = ExtResource("11_05cvk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wh7gg"]
+shader = ExtResource("12_7vgqf")
 
 [node name="Control" type="Control" node_paths=PackedStringArray("options_container")]
 layout_mode = 3
@@ -103,9 +111,9 @@ z_index = 1
 layout_mode = 2
 anchors_preset = 0
 offset_left = 415.0
-offset_top = 310.0
+offset_top = 296.0
 offset_right = 826.0
-offset_bottom = 310.0
+offset_bottom = 296.0
 script = ExtResource("5_jdct0")
 metadata/option = "Bullet Effects"
 
@@ -158,9 +166,9 @@ z_index = 1
 layout_mode = 2
 anchors_preset = 0
 offset_left = 415.0
-offset_top = 349.0
+offset_top = 335.0
 offset_right = 826.0
-offset_bottom = 349.0
+offset_bottom = 335.0
 script = ExtResource("5_jdct0")
 metadata/option = "Black And White"
 
@@ -198,6 +206,62 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Tick" type="TextureRect" parent="Control2"]
+visible = false
+modulate = Color(0.620744, 0.376387, 0, 1)
+layout_mode = 0
+offset_left = 227.0
+offset_top = -52.0
+offset_right = 727.0
+offset_bottom = 448.0
+scale = Vector2(0.0634141, 0.0634141)
+mouse_filter = 2
+texture = ExtResource("4_hdqka")
+
+[node name="Control3" type="Control" parent="."]
+z_index = 1
+layout_mode = 2
+anchors_preset = 0
+offset_left = 415.0
+offset_top = 375.0
+offset_right = 826.0
+offset_bottom = 375.0
+script = ExtResource("5_jdct0")
+metadata/option = "High Contrast"
+
+[node name="Button" type="Button" parent="Control3" node_paths=PackedStringArray("button")]
+layout_mode = 0
+offset_left = 230.0
+offset_top = -40.0
+offset_right = 251.0
+offset_bottom = -19.0
+theme_override_styles/focus = ExtResource("2_goha0")
+theme_override_styles/disabled_mirrored = ExtResource("2_goha0")
+theme_override_styles/disabled = ExtResource("2_goha0")
+theme_override_styles/hover_pressed_mirrored = ExtResource("2_goha0")
+theme_override_styles/hover_pressed = ExtResource("2_goha0")
+theme_override_styles/hover_mirrored = ExtResource("2_goha0")
+theme_override_styles/hover = ExtResource("2_goha0")
+theme_override_styles/pressed_mirrored = ExtResource("2_goha0")
+theme_override_styles/pressed = ExtResource("2_goha0")
+theme_override_styles/normal_mirrored = ExtResource("2_goha0")
+theme_override_styles/normal = ExtResource("2_goha0")
+script = ExtResource("9_ataox")
+button = NodePath(".")
+
+[node name="Label" type="Label" parent="Control3"]
+layout_mode = 2
+offset_top = -38.0
+offset_right = 303.0
+offset_bottom = -20.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_d30bj")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1fjvm")
+text = "High Contrast"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tick" type="TextureRect" parent="Control3"]
 visible = false
 modulate = Color(0.620744, 0.376387, 0, 1)
 layout_mode = 0
@@ -253,6 +317,27 @@ text = "OPTIONS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="BlackAndWhite" type="ColorRect" parent="."]
+visible = false
+z_index = 2
+material = SubResource("ShaderMaterial_36faa")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="BlackAndWhite"]
+copy_mode = 2
+
+[node name="HighContrast" type="ColorRect" parent="."]
+visible = false
+top_level = true
+clip_children = 2
+z_index = 2
+material = SubResource("ShaderMaterial_wh7gg")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
 [connection signal="button_down" from="Button2" to="Button2" method="_on_button_button_down"]
 [connection signal="button_up" from="Button2" to="Button2" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="Button2" to="Button2" method="_on_button_mouse_entered"]
@@ -273,3 +358,8 @@ vertical_alignment = 1
 [connection signal="mouse_entered" from="Control2/Button" to="Control2/Button" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control2/Button" to="Control2/Button" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Control2/Button" to="Control2" method="_on_button_pressed"]
+[connection signal="button_down" from="Control3/Button" to="Control3/Button" method="_on_button_button_down"]
+[connection signal="button_up" from="Control3/Button" to="Control3/Button" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="Control3/Button" to="Control3/Button" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control3/Button" to="Control3/Button" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Control3/Button" to="Control3" method="_on_button_pressed"]
