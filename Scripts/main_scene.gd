@@ -406,6 +406,7 @@ func _process(_delta: float) -> void:
 		
 		if i.position == Vector3(0, -0.5, 0)\
 			or i.get_meta("damage") >= global.enemies[i.get_meta("enemy_name")].health:
+			global.cookie_dough += 50
 			enemies.erase(i)
 			i.queue_free()
 
