@@ -151,6 +151,10 @@ func _move_building_to_mouse_position():
 	$RayCast3D.add_exception(global.current_building.get_node("Area3D"))
 	$RayCast3D2.add_exception(global.current_building.get_node("Area3D"))
 	
+	if global.current_building.get_node("Area3D2"):
+		$RayCast3D.add_exception(global.current_building.get_node("Area3D2"))
+		$RayCast3D2.add_exception(global.current_building.get_node("Area3D2"))
+	
 	new_position = await _update_placement_position(new_position)
 	
 	placement_mouse_target = new_position
@@ -284,7 +288,8 @@ func _shoot(building, enemy):
 		var cooldown_time = clamp(global.buildings[building.get_meta("building_name")].cooldown_time - 0.1, 0, INF)
 		await get_tree().create_timer(cooldown_time).timeout
 		
-		building.set_meta("cooldown", false)
+		if building != null:
+			building.set_meta("cooldown", false)
 
 
 # Detects when the player presses a key or clicks or moves their mouse
@@ -306,6 +311,11 @@ func _input(event: InputEvent) -> void:
 					buildings_placed.append(global.current_building)
 					$RayCast3D.remove_exception(global.current_building.get_node("Area3D"))
 					$RayCast3D2.remove_exception(global.current_building.get_node("Area3D"))
+					
+					if global.current_building.get_node("Area3D2"):
+						$RayCast3D.remove_exception(global.current_building.get_node("Area3D2"))
+						$RayCast3D2.remove_exception(global.current_building.get_node("Area3D2"))
+					
 					global.cookie_dough -= global.buildings[global.current_building.get_meta("building_name")].price
 					_select_building(null)
 				

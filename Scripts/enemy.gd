@@ -28,7 +28,8 @@ func _process(_delta: float) -> void:
 		#look_at(Vector3(0, -0.5, 0), Vector3.UP, true)
 		
 	for i in $Area3D.get_overlapping_areas():
-		if i.name != "Area3D2"\
+		if i != null \
+			and i.name != "Area3D2"\
 			and i.get_parent().has_meta("building_name")\
 			and i.get_parent() != global.current_building\
 			and not buildings_hit.has(i.get_parent()):
