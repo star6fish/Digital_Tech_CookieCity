@@ -24,11 +24,11 @@ var enemy_spawn_positions : Array = [Vector3(-14, -0.5, 13), Vector3(-13, -0.5, 
 
 var save_buildings : Array = []
 
-var options = {
+var options : Dictionary = {
 	"Bullet Effects" = true,
 	"Black And White" = false,
 	"Bigger Text" = false,
 	"High Contrast" = false,
 }
 
-var options_back = "Main Screen"
+var options_back : String = "Main Screen"

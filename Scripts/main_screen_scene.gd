@@ -36,6 +36,7 @@ func _ready() -> void:
 	if global.options["High Contrast"] == true:
 		get_node("HighContrast").visible = true
 
+
 # Help button is pressed
 func _on_button_pressed_help() -> void:
 	
@@ -66,9 +67,11 @@ func _on_button_pressed_help() -> void:
 			tween.parallel().tween_property(i, "visible_characters", i.text.length(), 0.25)
 
 
+# Play button is pressed
 func _on_button_pressed_play() -> void:
 	get_tree().change_scene_to_file("res://Scenes/main_scene.tscn")
 
 
+# Options button is pressed
 func _on_button_pressed_options() -> void:
 	get_tree().change_scene_to_file("res://Scenes/options_screen_scene.tscn")

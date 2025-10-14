@@ -35,6 +35,7 @@ func _reset_game_save():
 	save.close()
 
 
+# Updates the global options and saves the game data
 func _setting(option, toggle):
 	
 	global.options[option] = toggle
@@ -45,7 +46,8 @@ func _setting(option, toggle):
 		get_node("HighContrast").visible = toggle
 	
 	_save_game()
-	
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
@@ -60,6 +62,7 @@ func _ready() -> void:
 		get_node("HighContrast").visible = true
 
 
+# Back button is pressed
 func _on_button_2_pressed_back() -> void:
 	if global.options_back == "Main Screen":
 		get_tree().change_scene_to_file("res://Scenes/main_screen_scene.tscn")
@@ -67,5 +70,6 @@ func _on_button_2_pressed_back() -> void:
 		get_tree().change_scene_to_file("res://Scenes/main_scene.tscn")
 
 
+# Reset data button is pressed
 func _on_button_3_pressed_resetdata() -> void:
 	_reset_game_save()
