@@ -2,11 +2,12 @@ extends Control
 
 @onready var global = get_node("/root/Global")
 
-@export var options_container : VBoxContainer
-
 @export var main_scene : PackedScene
 
-var save_path = "user://save_data"
+@export var black_and_white : ColorRect
+@export var high_contrast : ColorRect
+
+var save_path : String = "user://save_data"
 
 
 # Saves the game data
@@ -41,9 +42,9 @@ func _setting(option, toggle):
 	global.options[option] = toggle
 	
 	if option == "Black And White":
-		get_node("BlackAndWhite").visible = toggle
+		black_and_white.visible = toggle
 	elif option == "High Contrast":
-		get_node("HighContrast").visible = toggle
+		high_contrast.visible = toggle
 	
 	_save_game()
 
@@ -56,10 +57,10 @@ func _ready() -> void:
 			i._reset_tick()
 	
 	if global.options["Black And White"] == true:
-		get_node("BlackAndWhite").visible = true
-	
+		black_and_white.visible = true
+		
 	if global.options["High Contrast"] == true:
-		get_node("HighContrast").visible = true
+		high_contrast.visible = true
 
 
 # Back button is pressed

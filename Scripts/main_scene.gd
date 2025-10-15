@@ -21,7 +21,10 @@ extends Node3D
 @export var buildings_placed_label : Label
 @export var time_label : Label
 
-var save_path = "user://save_data"
+@export var black_and_white : ColorRect
+@export var high_contrast : ColorRect
+
+var save_path : String = "user://save_data"
 
 var buildings : Dictionary = Global.buildings
 
@@ -29,8 +32,12 @@ var buildings_placed : Array = []
 var enemies : Array = []
 var ennemy_spawn_saves : Array = []
 
-var mouse_motion = Vector2(0, 0)
-var camera_speed = 0.25
+var mouse_motion : Vector2 = Vector2(0, 0)
+var camera_speed : float = 0.25
+var camera_speed_slower : float = camera_speed / 4
+
+var building_money_taxer : int = 4
+var enemy_defeat_money : int = 50
 
 var placement_mouse_cooldown : bool = false
 var placement_mouse_target : Vector3 = Vector3(0, 0, 0)
@@ -308,20 +315,26 @@ func _input(event: InputEvent) -> void:
 			if global.current_building != null:
 				if placement_mouse_cooldown == false: # Making sure that the building is not moving
 					
-					buildings_placed.append(global.current_building)
-					$RayCast3D.remove_exception(global.current_building.get_node("Area3D"))
-					$RayCast3D2.remove_exception(global.current_building.get_node("Area3D"))
+					var area3D_1 = global.current_building.get_node("Area3D")
+					var area3D_2 = global.current_building.get_node("Area3D2")
 					
-					if global.current_building.get_node("Area3D2"):
-						$RayCast3D.remove_exception(global.current_building.get_node("Area3D2"))
-						$RayCast3D2.remove_exception(global.current_building.get_node("Area3D2"))
+					buildings_placed.append(global.current_building)
+					$RayCast3D.remove_exception(area3D_1)
+					$RayCast3D2.remove_exception(area3D_1)
+					
+					if area3D_2 != null:
+						$RayCast3D.remove_exception(area3D_2)
+						$RayCast3D2.remove_exception(area3D_2)
 					
 					global.cookie_dough -= global.buildings[global.current_building.get_meta("building_name")].price
 					_select_building(null)
 				
 	elif Input.is_key_pressed(KEY_R) and not event.is_echo():
 		if global.current_building != null:
-			global.current_building.get_node("Area3D").rotation += Vector3(0, deg_to_rad(45), 0)
+			
+			var area3D = global.current_building.get_node("Area3D")
+			
+			area3D.rotation += Vector3(0, deg_to_rad(45), 0)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -330,23 +343,27 @@ func _ready() -> void:
 	global.options_back = "Game Screen"
 	
 	if global.options["Black And White"] == true:
-		get_node("Control/BlackAndWhite").visible = true
+		black_and_white.visible = true
 		
 	if global.options["High Contrast"] == true:
-		get_node("Control/HighContrast").visible = true
+		high_contrast.visible = true
 
 	var game_save = _get_game_save()
 	
 	for i in game_save.buildings:
+		
 		var building_name = i.type
+		var building_health = i.health
+		var building_position = i.position
+		var building_rotation = i.rotation
 		
 		var new_building = global.buildings[building_name].scene.instantiate()
 		
 		add_child(new_building)
 		
-		new_building.position = i.position
-		new_building.rotation = i.rotation
-		new_building.set_meta("health", i.health)
+		new_building.position = building_position
+		new_building.rotation = building_rotation
+		new_building.set_meta("health", building_health)
 		
 		buildings_placed.append(new_building)
 	
@@ -362,14 +379,18 @@ func _ready() -> void:
 		
 		new_building_template.set_meta("building", i)
 		
-		new_building_template.get_node("Label3").text = i
-		new_building_template.get_node("Label4").text = "$ " + str(building.price)
+		var new_building_template_name_label = new_building_template.get_node("Label3")
+		var new_building_template_price_label = new_building_template.get_node("Label4")
+		var new_building_template_icon = new_building_template.get_node("TextureRect2")
 		
 		var new_font_size : int = clamp(200 / clamp(i.length(), 12, INF), 2, 20)
 		
-		new_building_template.get_node("Label3").set("theme_override_font_sizes/font_size", new_font_size)
-		new_building_template.get_node("TextureRect2").texture = load(building.icon)
+		new_building_template_name_label.text = i
+		new_building_template_price_label.text = "$ " + str(building.price)
+		new_building_template_icon.texture = load(building.icon)
 		
+		new_building_template_name_label.set("theme_override_font_sizes/font_size", new_font_size)
+
 		build_screen_container.add_child(new_building_template)
 
 
@@ -383,8 +404,8 @@ func _process(_delta: float) -> void:
 		var tween = get_tree().create_tween()
 		tween.tween_property(global.current_building, "rotation", new_rotation, 0.1)
 		
-	var forward_direction = camera.transform.basis.z * Vector3(1, 0, 1)
-	var side_direction = camera.transform.basis.x
+	var forward_direction : Vector3 = camera.transform.basis.z * Vector3(1, 0, 1)
+	var side_direction : Vector3 = camera.transform.basis.x
 	
 	if Input.is_action_pressed("forward"):
 		camera.global_position -= forward_direction * camera_speed
@@ -398,10 +419,10 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_key_pressed(KEY_E):
 		camera.rotation_degrees += Vector3(0, 1, 0) * camera_speed
-		camera.position += side_direction * camera_speed / 4
+		camera.position += side_direction * camera_speed_slower
 	if Input.is_key_pressed(KEY_Q):
 		camera.rotation_degrees -= Vector3(0, 1, 0) * camera_speed
-		camera.position -= side_direction * camera_speed / 4
+		camera.position -= side_direction * camera_speed_slower
 		
 	for i in buildings_placed:
 		
@@ -410,8 +431,11 @@ func _process(_delta: float) -> void:
 			and i.get_meta("cooldown") == false:
 			
 			for i_2 in i.get_node("Area3D2").get_overlapping_areas():
-				if i_2.get_parent().has_meta("enemy_name"):
-					_shoot(i, i_2.get_parent())
+				
+				var parent_node : Node3D = i_2.get_parent()
+				
+				if parent_node.has_meta("enemy_name"):
+					_shoot(i, parent_node)
 					
 		if i.get_meta("health") >= global.buildings[i.get_meta("building_name")].health:
 			buildings_placed.erase(i)
@@ -422,15 +446,24 @@ func _process(_delta: float) -> void:
 	
 	for i in enemies:
 		
+		var enemy_name = i.get_meta("enemy_name")
+		
+		if i.get_meta("damage") >= global.enemies[enemy_name].health:
+			global.cookie_dough += enemy_defeat_money
+		
 		if i.position == Vector3(0, -0.5, 0)\
-			or i.get_meta("damage") >= global.enemies[i.get_meta("enemy_name")].health:
-			global.cookie_dough += 50
+			or i.get_meta("damage") >= global.enemies[enemy_name].health:
 			enemies.erase(i)
 			i.queue_free()
 
 	if money_cooldown == false:
 		for i in buildings_placed:
-			global.cookie_dough += global.buildings[i.get_meta("building_name")].price / 4
+			
+			var building_name = i.get_meta("building_name")
+			
+			var building_money = global.buildings[building_name].price / building_money_taxer
+			
+			global.cookie_dough += building_money
 		
 		money_cooldown = true
 		await get_tree().create_timer(5).timeout

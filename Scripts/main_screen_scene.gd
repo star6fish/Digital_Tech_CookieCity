@@ -5,7 +5,10 @@ extends Control
 @export var help_screen : Control
 @export var help_screen_container : VBoxContainer
 
-var save_path = "user://save_data"
+@export var black_and_white : ColorRect
+@export var high_contrast : ColorRect
+
+var save_path : String = "user://save_data"
 
 var help_screen_open : bool = false
 
@@ -31,10 +34,10 @@ func _ready() -> void:
 	global.save_buildings = game_save.buildings
 	
 	if global.options["Black And White"] == true:
-		get_node("BlackAndWhite").visible = true
-	
+		black_and_white.visible = true
+		
 	if global.options["High Contrast"] == true:
-		get_node("HighContrast").visible = true
+		high_contrast.visible = true
 
 
 # Help button is pressed

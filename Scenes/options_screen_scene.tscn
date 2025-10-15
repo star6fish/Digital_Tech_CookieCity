@@ -31,7 +31,7 @@ shader = ExtResource("11_05cvk")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wh7gg"]
 shader = ExtResource("12_7vgqf")
 
-[node name="Control" type="Control" node_paths=PackedStringArray("options_container")]
+[node name="Control" type="Control" node_paths=PackedStringArray("black_and_white", "high_contrast")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,8 +39,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ncbyl")
-options_container = NodePath("ScrollContainer2/VBoxContainer")
 main_scene = ExtResource("2_brqdp")
+black_and_white = NodePath("BlackAndWhite")
+high_contrast = NodePath("HighContrast")
 
 [node name="Button2" type="Button" parent="." node_paths=PackedStringArray("button")]
 z_index = 1

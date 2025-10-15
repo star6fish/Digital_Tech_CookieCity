@@ -29,7 +29,7 @@ shader = ExtResource("9_skydv")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aw1an"]
 shader = ExtResource("9_6r73o")
 
-[node name="Control" type="Control" node_paths=PackedStringArray("help_screen", "help_screen_container")]
+[node name="Control" type="Control" node_paths=PackedStringArray("help_screen", "help_screen_container", "black_and_white", "high_contrast")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,6 +39,8 @@ grow_vertical = 2
 script = ExtResource("1_hanqq")
 help_screen = NodePath("Control3")
 help_screen_container = NodePath("Control3/ScrollContainer2/VBoxContainer")
+black_and_white = NodePath("BlackAndWhite")
+high_contrast = NodePath("HighContrast")
 
 [node name="Button" type="Button" parent="." node_paths=PackedStringArray("button")]
 layout_mode = 0
