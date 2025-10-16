@@ -10,6 +10,8 @@ extends Control
 
 var save_path : String = "user://save_data"
 
+var scene_name: String = "Main Screen"
+
 var help_screen_open : bool = false
 
 
@@ -26,7 +28,7 @@ func _get_game_save():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	global.options_back = "Main Screen"
+	global.options_back = scene_name
 	
 	var game_save = _get_game_save()
 	

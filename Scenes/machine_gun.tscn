@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bfrhjn1u6h1ns"]
 
-[ext_resource type="Script" path="res://Scripts/machine_gun.gd" id="1_pq0mh"]
+[ext_resource type="Script" path="res://Scripts/building.gd" id="1_ybiyb"]
 [ext_resource type="PackedScene" uid="uid://batkf570ctwlg" path="res://Assets/machinegun.glb" id="2_de4gs"]
 [ext_resource type="PackedScene" uid="uid://dngppnpo0l3b0" path="res://Scenes/explosion_crums.tscn" id="2_wqad8"]
 [ext_resource type="PackedScene" uid="uid://b4mfv1do3p3go" path="res://Assets/MachineGun_Animated.tscn" id="3_e5xht"]
@@ -11,8 +11,8 @@ size = Vector3(5, 1, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7imy8"]
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_pq0mh")
-explosion_crums = ExtResource("2_wqad8")
+script = ExtResource("1_ybiyb")
+explosion_crumbs = ExtResource("2_wqad8")
 metadata/building_name = "Machine Gun"
 metadata/health = 0
 metadata/cooldown = false

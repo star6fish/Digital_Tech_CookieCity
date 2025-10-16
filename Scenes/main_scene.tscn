@@ -72,7 +72,7 @@ albedo_color = Color(0, 1, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx0yw"]
 albedo_color = Color(0, 1, 0, 1)
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("camera", "help_screen", "help_screen_container", "build_screen", "build_screen_container", "money_label", "buildings_placed_label", "time_label", "black_and_white", "high_contrast")]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("camera", "help_screen", "help_screen_container", "build_screen_container", "build_screen", "money_label", "buildings_placed_label", "time_label", "black_and_white", "high_contrast")]
 script = ExtResource("1_7hg08")
 camera = NodePath("Camera3D")
 building_template = ExtResource("2_esms4")
@@ -82,8 +82,8 @@ panel_selected = ExtResource("2_pgo2f")
 panel_unselected = ExtResource("4_nhymn")
 help_screen = NodePath("Control/Control2")
 help_screen_container = NodePath("Control/Control2/ScrollContainer2/VBoxContainer")
-build_screen = NodePath("Control/ScrollContainer")
 build_screen_container = NodePath("Control/ScrollContainer/HBoxContainer")
+build_screen = NodePath("Control/ScrollContainer")
 money_label = NodePath("Control/Label")
 buildings_placed_label = NodePath("Control/Label2")
 time_label = NodePath("Control/Label3")

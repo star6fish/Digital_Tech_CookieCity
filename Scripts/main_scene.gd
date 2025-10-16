@@ -7,24 +7,20 @@ extends Node3D
 @export var building_template : PackedScene
 @export var bullet : PackedScene
 @export var explosion_crums : PackedScene
-
 @export var panel_selected : StyleBoxFlat
 @export var panel_unselected : StyleBoxFlat
-
 @export var help_screen : Control
 @export var help_screen_container : VBoxContainer
-
-@export var build_screen : ScrollContainer
 @export var build_screen_container : HBoxContainer
-
+@export var build_screen : ScrollContainer
 @export var money_label : Label
 @export var buildings_placed_label : Label
 @export var time_label : Label
-
 @export var black_and_white : ColorRect
 @export var high_contrast : ColorRect
 
 var save_path : String = "user://save_data"
+var scene_name: String = "Game Screen"
 
 var buildings : Dictionary = Global.buildings
 
@@ -32,19 +28,32 @@ var buildings_placed : Array = []
 var enemies : Array = []
 var ennemy_spawn_saves : Array = []
 
-var mouse_motion : Vector2 = Vector2(0, 0)
+var snap : float = 0.5
 var camera_speed : float = 0.25
 var camera_speed_slower : float = camera_speed / 4
+var building_size_default : float = 0.5
+var tween_user_interface_speed : float = 0.25
+var bullet_speed : float = 0.1
+var building_move_effect_speed : float = 0.1
 
+var rotation_turn : int = 45
+var enemy_spawn_range : int = 25
 var building_money_taxer : int = 4
 var enemy_defeat_money : int = 50
+var money_cooldown_time : int = 5
+var game_save_cooldown_time : int = 5
+var enemy_cooldown_time : int = 2
 
-var placement_mouse_cooldown : bool = false
 var placement_mouse_target : Vector3 = Vector3(0, 0, 0)
+
+var mouse_motion : Vector2 = Vector2(0, 0)
+var build_screen_position_up : Vector2 = Vector2(26, 447)
+var build_screen_positon_down : Vector2 = Vector2(26, 667)
+
 var money_cooldown : bool = false
 var enemy_cooldown : bool = false
 var save_cooldown : bool = true # Sets to true so that the game does not save the data before the buildings are loaded
-
+var placement_mouse_cooldown : bool = false
 var help_screen_open : bool = false
 var build_screen_open : bool = false
 
@@ -67,7 +76,7 @@ func _save_game():
 	
 	save.close()
 	
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(game_save_cooldown_time).timeout
 	save_cooldown = false
 
 
@@ -98,7 +107,7 @@ func _get_mouse_position():
 			
 	if mouse_position_3D.has("position"):
 		new_position = mouse_position_3D.position
-		new_position = Vector3(snapped(new_position.x, 0.25), -0.5, snapped(new_position.z, 0.25))
+		new_position = Vector3(snapped(new_position.x, 0.25), snap, snapped(new_position.z, 0.25))
 				
 	return new_position
 
@@ -108,25 +117,8 @@ func _update_placement_position(placement_position : Vector3):
 	
 	var original_positon = placement_position
 	
-	"""
-	var space_state = get_world_3d().direct_space_state
-	
-	var origin1 = Vector3(placement_position.x - 0.5, placement_position.y + 0.5, placement_position.z + 0.5)
-	var direction = Vector3(0, 0, -5)
-	
-	var query1 = PhysicsRayQueryParameters3D.create(origin1, origin1 + direction, 3)
-	
-	query1.collide_with_areas = true
-	query1.exclude = [global.current_building.get_node("Area3D")]
-
-	var result1 = space_state.intersect_ray(query1)
-	
-	if result1.has("collider"):
-		pass
-	"""
-	
-	$RayCast3D.position = Vector3(placement_position.x - 0.5, placement_position.y, placement_position.z + 0.5)
-	$RayCast3D2.position = Vector3(placement_position.x + 0.5, placement_position.y, placement_position.z + 0.5)
+	$RayCast3D.position = Vector3(placement_position.x - building_size_default, placement_position.y, placement_position.z + building_size_default)
+	$RayCast3D2.position = Vector3(placement_position.x + building_size_default, placement_position.y, placement_position.z + building_size_default)
 	
 	$RayCast3D.force_raycast_update()
 	$RayCast3D2.force_raycast_update()
@@ -172,10 +164,10 @@ func _move_building_to_mouse_position():
 	
 	var tween = get_tree().create_tween()
 	
-	tween.tween_property(global.current_building, "position", new_position, 0.1)
-	tween.parallel().tween_property(global.current_building, "rotation", rotation_placement, 0.1)
+	tween.tween_property(global.current_building, "position", new_position, building_move_effect_speed)
+	tween.parallel().tween_property(global.current_building, "rotation", rotation_placement, building_move_effect_speed)
 	
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(building_move_effect_speed).timeout
 	
 	if placement_mouse_target == new_position:
 		placement_mouse_cooldown = false # When the building is finished tweening stop the cooldown
@@ -233,14 +225,12 @@ func _spawn_enemy():
 		
 		valid = true
 		
-		random = snapped(randf_range(-25, 25), 0.5)
-		enemy_position = Vector3(random, -0.5, 25)
+		random = snapped(randf_range(-enemy_spawn_range, enemy_spawn_range), snap)
+		enemy_position = Vector3(random, snap, enemy_spawn_range)
 		
 		for i in ennemy_spawn_saves:
-			if abs(random - i.x) < 0.5:
+			if abs(random - i.x) < snap:
 				valid = false
-				
-		await get_tree().create_timer(0).timeout
 			
 	ennemy_spawn_saves.append(enemy_position)
 			
@@ -248,12 +238,9 @@ func _spawn_enemy():
 	
 	add_child(enemy)
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(enemy_cooldown_time).timeout
 	
 	enemy_cooldown = false
-	
-	if enemy != null:
-		await get_tree().create_timer(20 - global.enemies[enemy.get_meta("enemy_name")].speed).timeout
 	
 	ennemy_spawn_saves.erase(enemy_position)
 
@@ -285,14 +272,18 @@ func _shoot(building, enemy):
 		new_bullet.position = building.get_node("Area3D2/Shoot").global_position
 		new_bullet.look_at(enemy.position, Vector3.UP, true)
 		
-		tween.parallel().tween_property(new_bullet, "position", enemy.position, 0.1)
+		tween.parallel().tween_property(new_bullet, "position", enemy.position, bullet_speed)
 	
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(bullet_speed).timeout
 	
 		new_bullet.queue_free()
 	
 	if building != null:
-		var cooldown_time = clamp(global.buildings[building.get_meta("building_name")].cooldown_time - 0.1, 0, INF)
+		
+		var building_cooldown_time = global.buildings[building.get_meta("building_name")].cooldown_time
+				
+		var cooldown_time = clamp(building_cooldown_time - bullet_speed, 0, INF)
+		
 		await get_tree().create_timer(cooldown_time).timeout
 		
 		if building != null:
@@ -334,13 +325,13 @@ func _input(event: InputEvent) -> void:
 			
 			var area3D = global.current_building.get_node("Area3D")
 			
-			area3D.rotation += Vector3(0, deg_to_rad(45), 0)
+			area3D.rotation += Vector3(0, deg_to_rad(rotation_turn), 0)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	global.options_back = "Game Screen"
+	global.options_back = scene_name
 	
 	if global.options["Black And White"] == true:
 		black_and_white.visible = true
@@ -402,7 +393,7 @@ func _process(_delta: float) -> void:
 		var new_rotation = Vector3(0, 0, 0)
 		
 		var tween = get_tree().create_tween()
-		tween.tween_property(global.current_building, "rotation", new_rotation, 0.1)
+		tween.tween_property(global.current_building, "rotation", new_rotation, building_move_effect_speed)
 		
 	var forward_direction : Vector3 = camera.transform.basis.z * Vector3(1, 0, 1)
 	var side_direction : Vector3 = camera.transform.basis.x
@@ -448,11 +439,13 @@ func _process(_delta: float) -> void:
 		
 		var enemy_name = i.get_meta("enemy_name")
 		
-		if i.get_meta("damage") >= global.enemies[enemy_name].health:
+		var enemy_health = global.enemies[enemy_name].health
+		
+		if i.get_meta("damage") >= enemy_health:
 			global.cookie_dough += enemy_defeat_money
 		
-		if i.position == Vector3(0, -0.5, 0)\
-			or i.get_meta("damage") >= global.enemies[enemy_name].health:
+		if i.position == Vector3(0, snap, 0)\
+			or i.get_meta("damage") >= enemy_health:
 			enemies.erase(i)
 			i.queue_free()
 
@@ -466,7 +459,7 @@ func _process(_delta: float) -> void:
 			global.cookie_dough += building_money
 		
 		money_cooldown = true
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(money_cooldown_time).timeout
 		money_cooldown = false
 
 	if save_cooldown == false:
@@ -489,23 +482,23 @@ func _on_button_pressed_help() -> void:
 		
 		help_screen_open = false
 		
-		tween.tween_property(help_screen, "scale", Vector2(0, 0), 0.2)
-		tween.parallel().tween_property(help_screen, "rotation_degrees", 180, 0.25)
+		tween.tween_property(help_screen, "scale", Vector2(0, 0), tween_user_interface_speed)
+		tween.parallel().tween_property(help_screen, "rotation_degrees", 180, tween_user_interface_speed)
 		
 		for i : Label in help_screen_container.get_children():
 			i.visible_characters = 0
-			tween.parallel().tween_property(i, "visible_characters", 0, 0.25)
+			tween.parallel().tween_property(i, "visible_characters", 0, tween_user_interface_speed)
 		
 	elif help_screen_open == false:
 		
 		help_screen_open = true
 		
-		tween.tween_property(help_screen, "scale", Vector2(1, 1), 0.25)
-		tween.parallel().tween_property(help_screen, "rotation_degrees", 0, 0.25)
+		tween.tween_property(help_screen, "scale", Vector2(1, 1), tween_user_interface_speed)
+		tween.parallel().tween_property(help_screen, "rotation_degrees", 0, tween_user_interface_speed)
 		
 		for i : Label in help_screen_container.get_children():
 			i.visible_characters = 0
-			tween.parallel().tween_property(i, "visible_characters", i.text.length(), 0.25)
+			tween.parallel().tween_property(i, "visible_characters", i.text.length(), tween_user_interface_speed)
 			
 
 # Build button is pressed
@@ -519,15 +512,15 @@ func _on_button_pressed_build() -> void:
 		
 		build_screen_open = false
 		
-		tween.tween_property(build_screen, "position", Vector2(26, 667), 0.25)
-		tween.parallel().tween_property(build_screen, "rotation_degrees", -180, 0.25)
+		tween.tween_property(build_screen, "position", build_screen_positon_down, tween_user_interface_speed)
+		tween.parallel().tween_property(build_screen, "rotation_degrees", -180, tween_user_interface_speed)
 		
 	elif build_screen_open== false:
 		
 		build_screen_open = true
 		
-		tween.tween_property(build_screen, "position", Vector2(26, 447), 0.25)
-		tween.parallel().tween_property(build_screen, "rotation_degrees", 0, 0.25)
+		tween.tween_property(build_screen, "position", build_screen_position_up, tween_user_interface_speed)
+		tween.parallel().tween_property(build_screen, "rotation_degrees", 0,tween_user_interface_speed)
 
 
 func _on_button_pressed_options() -> void:

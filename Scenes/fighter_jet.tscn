@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c66ctdvfb8m3g"]
+[gd_scene load_steps=7 format=3 uid="uid://c66ctdvfb8m3g"]
 
 [ext_resource type="Script" path="res://Scripts/fighter_jet.gd" id="1_c305t"]
+[ext_resource type="PackedScene" uid="uid://dngppnpo0l3b0" path="res://Scenes/explosion_crums.tscn" id="2_0dp2o"]
 [ext_resource type="PackedScene" uid="uid://p5er5whytbo1" path="res://Assets/planebottom.glb" id="2_82l2o"]
 [ext_resource type="PackedScene" uid="uid://bqh73dwrjk5co" path="res://Assets/Fighter_Jet_Animated.tscn" id="3_ccwrl"]
 
@@ -10,8 +11,10 @@ size = Vector3(3.41553, 5, 3.49609)
 [sub_resource type="BoxShape3D" id="BoxShape3D_oslbm"]
 size = Vector3(5, 1, 5)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("area3D2")]
 script = ExtResource("1_c305t")
+explosion_crumbs = ExtResource("2_0dp2o")
+area3D2 = NodePath("Area3D2")
 metadata/building_name = "Fighter Jet"
 metadata/health = 0
 metadata/cooldown = false

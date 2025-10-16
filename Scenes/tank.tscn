@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://csy83sp2t28m6"]
+[gd_scene load_steps=7 format=3 uid="uid://csy83sp2t28m6"]
 
 [ext_resource type="PackedScene" uid="uid://cb4otfpt2sgpc" path="res://Assets/Tank_Animated.tscn" id="1_4nxj6"]
-[ext_resource type="Script" path="res://Scripts/tank.gd" id="1_m4l12"]
+[ext_resource type="Script" path="res://Scripts/building.gd" id="1_hhvhk"]
+[ext_resource type="PackedScene" uid="uid://dngppnpo0l3b0" path="res://Scenes/explosion_crums.tscn" id="2_6mt24"]
 [ext_resource type="PackedScene" uid="uid://bwf40nktj1sya" path="res://Assets/tankbottom.glb" id="3_kvros"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kp3xu"]
@@ -11,7 +12,8 @@ size = Vector3(7, 1, 7)
 size = Vector3(1.66748, 0.599335, 1)
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_m4l12")
+script = ExtResource("1_hhvhk")
+explosion_crumbs = ExtResource("2_6mt24")
 metadata/building_name = "Tank"
 metadata/health = 0
 metadata/cooldown = false

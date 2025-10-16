@@ -9,7 +9,7 @@ size = Vector3(1.608, 1.27588, 1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_5xx6p")
-explosion_crums = ExtResource("2_tianr")
+explosion_crumbs = ExtResource("2_tianr")
 metadata/building_name = "Skyscraper"
 metadata/health = 0
 

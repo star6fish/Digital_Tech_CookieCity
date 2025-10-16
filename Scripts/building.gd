@@ -2,24 +2,30 @@ extends Node3D
 
 @onready var global = get_node("/root/Global")
 
-@export var explosion_crums : PackedScene
+@export var explosion_crumbs : PackedScene
+
+var snap : float = 0.5
 
 var building_damage : int = 0
+var crumb_time : int = 1
 
 
 # Damages the building
 func _damage(damage, target_position):
+	
 	building_damage += damage
 	set_meta("health", building_damage)
 	
-	if explosion_crums != null:
+	if explosion_crumbs != null:
 		
-		var explosion_crum = explosion_crums.instantiate()
+		var explosion_crumb = explosion_crumbs.instantiate()
 		
-		explosion_crum.position = (target_position - global_position) + Vector3(0, 0.5, 0)
+		var crumb_position : Vector3 = (target_position - global_position) + Vector3(0, snap, 0)
 		
-		add_child(explosion_crum)
+		explosion_crumb.position = crumb_position
 		
-		await get_tree().create_timer(1).timeout
+		add_child(explosion_crumb)
 		
-		explosion_crum.queue_free()
+		await get_tree().create_timer(crumb_time).timeout
+		
+		explosion_crumb.queue_free()
