@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfrhjn1u6h1ns"]
+[gd_scene load_steps=6 format=3 uid="uid://bfrhjn1u6h1ns"]
 
 [ext_resource type="Script" path="res://Scripts/building.gd" id="1_ybiyb"]
-[ext_resource type="PackedScene" uid="uid://batkf570ctwlg" path="res://Assets/machinegun.glb" id="2_de4gs"]
 [ext_resource type="PackedScene" uid="uid://dngppnpo0l3b0" path="res://Scenes/explosion_crums.tscn" id="2_wqad8"]
 [ext_resource type="PackedScene" uid="uid://b4mfv1do3p3go" path="res://Assets/MachineGun_Animated.tscn" id="3_e5xht"]
 
@@ -34,10 +33,6 @@ transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 6
 collision_mask = 6
-
-[node name="machinegun" parent="Area3D" instance=ExtResource("2_de4gs")]
-transform = Transform3D(5.24537e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, 5.24537e-08, -0.842412, 0.403, 0.424)
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_7imy8")

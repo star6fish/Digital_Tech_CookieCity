@@ -1,9 +1,12 @@
 extends Node3D
 
 @onready var global = get_node("/root/Global")
+@onready var animation_player : AnimationPlayer = get_node("Area3D2/Animated/AnimationPlayer")
 
 @export var explosion_crumbs : PackedScene
 @export var area3D2 : Area3D
+
+var animation_name : String = "ArmatureAction"
 
 var snap : float = 0.5
 
@@ -19,7 +22,7 @@ func _damage(damage, target_position):
 	
 	if explosion_crumbs != null:
 		
-		var explosion_crumb = explosion_crumbs.instantiate()
+		var explosion_crumb : Node3D = explosion_crumbs.instantiate()
 		
 		var crumb_position : Vector3 = (target_position - global_position) + Vector3(0, snap, 0)
 		
@@ -34,7 +37,7 @@ func _damage(damage, target_position):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_node("Area3D2/Animated/AnimationPlayer").play("ArmatureAction")
+	animation_player.play(animation_name)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

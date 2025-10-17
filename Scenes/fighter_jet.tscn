@@ -8,8 +8,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_m2avp"]
 size = Vector3(3.41553, 5, 3.49609)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_oslbm"]
-size = Vector3(5, 1, 5)
+[sub_resource type="BoxShape3D" id="BoxShape3D_uouxl"]
+size = Vector3(1.95361, 2.02722, 2.00494)
 
 [node name="Node3D" type="Node3D" node_paths=PackedStringArray("area3D2")]
 script = ExtResource("1_c305t")
@@ -40,7 +40,8 @@ collision_layer = 6
 collision_mask = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("BoxShape3D_oslbm")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0568848, 0.513611, 0.0679626)
+shape = SubResource("BoxShape3D_uouxl")
 
-[node name="planebottom" parent="." instance=ExtResource("2_82l2o")]
+[node name="planebottom" parent="Area3D" instance=ExtResource("2_82l2o")]
 transform = Transform3D(0.43, 0, 0, 0, 0.43, 0, 0, 0, 0.43, 0, 0, -3)

@@ -1,10 +1,15 @@
 extends Node3D
 
 @onready var global = get_node("/root/Global")
+@onready var animation_player : AnimationPlayer = get_node("Animated/AnimationPlayer")
 
-@onready var tween = get_tree().create_tween()
+@onready var tween : Tween = get_tree().create_tween()
+
+var animation_name : String = "ArmatureAction"
 
 var buildings_hit : Array = []
+
+var end_position : Vector3 = Vector3(0, -0.5, 0)
 
 var enemy_damage : int = 0
 var eating_time : int = 1
@@ -25,9 +30,9 @@ func _ready() -> void:
 	
 	look_at(Vector3(0, -0.5, 0), Vector3.UP, true)
 	
-	tween.tween_property($Area3D.get_parent(), "position", Vector3(0, -0.5, 0), 20 - enemy_speed)
+	tween.tween_property($Area3D.get_parent(), "position", end_position, 20 - enemy_speed)
 	
-	get_node("Animated/AnimationPlayer").play("ArmatureAction")
+	animation_player.play(animation_name)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,12 +50,15 @@ func _process(_delta: float) -> void:
 			
 			buildings_hit.append(building_node)
 			
-			building_node._damage(global.enemies[get_meta("enemy_name")].damage, position)
+			var enemy_name : String = get_meta("enemy_name")
+			var enemy_attack_damage : int = global.enemies[enemy_name].damage
+			
+			building_node._damage(enemy_attack_damage, position)
 			tween.pause()
 			
-			get_node("Animated/AnimationPlayer").pause()
+			animation_player.pause()
 			
 			await get_tree().create_timer(eating_time).timeout
 			tween.play()
 			
-			get_node("Animated/AnimationPlayer").play("ArmatureAction")
+			animation_player.play(animation_name)

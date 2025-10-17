@@ -18,7 +18,7 @@ func _damage(damage, target_position):
 	
 	if explosion_crumbs != null:
 		
-		var explosion_crumb = explosion_crumbs.instantiate()
+		var explosion_crumb : Node3D = explosion_crumbs.instantiate()
 		
 		var crumb_position : Vector3 = (target_position - global_position) + Vector3(0, snap, 0)
 		

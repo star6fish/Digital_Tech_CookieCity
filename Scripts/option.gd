@@ -5,16 +5,25 @@ extends Control
 
 # Resets the tick to be visible if the option is true
 func _reset_tick():
-	get_node("Tick").visible = global.options[get_meta("option")]
+	var option : String = get_meta("option")
+	var optiion_on : bool = global.options[option]
+	
+	get_node("Tick").visible = optiion_on
 
 
 # Option is pressed
 func _on_button_pressed() -> void:
-	if global.options[get_meta("option")] == true:
-		global.options[get_meta("option")] = false
-	elif global.options[get_meta("option")] == false:
-		global.options[get_meta("option")] = true
 	
-	get_parent()._setting(get_meta("option"), global.options[get_meta("option")])
+	var option : String = get_meta("option")
+	var option_on : bool = global.options[option]
+	
+	if option_on == true:
+		global.options[option] = false
+	elif option_on == false:
+		global.options[option] = true
+	
+	option_on = global.options[option]
+	
+	get_parent()._toggle_setting(option, option_on)
 	
 	_reset_tick()

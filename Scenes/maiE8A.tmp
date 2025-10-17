@@ -478,10 +478,10 @@ vertical_alignment = 1
 
 [node name="Label4" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 805.0
-offset_top = 9.0
-offset_right = 1131.0
-offset_bottom = 46.0
+offset_left = 796.0
+offset_top = 19.0
+offset_right = 1112.0
+offset_bottom = 56.0
 theme_override_colors/font_color = Color(1, 1, 1, 0.572549)
 theme_override_colors/font_outline_color = Color(0.92549, 0.603922, 0.403922, 1)
 theme_override_constants/shadow_offset_y = 2

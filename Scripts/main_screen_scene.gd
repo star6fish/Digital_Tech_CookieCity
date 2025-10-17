@@ -4,13 +4,13 @@ extends Control
 
 @export var help_screen : Control
 @export var help_screen_container : VBoxContainer
-
 @export var black_and_white : ColorRect
 @export var high_contrast : ColorRect
 
-var save_path : String = "user://save_data"
-
-var scene_name: String = "Main Screen"
+const SAVE_PATH : String = "user://save_data"
+const SCENE_NAME = "Main Screen"
+const GAME_PATH : String = "res://Scenes/main_scene.tscn"
+const OPTIONS_PATH : String = "res://Scenes/options_screen_scene.tscn"
 
 var help_screen_open : bool = false
 
@@ -18,8 +18,8 @@ var help_screen_open : bool = false
 # Gets the games data
 func _get_game_save():
 	
-	if FileAccess.file_exists(save_path):
-		var save = FileAccess.open(save_path, FileAccess.READ)
+	if FileAccess.file_exists(SAVE_PATH):
+		var save = FileAccess.open(SAVE_PATH, FileAccess.READ)
 		return save.get_var()
 
 	else:
@@ -28,9 +28,9 @@ func _get_game_save():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	global.options_back = scene_name
+	global.options_back = SCENE_NAME
 	
-	var game_save = _get_game_save()
+	var game_save : Dictionary = _get_game_save()
 	
 	global.options = game_save.options
 	global.save_buildings = game_save.buildings
@@ -45,7 +45,7 @@ func _ready() -> void:
 # Help button is pressed
 func _on_button_pressed_help() -> void:
 	
-	var tween = get_tree().create_tween()
+	var tween : Tween = get_tree().create_tween()
 	
 	tween.set_trans(Tween.TRANS_QUAD)
 	
@@ -74,9 +74,9 @@ func _on_button_pressed_help() -> void:
 
 # Play button is pressed
 func _on_button_pressed_play() -> void:
-	get_tree().change_scene_to_file("res://Scenes/main_scene.tscn")
+	get_tree().change_scene_to_file(GAME_PATH)
 
 
 # Options button is pressed
 func _on_button_pressed_options() -> void:
-	get_tree().change_scene_to_file("res://Scenes/options_screen_scene.tscn")
+	get_tree().change_scene_to_file(OPTIONS_PATH)
